@@ -1,0 +1,11 @@
+platform :ios, '10.0'
+
+target 'Beacon' do
+  pod 'SDWebImage', '~>3.8'
+  pod 'SVProgressHUD'
+  pod 'Masonry'
+
+  target 'BeaconTests' do
+  end
+
+end

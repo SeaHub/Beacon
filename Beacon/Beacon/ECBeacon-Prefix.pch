@@ -1,0 +1,32 @@
+//
+//  ECBeacon-Prefix.pch
+//  Beacon
+//
+//  Created by SeaHub on 2017/5/20.
+//  Copyright © 2017年 Echo. All rights reserved.
+//
+
+#ifndef ECBeacon_Prefix_pch
+#define ECBeacon_Prefix_pch
+
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+
+#ifdef DEBUG
+
+#define debugLog(format, ...) do {                                              \
+    fprintf(stderr, "<%s : %d> %s\n",                                           \
+    [[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String],  \
+    __LINE__, __func__);                                                        \
+    (NSLog)((format), ##__VA_ARGS__);                                           \
+    fprintf(stderr, "-------\n");                                               \
+} while (0)
+
+#define debugMethod() NSLog(@"%s", __func__)
+#else
+#define debugLog(...)
+#define debugMethod()
+
+#endif
+
+#endif /* ECBeacon_Prefix_pch */
