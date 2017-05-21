@@ -7,22 +7,45 @@
 //
 
 #import "ECMainViewController.h"
-#import <SDWebImage/UIImageView+WebCache.h>
+#import "ECPlayerController.h"
 
-@interface ECMainViewController () {
-    __weak IBOutlet UIImageView *_imageView;
-}
+@interface ECMainViewController ()
+
 @end
 
 @implementation ECMainViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [_imageView sd_setImageWithURL:[NSURL URLWithString:@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495903164&di=a47f8c9c8b7a455a2bb5cee4b91500e8&imgtype=jpg&er=1&src=http%3A%2F%2Fimgsrc.baidu.com%2Fforum%2Fw%253D580%2Fsign%3D2507a4c8db33c895a67e9873e1127397%2Fd0ecb744ad345982989436cd0ef431adcbef8400.jpg"]];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:kSegueOfECPlayController]) {
+        ECPlayerController *playerController = (ECPlayerController *)segue.destinationViewController;
+        // Here is just a mock
+        playerController.contentDict         = @{
+            @"a_id": @"677870700",
+            @"date_format": @"2017-05-12",
+            @"date_timestamp": @"1494604800000",
+            @"id": @"677870700",
+            @"img": @"http://pic7.qiyipic.com/image/20170513/6d/a6/v_112314044_m_601_m1.jpg",
+            @"is_vip": @"0",
+            @"p_type": @"1",
+            @"play_count": @"5423310",
+            @"play_count_text": @"542.3\\U4e07",
+            @"short_title": @"\\U9910\\U5385\\U8058\\U6bd4\\U57fa\\U5c3c\\U7f8e\\U5973\\U7aef\\U83dc",
+            @"sns_score": @"",
+            @"title": @"\\U5357\\U4eac\\U4e00\\U9910\\U5385\\U8058\\U6bd4\\U57fa\\U5c3c\\U7f8e\\U5973\\U7aef\\U83dc \\U8425\\U9500\\U624b\\U6bb5\\U60f9\\U4e89\\U8bae",
+            @"total_num": @"1",
+            @"tv_id": @"677870700",
+            @"type": @"normal",
+            @"update_num": @"1",
+        };
+    }
 }
 
 @end

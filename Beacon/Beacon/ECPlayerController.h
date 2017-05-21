@@ -8,7 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface ECPlayerController : UIViewController
+
+@property (nonatomic, copy) NSDictionary *contentDict;
 
 @end
 
+NS_ASSUME_NONNULL_END
