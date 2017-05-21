@@ -22,6 +22,9 @@
 #pragma mark - Life Cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
     [self _setupVariables];
     [self _setupPlayerView];
 }
@@ -36,16 +39,17 @@
     _originalPlayerViewFrame = _playerView.frame;
     _originalPlayerFrame     = CGRectMake(0,
                                           0,
-                                          CGRectGetWidth(_playerView.bounds),
-                                          CGRectGetHeight(_playerView.bounds));
+                                          CGRectGetWidth(_playerView.frame),
+                                          CGRectGetHeight(_playerView.frame));
 }
 
 - (void)_setupPlayerView {
     QYPlayerController *playerController  = [QYPlayerController sharedInstance];
-    playerController.view.backgroundColor = UIColor.blackColor;
+    playerController.view.backgroundColor = UIColor.redColor;
     [playerController  setPlayerFrame:_originalPlayerFrame];
     [playerController setDelegate:self];
     [_playerView addSubview:playerController.view];
+    
 }
 
 #pragma mark - IBAction
@@ -65,8 +69,8 @@
 
 #pragma mark - Player Control
 - (void)_playerTransfromIntoFullScreen {
-    CGRect newPlayerFrame     = _isFullScreen ? _originalPlayerFrame : self.view.frame;
-    CGRect newPlayerViewFrame = _isFullScreen ? _originalPlayerViewFrame : self.view.frame;;
+    CGRect newPlayerFrame     = _isFullScreen ? _originalPlayerFrame     : self.view.frame;
+    CGRect newPlayerViewFrame = _isFullScreen ? _originalPlayerViewFrame : self.view.frame;
     _isFullScreen             = !_isFullScreen;
     
     [UIView animateWithDuration:0.5 animations:^{
