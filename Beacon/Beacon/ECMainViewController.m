@@ -11,20 +11,58 @@
 
 @interface ECMainViewController ()
 
+@property (weak, nonatomic) IBOutlet UIImageView *cardAImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *cardBImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *cardCImageView;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UIButton *downButton;
+@property (weak, nonatomic) IBOutlet UIButton *upButton;
+@property (weak, nonatomic) IBOutlet UIButton *moreButton;
+
 @end
 
 @implementation ECMainViewController
 
+#pragma mark - Life Cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // [_titleLabel setFont:[UIFont fontWithName:@"SFDisplayHeavy" size:40]];
+    [self _setupShadow:_downButton];
+    [self _setupShadow:_upButton];
+    [self _setupShadow:_moreButton];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
+#pragma mark - IBAction
+- (IBAction)downButtonClicked:(id)sender {
+    debugLog(@"todo");
+}
+
+- (IBAction)upButtonClicked:(id)sender {
+    debugLog(@"todo");
+}
+
+- (IBAction)moreButtonClicked:(id)sender {
+    debugLog(@"todo");
+    [self performSegueWithIdentifier:kSegueOfECPlayController sender:self];
+}
+
+#pragma mark - Private Methods
+- (void)_setupShadow:(UIButton *)button {
+    button.layer.shadowOffset = CGSizeMake(0, 2);
+    button.layer.shadowColor  = [UIColor colorWithRed:206 green:206 blue:210 alpha:1].CGColor;
+    UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithEffect:blur];
+    effectView.frame   = button.frame;
+    [button addSubview:effectView];
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:kSegueOfECPlayController]) {
+        // TO Delete
         ECPlayerController *playerController = (ECPlayerController *)segue.destinationViewController;
         // Here is just a mock
         playerController.contentDict         = @{

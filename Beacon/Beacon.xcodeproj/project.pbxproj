@@ -10,6 +10,7 @@
 		5233909E1ED067B600C46419 /* ECMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5233909D1ED067B600C46419 /* ECMainViewController.m */; };
 		525167431ED17BC500FA943C /* ECConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = 525167421ED17BC500FA943C /* ECConstant.m */; };
 		52C90F7A1ED077A7009793DC /* ECPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C90F791ED077A7009793DC /* ECPlayerController.m */; };
+		52D080581ED8989E00DBE31C /* SFDisplayHeavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 52D080571ED8989E00DBE31C /* SFDisplayHeavy.otf */; };
 		52EEB3611ED05AFD00CBDDBB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EEB3601ED05AFD00CBDDBB /* main.m */; };
 		52EEB3641ED05AFD00CBDDBB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EEB3631ED05AFD00CBDDBB /* AppDelegate.m */; };
 		52EEB36A1ED05AFD00CBDDBB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52EEB3681ED05AFD00CBDDBB /* Main.storyboard */; };
@@ -74,6 +75,7 @@
 		525167421ED17BC500FA943C /* ECConstant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECConstant.m; sourceTree = "<group>"; };
 		52C90F781ED077A7009793DC /* ECPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPlayerController.h; sourceTree = "<group>"; };
 		52C90F791ED077A7009793DC /* ECPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECPlayerController.m; sourceTree = "<group>"; };
+		52D080571ED8989E00DBE31C /* SFDisplayHeavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SFDisplayHeavy.otf; sourceTree = "<group>"; };
 		52E0C88D1ED065C0007D08D9 /* ECBeacon-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ECBeacon-Prefix.pch"; sourceTree = "<group>"; };
 		52EEB35C1ED05AFD00CBDDBB /* Beacon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Beacon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52EEB3601ED05AFD00CBDDBB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 				52EEB3631ED05AFD00CBDDBB /* AppDelegate.m */,
 				5233909C1ED067B600C46419 /* ECMainViewController.h */,
 				5233909D1ED067B600C46419 /* ECMainViewController.m */,
+				52D080571ED8989E00DBE31C /* SFDisplayHeavy.otf */,
 				52EEB3681ED05AFD00CBDDBB /* Main.storyboard */,
 				52EEB36B1ED05AFD00CBDDBB /* Assets.xcassets */,
 				52EEB36D1ED05AFD00CBDDBB /* LaunchScreen.storyboard */,
@@ -437,6 +440,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				52EEB36F1ED05AFD00CBDDBB /* LaunchScreen.storyboard in Resources */,
+				52D080581ED8989E00DBE31C /* SFDisplayHeavy.otf in Resources */,
 				52EEB36C1ED05AFD00CBDDBB /* Assets.xcassets in Resources */,
 				52EEB36A1ED05AFD00CBDDBB /* Main.storyboard in Resources */,
 			);
