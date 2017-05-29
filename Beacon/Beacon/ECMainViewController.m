@@ -36,10 +36,6 @@
     // Draggable Container
     [self loadDatas];
     
-    _cardAImageView.alpha = 0;
-    _cardBImageView.alpha = 0;
-    _cardCImageView.alpha = 0;
-    
     self.container.delegate = self;
     self.container.dataSource = self;
     self.container.backgroundColor = [UIColor clearColor];
