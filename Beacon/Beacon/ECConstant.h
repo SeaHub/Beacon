@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 extern NSString *const kSegueOfECPlayController;
+extern NSString *const kBundleIdentifier;
 
 @interface ECConstant : NSObject
 

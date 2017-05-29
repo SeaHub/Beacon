@@ -12,8 +12,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class ECReturningVideoType;
 @class ECReturningVideo;
+@class ECReturningVideoHistory;
+
 typedef void(^VideoTypeSuccessBlock)(NSArray<ECReturningVideoType *> *);
 typedef void(^Top5VideosSuccessBlock)(NSArray<ECReturningVideo *> *);
+typedef void(^AddPlayedHistorySuccessBlock)(BOOL);
+typedef void(^VideoHistorySuccessBlock)(NSArray<ECReturningVideoHistory *> *);
+typedef void(^AddLikedVideoSuccessBlock)(BOOL);
+typedef void(^LikedVideoSuccessBlock)(NSArray<ECReturningVideo *> *);
 typedef void(^FailureBlock)(NSError *);
 
 @interface ECAPIManager : NSObject
@@ -43,8 +49,47 @@ typedef void(^FailureBlock)(NSError *);
  */
 - (void)getTop5Videos:(NSArray * __nullable)types
      withSuccessBlock:(Top5VideosSuccessBlock __nullable)successBlock
-     withFailureBlock:(FailureBlock __nullable)failureBlock;;
+     withFailureBlock:(FailureBlock __nullable)failureBlock;
 
+/**
+ 添加视频播放记录
+
+ @param videoID 已播放的视频ID
+ @param successBlock 成功回调函数：返回添加状态（YES 为添加成功，NO 为添加失败）
+ @param failureBlock 失败回调函数
+ */
+- (void)addPlayedHistoryWithVideoID:(NSString *)videoID
+                   withSuccessBlock:(AddPlayedHistorySuccessBlock __nullable)successBlock
+                   withFailureBlock:(FailureBlock __nullable)failureBlock;
+
+/**
+ 查看视频播放记录
+
+ @param successBlock 成功回调函数：返回历史信息数组
+ @param failureBlock 失败回调函数
+ */
+- (void)getPlayedHistroyWithSuccessBlock:(VideoHistorySuccessBlock __nullable)successBlock
+                        withFailureBlock:(FailureBlock __nullable)failureBlock;
+
+/**
+ 添加收藏视频
+
+ @param videoID 视频ID
+ @param successBlock 成功回调函数：返回添加状态（YES 为添加成功，NO 为添加失败）
+ @param failureBlock 失败回调函数
+ */
+- (void)addLikedVideoWithVideoID:(NSString *)videoID
+                withSuccessBlock:(AddLikedVideoSuccessBlock __nullable)successBlock
+                withFailureBlock:(FailureBlock __nullable)failureBlock;
+
+/**
+ 查看收藏视频
+
+ @param successBlock 成功回调函数：返回视频数组
+ @param failureBlock 失败回调函数
+ */
+- (void)getLikedVideoWithSuccessBlock:(LikedVideoSuccessBlock __nullable)successBlock
+                     withFailureBlock:(FailureBlock __nullable)failureBlock;
 
 @end
 

@@ -16,6 +16,10 @@
 		525167431ED17BC500FA943C /* ECConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = 525167421ED17BC500FA943C /* ECConstant.m */; };
 		5281986D1EDBB1C8009D15FA /* ECAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5281986C1EDBB1C8009D15FA /* ECAPIManager.m */; };
 		52C90F7A1ED077A7009793DC /* ECPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C90F791ED077A7009793DC /* ECPlayerController.m */; };
+		52DE8C991EDC10AA00072C91 /* APKeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 52DE8C981EDC10AA00072C91 /* APKeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		52DE8C9E1EDC12CC00072C91 /* ECUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 52DE8C9D1EDC12CC00072C91 /* ECUtil.m */; };
+		52DE8CA51EDC19F000072C91 /* ECVideoHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 52DE8CA41EDC19F000072C91 /* ECVideoHistory.m */; };
+		52DE8CA91EDC1A1E00072C91 /* ECReturningVideoHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 52DE8CA81EDC1A1E00072C91 /* ECReturningVideoHistory.m */; };
 		52EEB3611ED05AFD00CBDDBB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EEB3601ED05AFD00CBDDBB /* main.m */; };
 		52EEB3641ED05AFD00CBDDBB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EEB3631ED05AFD00CBDDBB /* AppDelegate.m */; };
 		52EEB36A1ED05AFD00CBDDBB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52EEB3681ED05AFD00CBDDBB /* Main.storyboard */; };
@@ -96,6 +100,14 @@
 		5281986C1EDBB1C8009D15FA /* ECAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECAPIManager.m; sourceTree = "<group>"; };
 		52C90F781ED077A7009793DC /* ECPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPlayerController.h; sourceTree = "<group>"; };
 		52C90F791ED077A7009793DC /* ECPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECPlayerController.m; sourceTree = "<group>"; };
+		52DE8C971EDC10AA00072C91 /* APKeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APKeychainItemWrapper.h; sourceTree = "<group>"; };
+		52DE8C981EDC10AA00072C91 /* APKeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APKeychainItemWrapper.m; sourceTree = "<group>"; };
+		52DE8C9C1EDC12CC00072C91 /* ECUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECUtil.h; sourceTree = "<group>"; };
+		52DE8C9D1EDC12CC00072C91 /* ECUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECUtil.m; sourceTree = "<group>"; };
+		52DE8CA31EDC19F000072C91 /* ECVideoHistory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECVideoHistory.h; sourceTree = "<group>"; };
+		52DE8CA41EDC19F000072C91 /* ECVideoHistory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECVideoHistory.m; sourceTree = "<group>"; };
+		52DE8CA71EDC1A1E00072C91 /* ECReturningVideoHistory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECReturningVideoHistory.h; sourceTree = "<group>"; };
+		52DE8CA81EDC1A1E00072C91 /* ECReturningVideoHistory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECReturningVideoHistory.m; sourceTree = "<group>"; };
 		52E0C88D1ED065C0007D08D9 /* ECBeacon-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ECBeacon-Prefix.pch"; sourceTree = "<group>"; };
 		52EEB35C1ED05AFD00CBDDBB /* Beacon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Beacon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52EEB3601ED05AFD00CBDDBB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -244,22 +256,22 @@
 			name = ReturningVideoType;
 			sourceTree = "<group>";
 		};
-		5214C0861EDBC54700D09A06 /* ECVideoType */ = {
+		5214C0861EDBC54700D09A06 /* VideoType */ = {
 			isa = PBXGroup;
 			children = (
 				520964421EDBBB41001F2A05 /* ECVideoType.h */,
 				520964431EDBBB41001F2A05 /* ECVideoType.m */,
 			);
-			name = ECVideoType;
+			name = VideoType;
 			sourceTree = "<group>";
 		};
-		5214C0871EDBC54F00D09A06 /* ECVideo */ = {
+		5214C0871EDBC54F00D09A06 /* Video */ = {
 			isa = PBXGroup;
 			children = (
 				5214C0881EDBC55F00D09A06 /* ECVideo.h */,
 				5214C0891EDBC55F00D09A06 /* ECVideo.m */,
 			);
-			name = ECVideo;
+			name = Video;
 			sourceTree = "<group>";
 		};
 		5281986A1EDBB112009D15FA /* APIManager */ = {
@@ -302,7 +314,6 @@
 			isa = PBXGroup;
 			children = (
 				528B21EF1EDBABA700D1CE02 /* ReturnModel */,
-				528B21EE1EDBABA000D1CE02 /* RequestModel */,
 			);
 			name = NetworkModel;
 			sourceTree = "<group>";
@@ -327,21 +338,16 @@
 		528B21ED1EDBAB6400D1CE02 /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				52DE8C961EDC109D00072C91 /* Tools */,
 				528B21E81EDBAB2500D1CE02 /* Network */,
 			);
 			name = Others;
 			sourceTree = "<group>";
 		};
-		528B21EE1EDBABA000D1CE02 /* RequestModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = RequestModel;
-			sourceTree = "<group>";
-		};
 		528B21EF1EDBABA700D1CE02 /* ReturnModel */ = {
 			isa = PBXGroup;
 			children = (
+				52DE8C9F1EDC19BE00072C91 /* ReturningVideoHistory */,
 				5209644C1EDBC451001F2A05 /* ReturningVideoType */,
 				520964481EDBC406001F2A05 /* ReturningVideo */,
 			);
@@ -351,10 +357,56 @@
 		528B21F01EDBABBD00D1CE02 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				5214C0871EDBC54F00D09A06 /* ECVideo */,
-				5214C0861EDBC54700D09A06 /* ECVideoType */,
+				5214C0871EDBC54F00D09A06 /* Video */,
+				5214C0861EDBC54700D09A06 /* VideoType */,
+				52DE8CA61EDC19F300072C91 /* VideoHistory */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		52DE8C961EDC109D00072C91 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				52DE8C9B1EDC12B500072C91 /* Util */,
+				52DE8C9A1EDC10AD00072C91 /* Keychain */,
+			);
+			name = Tools;
+			sourceTree = "<group>";
+		};
+		52DE8C9A1EDC10AD00072C91 /* Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				52DE8C971EDC10AA00072C91 /* APKeychainItemWrapper.h */,
+				52DE8C981EDC10AA00072C91 /* APKeychainItemWrapper.m */,
+			);
+			name = Keychain;
+			sourceTree = "<group>";
+		};
+		52DE8C9B1EDC12B500072C91 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				52DE8C9C1EDC12CC00072C91 /* ECUtil.h */,
+				52DE8C9D1EDC12CC00072C91 /* ECUtil.m */,
+			);
+			name = Util;
+			sourceTree = "<group>";
+		};
+		52DE8C9F1EDC19BE00072C91 /* ReturningVideoHistory */ = {
+			isa = PBXGroup;
+			children = (
+				52DE8CA71EDC1A1E00072C91 /* ECReturningVideoHistory.h */,
+				52DE8CA81EDC1A1E00072C91 /* ECReturningVideoHistory.m */,
+			);
+			name = ReturningVideoHistory;
+			sourceTree = "<group>";
+		};
+		52DE8CA61EDC19F300072C91 /* VideoHistory */ = {
+			isa = PBXGroup;
+			children = (
+				52DE8CA31EDC19F000072C91 /* ECVideoHistory.h */,
+				52DE8CA41EDC19F000072C91 /* ECVideoHistory.m */,
+			);
+			name = VideoHistory;
 			sourceTree = "<group>";
 		};
 		52EEB3531ED05AFD00CBDDBB = {
@@ -756,14 +808,18 @@
 				520964471EDBBB5A001F2A05 /* ECReturningVideoType.m in Sources */,
 				5214C08A1EDBC55F00D09A06 /* ECVideo.m in Sources */,
 				5233909E1ED067B600C46419 /* ECMainViewController.m in Sources */,
+				52DE8C9E1EDC12CC00072C91 /* ECUtil.m in Sources */,
 				52EEB3641ED05AFD00CBDDBB /* AppDelegate.m in Sources */,
 				5209644B1EDBC436001F2A05 /* ECReturningVideo.m in Sources */,
 				5281986D1EDBB1C8009D15FA /* ECAPIManager.m in Sources */,
+				52DE8CA91EDC1A1E00072C91 /* ECReturningVideoHistory.m in Sources */,
 				D5139B5E1EDBBE0900B6FB2C /* CCDraggableContainer.m in Sources */,
 				D5139B641EDBC43700B6FB2C /* ECCardView.m in Sources */,
 				525167431ED17BC500FA943C /* ECConstant.m in Sources */,
 				D5139B5D1EDBBE0900B6FB2C /* CCDraggableCardView.m in Sources */,
+				52DE8C991EDC10AA00072C91 /* APKeychainItemWrapper.m in Sources */,
 				52EEB3611ED05AFD00CBDDBB /* main.m in Sources */,
+				52DE8CA51EDC19F000072C91 /* ECVideoHistory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

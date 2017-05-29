@@ -25,4 +25,8 @@
     return [NSString stringWithFormat:@"description: %@, name: %@, id: %@", _desc, _name, _identifier];
 }
 
+- (BOOL)isEqual:(id)object {
+    return [_identifier isEqualToString:((ECVideoType *)object).identifier];
+}
+
 @end

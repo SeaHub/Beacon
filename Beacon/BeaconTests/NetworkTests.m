@@ -79,4 +79,84 @@ static const double kTestCaseTimeOutInterval = 20.0;
     [self waitForExpectationsWithTimeout:kTestCaseTimeOutInterval handler:nil];
 }
 
+- (void)testAddPlayedHistory {
+    XCTestExpectation *exception = [self expectationWithDescription:@"Wait callback"];
+    [[ECAPIManager sharedManager] getTop5Videos:nil
+                               withSuccessBlock:^(NSArray<ECReturningVideo *> * _Nonnull models) {
+        
+        [[ECAPIManager sharedManager] addPlayedHistoryWithVideoID:models.firstObject.identifier
+                                                 withSuccessBlock:^(BOOL status) {
+            if (status) {
+                [exception fulfill];
+            } else {
+                XCTAssert(NO);
+            }
+            
+        } withFailureBlock:^(NSError * _Nonnull error) {
+            XCTAssert(error == nil);
+        }];
+        
+    } withFailureBlock:^(NSError * _Nonnull error) {
+        XCTAssert(error == nil);
+    }];
+    
+    [self waitForExpectationsWithTimeout:kTestCaseTimeOutInterval * 2 handler:nil];
+}
+
+- (void)testGetPlayedHistory {
+    XCTestExpectation *exception = [self expectationWithDescription:@"Wait callback"];
+    [[ECAPIManager sharedManager] getPlayedHistroyWithSuccessBlock:^(NSArray<ECReturningVideoHistory *> * _Nonnull models) {
+        for (ECReturningVideo *model in models) {
+            ECVideo *realModel = [model toRealObject];
+            XCTAssert(realModel != nil);
+        }
+        
+        [exception fulfill];
+    } withFailureBlock:^(NSError * _Nonnull error) {
+         XCTAssert(error == nil);
+    }];
+    
+    [self waitForExpectationsWithTimeout:kTestCaseTimeOutInterval * 2 handler:nil];
+}
+
+- (void)testAddLikedVideo {
+    XCTestExpectation *exception = [self expectationWithDescription:@"Wait callback"];
+    [[ECAPIManager sharedManager] getTop5Videos:nil
+                               withSuccessBlock:^(NSArray<ECReturningVideo *> * _Nonnull models) {
+                                   
+            [[ECAPIManager sharedManager] addLikedVideoWithVideoID:models.firstObject.identifier withSuccessBlock:^(BOOL status) {
+                                      
+                    if (status) {
+                        [exception fulfill];
+                    } else {
+                        XCTAssert(NO);
+                    }
+                                      
+                } withFailureBlock:^(NSError * _Nonnull error) {
+                    XCTAssert(error == nil);
+                }];
+                                   
+    } withFailureBlock:^(NSError * _Nonnull error) {
+        XCTAssert(error == nil);
+    }];
+    
+    [self waitForExpectationsWithTimeout:kTestCaseTimeOutInterval * 2 handler:nil];
+}
+
+- (void)testGetLikedVideo {
+    XCTestExpectation *exception = [self expectationWithDescription:@"Wait callback"];
+    [[ECAPIManager sharedManager] getLikedVideoWithSuccessBlock:^(NSArray<ECReturningVideo *> * _Nonnull models) {
+        for (ECReturningVideo *model in models) {
+            ECVideo *realModel = [model toRealObject];
+            XCTAssert(realModel != nil);
+        }
+        
+        [exception fulfill];
+    } withFailureBlock:^(NSError * _Nonnull error) {
+        XCTAssert(error == nil);
+    }];
+
+    [self waitForExpectationsWithTimeout:kTestCaseTimeOutInterval * 2 handler:nil];
+}
+
 @end

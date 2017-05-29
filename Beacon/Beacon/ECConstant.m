@@ -9,6 +9,7 @@
 #import "ECConstant.h"
 
 NSString *const kSegueOfECPlayController = @"kSegueOfECPlayController";
+NSString *const kBundleIdentifier        = @"com.Echo.Beacon";
 
 @implementation ECConstant
 

@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithReturningModel:(ECReturningVideoType *)model;
 - (NSString *)description;
+- (BOOL)isEqual:(id)object;
 
 @property (nonatomic, copy) NSString *desc;
 @property (nonatomic, copy) NSString *identifier;

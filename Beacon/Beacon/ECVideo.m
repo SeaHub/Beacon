@@ -30,4 +30,8 @@
     return [NSString stringWithFormat:@"aID: %@, dateFormat: %@, identifier: %@, img: %@, isVip: %@, playCountText: %@, shortTitle: %@, tvID: %@", _aID, _dateFormat, _identifier, _img, _isVip, _playCountText, _shortTitle, _tvID];
 }
 
+- (BOOL)isEqual:(id)object {
+    return [_identifier isEqualToString:((ECVideo *)object).identifier];
+}
+
 @end
