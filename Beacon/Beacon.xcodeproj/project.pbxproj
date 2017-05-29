@@ -52,8 +52,11 @@
 		52EEB3D81ED05CD300CBDDBB /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 52EEB3D71ED05CD300CBDDBB /* libstdc++.tbd */; };
 		52EEB3DA1ED05CE200CBDDBB /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 52EEB3D91ED05CE200CBDDBB /* libc++.tbd */; };
 		52EEB3DC1ED05CEA00CBDDBB /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 52EEB3DB1ED05CEA00CBDDBB /* libiconv.tbd */; };
-		AA678E119EC4F451DE19BFF6 /* libPods-Beacon-BeaconTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0115FB84FD6C93526CC5EB60 /* libPods-Beacon-BeaconTests.a */; };
-		ED50C40906F1BAF5AC30163F /* libPods-Beacon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 434DCE203FA20976CCC23D69 /* libPods-Beacon.a */; };
+		609E5B03E48D5A193E9BE625 /* libPods-Beacon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 434DCE203FA20976CCC23D69 /* libPods-Beacon.a */; };
+		D5139B5D1EDBBE0900B6FB2C /* CCDraggableCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5139B591EDBBE0900B6FB2C /* CCDraggableCardView.m */; };
+		D5139B5E1EDBBE0900B6FB2C /* CCDraggableContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = D5139B5C1EDBBE0900B6FB2C /* CCDraggableContainer.m */; };
+		D5139B641EDBC43700B6FB2C /* ECCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5139B631EDBC43700B6FB2C /* ECCardView.m */; };
+		DF6667C7B0C8BE6B64CCC04A /* libPods-Beacon-BeaconTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0115FB84FD6C93526CC5EB60 /* libPods-Beacon-BeaconTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -140,6 +143,13 @@
 		5C466BDF398279E07157273F /* Pods-Beacon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Beacon.release.xcconfig"; path = "Pods/Target Support Files/Pods-Beacon/Pods-Beacon.release.xcconfig"; sourceTree = "<group>"; };
 		6392E15A2A3C77F3B7FC3DB4 /* libPods-BeaconTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BeaconTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B3B08B6D3329AFDDB613AAE /* Pods-Beacon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Beacon.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Beacon/Pods-Beacon.debug.xcconfig"; sourceTree = "<group>"; };
+		D5139B581EDBBE0900B6FB2C /* CCDraggableCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCDraggableCardView.h; sourceTree = "<group>"; };
+		D5139B591EDBBE0900B6FB2C /* CCDraggableCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCDraggableCardView.m; sourceTree = "<group>"; };
+		D5139B5A1EDBBE0900B6FB2C /* CCDraggableConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCDraggableConfig.h; sourceTree = "<group>"; };
+		D5139B5B1EDBBE0900B6FB2C /* CCDraggableContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCDraggableContainer.h; sourceTree = "<group>"; };
+		D5139B5C1EDBBE0900B6FB2C /* CCDraggableContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCDraggableContainer.m; sourceTree = "<group>"; };
+		D5139B621EDBC43700B6FB2C /* ECCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECCardView.h; sourceTree = "<group>"; };
+		D5139B631EDBC43700B6FB2C /* ECCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECCardView.m; sourceTree = "<group>"; };
 		FBCAB8705E59DF728B7BC9FE /* Pods-Beacon-BeaconTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Beacon-BeaconTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Beacon-BeaconTests/Pods-Beacon-BeaconTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -184,7 +194,7 @@
 				52EEB39A1ED05BD000CBDDBB /* CoreMotion.framework in Frameworks */,
 				52EEB3981ED05BC900CBDDBB /* CoreTelephony.framework in Frameworks */,
 				52EEB3951ED05B9B00CBDDBB /* libav.a in Frameworks */,
-				ED50C40906F1BAF5AC30163F /* libPods-Beacon.a in Frameworks */,
+				609E5B03E48D5A193E9BE625 /* libPods-Beacon.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,7 +202,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA678E119EC4F451DE19BFF6 /* libPods-Beacon-BeaconTests.a in Frameworks */,
+				DF6667C7B0C8BE6B64CCC04A /* libPods-Beacon-BeaconTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,6 +313,7 @@
 		52EEB35E1ED05AFD00CBDDBB /* Beacon */ = {
 			isa = PBXGroup;
 			children = (
+				D5139B551EDBBD8000B6FB2C /* View */,
 				528B21F01EDBABBD00D1CE02 /* Model */,
 				528B21EC1EDBAB5A00D1CE02 /* Controller */,
 				528B21ED1EDBAB6400D1CE02 /* Others */,
@@ -431,6 +442,44 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		D5139B551EDBBD8000B6FB2C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D5139B561EDBBD8800B6FB2C /* Main */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		D5139B561EDBBD8800B6FB2C /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				D5139B5F1EDBC3BB00B6FB2C /* ECCardView */,
+				D5139B571EDBBDF500B6FB2C /* CCDraggableCard */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		D5139B571EDBBDF500B6FB2C /* CCDraggableCard */ = {
+			isa = PBXGroup;
+			children = (
+				D5139B581EDBBE0900B6FB2C /* CCDraggableCardView.h */,
+				D5139B591EDBBE0900B6FB2C /* CCDraggableCardView.m */,
+				D5139B5A1EDBBE0900B6FB2C /* CCDraggableConfig.h */,
+				D5139B5B1EDBBE0900B6FB2C /* CCDraggableContainer.h */,
+				D5139B5C1EDBBE0900B6FB2C /* CCDraggableContainer.m */,
+			);
+			name = CCDraggableCard;
+			sourceTree = "<group>";
+		};
+		D5139B5F1EDBC3BB00B6FB2C /* ECCardView */ = {
+			isa = PBXGroup;
+			children = (
+				D5139B621EDBC43700B6FB2C /* ECCardView.h */,
+				D5139B631EDBC43700B6FB2C /* ECCardView.m */,
+			);
+			name = ECCardView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -486,6 +535,7 @@
 				TargetAttributes = {
 					52EEB35B1ED05AFD00CBDDBB = {
 						CreatedOnToolsVersion = 8.3.2;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 					52EEB3741ED05AFD00CBDDBB = {
@@ -578,7 +628,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		B1F466833B575D8EE43031F5 /* [CP] Copy Pods Resources */ = {
@@ -623,7 +673,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -636,7 +686,10 @@
 				52C90F7A1ED077A7009793DC /* ECPlayerController.m in Sources */,
 				5233909E1ED067B600C46419 /* ECMainViewController.m in Sources */,
 				52EEB3641ED05AFD00CBDDBB /* AppDelegate.m in Sources */,
+				D5139B5E1EDBBE0900B6FB2C /* CCDraggableContainer.m in Sources */,
+				D5139B641EDBC43700B6FB2C /* ECCardView.m in Sources */,
 				525167431ED17BC500FA943C /* ECConstant.m in Sources */,
+				D5139B5D1EDBBE0900B6FB2C /* CCDraggableCardView.m in Sources */,
 				52EEB3611ED05AFD00CBDDBB /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -781,6 +834,7 @@
 			baseConfigurationReference = 8B3B08B6D3329AFDDB613AAE /* Pods-Beacon.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "Beacon/ECBeacon-Prefix.pch";
@@ -798,6 +852,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Echo.Beacon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -806,6 +862,7 @@
 			baseConfigurationReference = 5C466BDF398279E07157273F /* Pods-Beacon.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "Beacon/ECBeacon-Prefix.pch";
@@ -823,6 +880,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Echo.Beacon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
