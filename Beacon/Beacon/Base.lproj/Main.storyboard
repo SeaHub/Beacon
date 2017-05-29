@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="HqE-lK-Qi0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="HqE-lK-Qi0">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -47,23 +47,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cardC" translatesAutoresizingMaskIntoConstraints="NO" id="fwJ-Sm-oeS">
-                                <rect key="frame" x="43" y="113.5" width="289" height="351"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="fwJ-Sm-oeS" secondAttribute="height" multiplier="167:203" id="wax-FU-ZmZ"/>
-                                </constraints>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cardB" translatesAutoresizingMaskIntoConstraints="NO" id="gl6-6v-oR4">
-                                <rect key="frame" x="30" y="123" width="314" height="374.5"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cardA" translatesAutoresizingMaskIntoConstraints="NO" id="nLf-H0-5Ch">
-                                <rect key="frame" x="20.5" y="135.5" width="334" height="406"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="nLf-H0-5Ch" secondAttribute="height" multiplier="167:203" id="elY-qc-jbe"/>
-                                </constraints>
-                            </imageView>
                             <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ctn-rj-nDa">
-                                <rect key="frame" x="47.5" y="561.5" width="69.5" height="69"/>
+                                <rect key="frame" x="49" y="562" width="69" height="69"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ctn-rj-nDa" secondAttribute="height" multiplier="1:1" id="bNW-Od-dzE"/>
                                 </constraints>
@@ -73,13 +58,13 @@
                                 </connections>
                             </button>
                             <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="71J-6b-ZkP">
-                                <rect key="frame" x="153" y="561.5" width="69" height="69"/>
+                                <rect key="frame" x="153" y="562" width="69" height="69"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="71J-6b-ZkP" secondAttribute="height" multiplier="1:1" id="nIt-mO-vXh"/>
                                 </constraints>
-                                <state key="normal" image="up"/>
+                                <state key="normal" image="more"/>
                                 <connections>
-                                    <action selector="upButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jAe-3P-sZa"/>
+                                    <action selector="moreButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="r9W-Oa-YSt"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Browse" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Geu-Pn-nju">
@@ -93,57 +78,53 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jba-iB-NzY">
-                                <rect key="frame" x="258" y="561.5" width="69.5" height="69"/>
+                                <rect key="frame" x="258" y="562" width="69" height="69"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="jba-iB-NzY" secondAttribute="height" multiplier="1:1" id="ra9-mo-H4N"/>
                                 </constraints>
-                                <state key="normal" title="Button" image="more"/>
+                                <state key="normal" title="Button" image="up"/>
                                 <connections>
-                                    <action selector="moreButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3FT-QY-vTU"/>
+                                    <action selector="upButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aGe-PK-Uop"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v8S-F3-oRW" customClass="CCDraggableContainer">
+                                <rect key="frame" x="5" y="101" width="365" height="471"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="71J-6b-ZkP" firstAttribute="top" secondItem="nLf-H0-5Ch" secondAttribute="bottom" constant="20" id="1nD-d3-XdS"/>
                             <constraint firstItem="71J-6b-ZkP" firstAttribute="width" secondItem="ctn-rj-nDa" secondAttribute="width" id="3E5-kp-spv"/>
                             <constraint firstItem="71J-6b-ZkP" firstAttribute="leading" secondItem="ctn-rj-nDa" secondAttribute="trailing" constant="35.850000000000001" id="3fc-lg-laV"/>
-                            <constraint firstItem="gl6-6v-oR4" firstAttribute="trailing" secondItem="nLf-H0-5Ch" secondAttribute="trailing" constant="-10" id="8fj-Fb-6Fb"/>
                             <constraint firstItem="ctn-rj-nDa" firstAttribute="height" secondItem="71J-6b-ZkP" secondAttribute="height" id="9eV-NU-MZm"/>
                             <constraint firstItem="ctn-rj-nDa" firstAttribute="centerY" secondItem="71J-6b-ZkP" secondAttribute="centerY" id="Azx-wH-f2d"/>
-                            <constraint firstItem="nLf-H0-5Ch" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20.5" id="Ecl-v1-ZBY"/>
+                            <constraint firstAttribute="trailing" secondItem="v8S-F3-oRW" secondAttribute="trailing" constant="5" id="Ibf-hy-ukq"/>
                             <constraint firstItem="Geu-Pn-nju" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="28" id="OUz-mm-wxY"/>
+                            <constraint firstItem="v8S-F3-oRW" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="5" id="PJa-gw-sO8"/>
                             <constraint firstItem="Geu-Pn-nju" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="18" id="QRM-FW-PZV"/>
                             <constraint firstItem="jba-iB-NzY" firstAttribute="leading" secondItem="71J-6b-ZkP" secondAttribute="trailing" constant="35.850000000000001" id="Qeo-ps-tZm"/>
-                            <constraint firstItem="nLf-H0-5Ch" firstAttribute="top" secondItem="fwJ-Sm-oeS" secondAttribute="top" constant="22" id="Sa3-lS-enz"/>
+                            <constraint firstItem="jba-iB-NzY" firstAttribute="top" secondItem="v8S-F3-oRW" secondAttribute="bottom" constant="-10" id="UFa-LB-FrA"/>
                             <constraint firstItem="jba-iB-NzY" firstAttribute="centerY" secondItem="71J-6b-ZkP" secondAttribute="centerY" id="Wd0-tM-OfR"/>
                             <constraint firstItem="71J-6b-ZkP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="XW0-p2-WTb"/>
-                            <constraint firstItem="fwJ-Sm-oeS" firstAttribute="trailing" secondItem="nLf-H0-5Ch" secondAttribute="trailing" constant="-22.5" id="bA9-Hd-ChK"/>
-                            <constraint firstAttribute="trailing" secondItem="nLf-H0-5Ch" secondAttribute="trailing" constant="20.5" id="cGj-Pb-1Gx"/>
-                            <constraint firstItem="nLf-H0-5Ch" firstAttribute="top" secondItem="gl6-6v-oR4" secondAttribute="top" constant="12" id="gGy-Er-lqz"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ctn-rj-nDa" secondAttribute="bottom" constant="36" id="eg2-QS-Lat"/>
                             <constraint firstItem="71J-6b-ZkP" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="3:29" id="i4z-JV-pOX"/>
-                            <constraint firstItem="gl6-6v-oR4" firstAttribute="leading" secondItem="nLf-H0-5Ch" secondAttribute="leading" constant="10" id="kMe-IN-Jz1"/>
-                            <constraint firstItem="fwJ-Sm-oeS" firstAttribute="leading" secondItem="nLf-H0-5Ch" secondAttribute="leading" constant="22.5" id="pMp-iC-37D"/>
-                            <constraint firstItem="71J-6b-ZkP" firstAttribute="top" secondItem="gl6-6v-oR4" secondAttribute="bottom" constant="63.5" id="pe8-pS-buJ"/>
-                            <constraint firstItem="nLf-H0-5Ch" firstAttribute="top" secondItem="Geu-Pn-nju" secondAttribute="bottom" constant="40" id="qxg-v9-lyn"/>
+                            <constraint firstItem="v8S-F3-oRW" firstAttribute="top" secondItem="Geu-Pn-nju" secondAttribute="bottom" constant="5" id="ujK-aQ-nw1"/>
                             <constraint firstItem="jba-iB-NzY" firstAttribute="width" secondItem="71J-6b-ZkP" secondAttribute="width" id="y4k-8W-wKf"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Browse" id="a6a-Pc-n4I"/>
                     <connections>
-                        <outlet property="cardAImageView" destination="nLf-H0-5Ch" id="eBt-iI-4LI"/>
-                        <outlet property="cardBImageView" destination="gl6-6v-oR4" id="Tt2-9R-Xto"/>
-                        <outlet property="cardCImageView" destination="fwJ-Sm-oeS" id="pdj-vv-2Dh"/>
+                        <outlet property="container" destination="v8S-F3-oRW" id="qlz-PO-jp6"/>
                         <outlet property="downButton" destination="ctn-rj-nDa" id="hjq-no-ZBW"/>
-                        <outlet property="moreButton" destination="jba-iB-NzY" id="cdP-T3-aC7"/>
+                        <outlet property="moreButton" destination="71J-6b-ZkP" id="c7f-10-ev6"/>
                         <outlet property="titleLabel" destination="Geu-Pn-nju" id="q3t-K9-Szi"/>
-                        <outlet property="upButton" destination="71J-6b-ZkP" id="egM-E1-OMW"/>
+                        <outlet property="upButton" destination="jba-iB-NzY" id="5te-YO-QH5"/>
                         <segue destination="Cez-pd-0Gy" kind="show" identifier="kSegueOfECPlayController" id="KP0-B1-ed4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="116.25" y="122.53521126760563"/>
+            <point key="canvasLocation" x="116" y="121.88905547226388"/>
         </scene>
         <!--Prototype Player-->
         <scene sceneID="nRn-UK-Scj">
@@ -253,9 +234,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="cardA" width="342" height="426"/>
-        <image name="cardB" width="322" height="401"/>
-        <image name="cardC" width="297" height="370"/>
         <image name="down" width="69" height="69"/>
         <image name="more" width="69" height="69"/>
         <image name="up" width="69" height="69"/>
