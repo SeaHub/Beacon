@@ -26,7 +26,6 @@
 #pragma mark - Life Cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // [_titleLabel setFont:[UIFont fontWithName:@"SFDisplayHeavy" size:40]];
     [self _setupShadow:_downButton];
     [self _setupShadow:_upButton];
     [self _setupShadow:_moreButton];

@@ -10,7 +10,6 @@
 		5233909E1ED067B600C46419 /* ECMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5233909D1ED067B600C46419 /* ECMainViewController.m */; };
 		525167431ED17BC500FA943C /* ECConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = 525167421ED17BC500FA943C /* ECConstant.m */; };
 		52C90F7A1ED077A7009793DC /* ECPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C90F791ED077A7009793DC /* ECPlayerController.m */; };
-		52D080581ED8989E00DBE31C /* SFDisplayHeavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 52D080571ED8989E00DBE31C /* SFDisplayHeavy.otf */; };
 		52EEB3611ED05AFD00CBDDBB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EEB3601ED05AFD00CBDDBB /* main.m */; };
 		52EEB3641ED05AFD00CBDDBB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EEB3631ED05AFD00CBDDBB /* AppDelegate.m */; };
 		52EEB36A1ED05AFD00CBDDBB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52EEB3681ED05AFD00CBDDBB /* Main.storyboard */; };
@@ -53,6 +52,8 @@
 		52EEB3D81ED05CD300CBDDBB /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 52EEB3D71ED05CD300CBDDBB /* libstdc++.tbd */; };
 		52EEB3DA1ED05CE200CBDDBB /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 52EEB3D91ED05CE200CBDDBB /* libc++.tbd */; };
 		52EEB3DC1ED05CEA00CBDDBB /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 52EEB3DB1ED05CEA00CBDDBB /* libiconv.tbd */; };
+		AA678E119EC4F451DE19BFF6 /* libPods-Beacon-BeaconTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0115FB84FD6C93526CC5EB60 /* libPods-Beacon-BeaconTests.a */; };
+		ED50C40906F1BAF5AC30163F /* libPods-Beacon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 434DCE203FA20976CCC23D69 /* libPods-Beacon.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,12 +76,11 @@
 		525167421ED17BC500FA943C /* ECConstant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECConstant.m; sourceTree = "<group>"; };
 		52C90F781ED077A7009793DC /* ECPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPlayerController.h; sourceTree = "<group>"; };
 		52C90F791ED077A7009793DC /* ECPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECPlayerController.m; sourceTree = "<group>"; };
-		52D080571ED8989E00DBE31C /* SFDisplayHeavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SFDisplayHeavy.otf; sourceTree = "<group>"; };
 		52E0C88D1ED065C0007D08D9 /* ECBeacon-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ECBeacon-Prefix.pch"; sourceTree = "<group>"; };
 		52EEB35C1ED05AFD00CBDDBB /* Beacon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Beacon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52EEB3601ED05AFD00CBDDBB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		52EEB3621ED05AFD00CBDDBB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		52EEB3631ED05AFD00CBDDBB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		52EEB3621ED05AFD00CBDDBB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../AppDelegate.h; sourceTree = "<group>"; };
+		52EEB3631ED05AFD00CBDDBB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = ../AppDelegate.m; sourceTree = "<group>"; };
 		52EEB3691ED05AFD00CBDDBB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		52EEB36B1ED05AFD00CBDDBB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		52EEB36E1ED05AFD00CBDDBB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -184,6 +184,7 @@
 				52EEB39A1ED05BD000CBDDBB /* CoreMotion.framework in Frameworks */,
 				52EEB3981ED05BC900CBDDBB /* CoreTelephony.framework in Frameworks */,
 				52EEB3951ED05B9B00CBDDBB /* libav.a in Frameworks */,
+				ED50C40906F1BAF5AC30163F /* libPods-Beacon.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,12 +192,94 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA678E119EC4F451DE19BFF6 /* libPods-Beacon-BeaconTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		528B21E61EDBAAD700D1CE02 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				5233909C1ED067B600C46419 /* ECMainViewController.h */,
+				5233909D1ED067B600C46419 /* ECMainViewController.m */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		528B21E71EDBAAF300D1CE02 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				52C90F781ED077A7009793DC /* ECPlayerController.h */,
+				52C90F791ED077A7009793DC /* ECPlayerController.m */,
+			);
+			name = Player;
+			sourceTree = "<group>";
+		};
+		528B21E81EDBAB2500D1CE02 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				528B21EA1EDBAB3600D1CE02 /* NetworkManager */,
+				528B21E91EDBAB2D00D1CE02 /* NetworkModel */,
+			);
+			name = Network;
+			sourceTree = "<group>";
+		};
+		528B21E91EDBAB2D00D1CE02 /* NetworkModel */ = {
+			isa = PBXGroup;
+			children = (
+				528B21EF1EDBABA700D1CE02 /* ReturnModel */,
+				528B21EE1EDBABA000D1CE02 /* RequestModel */,
+			);
+			name = NetworkModel;
+			sourceTree = "<group>";
+		};
+		528B21EA1EDBAB3600D1CE02 /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = NetworkManager;
+			sourceTree = "<group>";
+		};
+		528B21EC1EDBAB5A00D1CE02 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				528B21E71EDBAAF300D1CE02 /* Player */,
+				528B21E61EDBAAD700D1CE02 /* Main */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		528B21ED1EDBAB6400D1CE02 /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				528B21E81EDBAB2500D1CE02 /* Network */,
+			);
+			name = Others;
+			sourceTree = "<group>";
+		};
+		528B21EE1EDBABA000D1CE02 /* RequestModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = RequestModel;
+			sourceTree = "<group>";
+		};
+		528B21EF1EDBABA700D1CE02 /* ReturnModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ReturnModel;
+			sourceTree = "<group>";
+		};
+		528B21F01EDBABBD00D1CE02 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		52EEB3531ED05AFD00CBDDBB = {
 			isa = PBXGroup;
 			children = (
@@ -220,13 +303,9 @@
 		52EEB35E1ED05AFD00CBDDBB /* Beacon */ = {
 			isa = PBXGroup;
 			children = (
-				52C90F781ED077A7009793DC /* ECPlayerController.h */,
-				52C90F791ED077A7009793DC /* ECPlayerController.m */,
-				52EEB3621ED05AFD00CBDDBB /* AppDelegate.h */,
-				52EEB3631ED05AFD00CBDDBB /* AppDelegate.m */,
-				5233909C1ED067B600C46419 /* ECMainViewController.h */,
-				5233909D1ED067B600C46419 /* ECMainViewController.m */,
-				52D080571ED8989E00DBE31C /* SFDisplayHeavy.otf */,
+				528B21F01EDBABBD00D1CE02 /* Model */,
+				528B21EC1EDBAB5A00D1CE02 /* Controller */,
+				528B21ED1EDBAB6400D1CE02 /* Others */,
 				52EEB3681ED05AFD00CBDDBB /* Main.storyboard */,
 				52EEB36B1ED05AFD00CBDDBB /* Assets.xcassets */,
 				52EEB36D1ED05AFD00CBDDBB /* LaunchScreen.storyboard */,
@@ -260,6 +339,8 @@
 		52EEB3841ED05B9B00CBDDBB /* IOSPlayerLib */ = {
 			isa = PBXGroup;
 			children = (
+				52EEB3621ED05AFD00CBDDBB /* AppDelegate.h */,
+				52EEB3631ED05AFD00CBDDBB /* AppDelegate.m */,
 				52EEB3941ED05B9B00CBDDBB /* libav.a */,
 				52EEB3851ED05B9B00CBDDBB /* include */,
 			);
@@ -440,7 +521,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				52EEB36F1ED05AFD00CBDDBB /* LaunchScreen.storyboard in Resources */,
-				52D080581ED8989E00DBE31C /* SFDisplayHeavy.otf in Resources */,
 				52EEB36C1ED05AFD00CBDDBB /* Assets.xcassets in Resources */,
 				52EEB36A1ED05AFD00CBDDBB /* Main.storyboard in Resources */,
 			);

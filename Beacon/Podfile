@@ -4,6 +4,7 @@ target 'Beacon' do
   pod 'SDWebImage', '~>3.8'
   pod 'SVProgressHUD'
   pod 'Masonry'
+  pod 'AFNetworking', '~> 3.0'
 
   target 'BeaconTests' do
   end
