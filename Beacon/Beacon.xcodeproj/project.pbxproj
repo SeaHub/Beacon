@@ -696,7 +696,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		B1F466833B575D8EE43031F5 /* [CP] Copy Pods Resources */ = {
@@ -741,7 +741,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -757,16 +757,12 @@
 				5214C08A1EDBC55F00D09A06 /* ECTop5Video.m in Sources */,
 				5233909E1ED067B600C46419 /* ECMainViewController.m in Sources */,
 				52EEB3641ED05AFD00CBDDBB /* AppDelegate.m in Sources */,
-<<<<<<< HEAD
 				5209644B1EDBC436001F2A05 /* ECReturningTop5Video.m in Sources */,
-				525167431ED17BC500FA943C /* ECConstant.m in Sources */,
 				5281986D1EDBB1C8009D15FA /* ECAPIManager.m in Sources */,
-=======
 				D5139B5E1EDBBE0900B6FB2C /* CCDraggableContainer.m in Sources */,
 				D5139B641EDBC43700B6FB2C /* ECCardView.m in Sources */,
 				525167431ED17BC500FA943C /* ECConstant.m in Sources */,
 				D5139B5D1EDBBE0900B6FB2C /* CCDraggableCardView.m in Sources */,
->>>>>>> 70788b9bb0671df969085bd3f0145f2f26d0332c
 				52EEB3611ED05AFD00CBDDBB /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
