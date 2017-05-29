@@ -10,8 +10,8 @@
 #import "ECAPIManager.h"
 #import "ECVideoType.h"
 #import "ECReturningVideoType.h"
-#import "ECReturningTop5Video.h"
-#import "ECTop5Video.h"
+#import "ECReturningVideo.h"
+#import "ECVideo.h"
 
 static const double kTestCaseTimeOutInterval = 20.0;
 @interface NetworkTests : XCTestCase
@@ -48,9 +48,26 @@ static const double kTestCaseTimeOutInterval = 20.0;
 - (void)testGetTop5Videos {
     XCTestExpectation *exception = [self expectationWithDescription:@"Wait callback"];
     
-    [[ECAPIManager sharedManager] getTop5Videos:nil withSuccessBlock:^(NSArray<ECReturningTop5Video *> * _Nonnull models) {
-        for (ECReturningTop5Video *model in models) {
-            ECTop5Video *realModel = [model toRealObject];
+    [[ECAPIManager sharedManager] getTop5Videos:nil withSuccessBlock:^(NSArray<ECReturningVideo *> * _Nonnull models) {
+        for (ECReturningVideo *model in models) {
+            ECVideo *realModel = [model toRealObject];
+            XCTAssert(realModel != nil);
+        }
+        
+        [exception fulfill];
+    } withFailureBlock:^(NSError * _Nonnull error) {
+        XCTAssert(error == nil);
+    }];
+    
+    [self waitForExpectationsWithTimeout:kTestCaseTimeOutInterval handler:nil];
+}
+
+- (void)testGetTop5VideosWithParams {
+    XCTestExpectation *exception = [self expectationWithDescription:@"Wait callback"];
+    
+    [[ECAPIManager sharedManager] getTop5Videos:@[@"电影", @"电视剧", @"综艺"] withSuccessBlock:^(NSArray<ECReturningVideo *> * _Nonnull models) {
+        for (ECReturningVideo *model in models) {
+            ECVideo *realModel = [model toRealObject];
             XCTAssert(realModel != nil);
         }
         

@@ -10,8 +10,8 @@
 		5205AD6D1EDBB59500DEACE8 /* NetworkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5205AD6C1EDBB59500DEACE8 /* NetworkTests.m */; };
 		520964441EDBBB41001F2A05 /* ECVideoType.m in Sources */ = {isa = PBXBuildFile; fileRef = 520964431EDBBB41001F2A05 /* ECVideoType.m */; };
 		520964471EDBBB5A001F2A05 /* ECReturningVideoType.m in Sources */ = {isa = PBXBuildFile; fileRef = 520964461EDBBB5A001F2A05 /* ECReturningVideoType.m */; };
-		5209644B1EDBC436001F2A05 /* ECReturningTop5Video.m in Sources */ = {isa = PBXBuildFile; fileRef = 5209644A1EDBC436001F2A05 /* ECReturningTop5Video.m */; };
-		5214C08A1EDBC55F00D09A06 /* ECTop5Video.m in Sources */ = {isa = PBXBuildFile; fileRef = 5214C0891EDBC55F00D09A06 /* ECTop5Video.m */; };
+		5209644B1EDBC436001F2A05 /* ECReturningVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5209644A1EDBC436001F2A05 /* ECReturningVideo.m */; };
+		5214C08A1EDBC55F00D09A06 /* ECVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5214C0891EDBC55F00D09A06 /* ECVideo.m */; };
 		5233909E1ED067B600C46419 /* ECMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5233909D1ED067B600C46419 /* ECMainViewController.m */; };
 		525167431ED17BC500FA943C /* ECConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = 525167421ED17BC500FA943C /* ECConstant.m */; };
 		5281986D1EDBB1C8009D15FA /* ECAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5281986C1EDBB1C8009D15FA /* ECAPIManager.m */; };
@@ -84,10 +84,10 @@
 		520964431EDBBB41001F2A05 /* ECVideoType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECVideoType.m; sourceTree = "<group>"; };
 		520964451EDBBB5A001F2A05 /* ECReturningVideoType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECReturningVideoType.h; sourceTree = "<group>"; };
 		520964461EDBBB5A001F2A05 /* ECReturningVideoType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECReturningVideoType.m; sourceTree = "<group>"; };
-		520964491EDBC436001F2A05 /* ECReturningTop5Video.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECReturningTop5Video.h; sourceTree = "<group>"; };
-		5209644A1EDBC436001F2A05 /* ECReturningTop5Video.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECReturningTop5Video.m; sourceTree = "<group>"; };
-		5214C0881EDBC55F00D09A06 /* ECTop5Video.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECTop5Video.h; sourceTree = "<group>"; };
-		5214C0891EDBC55F00D09A06 /* ECTop5Video.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECTop5Video.m; sourceTree = "<group>"; };
+		520964491EDBC436001F2A05 /* ECReturningVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECReturningVideo.h; sourceTree = "<group>"; };
+		5209644A1EDBC436001F2A05 /* ECReturningVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECReturningVideo.m; sourceTree = "<group>"; };
+		5214C0881EDBC55F00D09A06 /* ECVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECVideo.h; sourceTree = "<group>"; };
+		5214C0891EDBC55F00D09A06 /* ECVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECVideo.m; sourceTree = "<group>"; };
 		5233909C1ED067B600C46419 /* ECMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECMainViewController.h; sourceTree = "<group>"; };
 		5233909D1ED067B600C46419 /* ECMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECMainViewController.m; sourceTree = "<group>"; };
 		525167411ED17BC500FA943C /* ECConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECConstant.h; sourceTree = "<group>"; };
@@ -226,13 +226,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		520964481EDBC406001F2A05 /* ReturningTop5Video */ = {
+		520964481EDBC406001F2A05 /* ReturningVideo */ = {
 			isa = PBXGroup;
 			children = (
-				520964491EDBC436001F2A05 /* ECReturningTop5Video.h */,
-				5209644A1EDBC436001F2A05 /* ECReturningTop5Video.m */,
+				520964491EDBC436001F2A05 /* ECReturningVideo.h */,
+				5209644A1EDBC436001F2A05 /* ECReturningVideo.m */,
 			);
-			name = ReturningTop5Video;
+			name = ReturningVideo;
 			sourceTree = "<group>";
 		};
 		5209644C1EDBC451001F2A05 /* ReturningVideoType */ = {
@@ -253,13 +253,13 @@
 			name = ECVideoType;
 			sourceTree = "<group>";
 		};
-		5214C0871EDBC54F00D09A06 /* ECTop5Video */ = {
+		5214C0871EDBC54F00D09A06 /* ECVideo */ = {
 			isa = PBXGroup;
 			children = (
-				5214C0881EDBC55F00D09A06 /* ECTop5Video.h */,
-				5214C0891EDBC55F00D09A06 /* ECTop5Video.m */,
+				5214C0881EDBC55F00D09A06 /* ECVideo.h */,
+				5214C0891EDBC55F00D09A06 /* ECVideo.m */,
 			);
-			name = ECTop5Video;
+			name = ECVideo;
 			sourceTree = "<group>";
 		};
 		5281986A1EDBB112009D15FA /* APIManager */ = {
@@ -343,7 +343,7 @@
 			isa = PBXGroup;
 			children = (
 				5209644C1EDBC451001F2A05 /* ReturningVideoType */,
-				520964481EDBC406001F2A05 /* ReturningTop5Video */,
+				520964481EDBC406001F2A05 /* ReturningVideo */,
 			);
 			name = ReturnModel;
 			sourceTree = "<group>";
@@ -351,7 +351,7 @@
 		528B21F01EDBABBD00D1CE02 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				5214C0871EDBC54F00D09A06 /* ECTop5Video */,
+				5214C0871EDBC54F00D09A06 /* ECVideo */,
 				5214C0861EDBC54700D09A06 /* ECVideoType */,
 			);
 			name = Model;
@@ -754,10 +754,10 @@
 				52C90F7A1ED077A7009793DC /* ECPlayerController.m in Sources */,
 				520964441EDBBB41001F2A05 /* ECVideoType.m in Sources */,
 				520964471EDBBB5A001F2A05 /* ECReturningVideoType.m in Sources */,
-				5214C08A1EDBC55F00D09A06 /* ECTop5Video.m in Sources */,
+				5214C08A1EDBC55F00D09A06 /* ECVideo.m in Sources */,
 				5233909E1ED067B600C46419 /* ECMainViewController.m in Sources */,
 				52EEB3641ED05AFD00CBDDBB /* AppDelegate.m in Sources */,
-				5209644B1EDBC436001F2A05 /* ECReturningTop5Video.m in Sources */,
+				5209644B1EDBC436001F2A05 /* ECReturningVideo.m in Sources */,
 				5281986D1EDBB1C8009D15FA /* ECAPIManager.m in Sources */,
 				D5139B5E1EDBBE0900B6FB2C /* CCDraggableContainer.m in Sources */,
 				D5139B641EDBC43700B6FB2C /* ECCardView.m in Sources */,

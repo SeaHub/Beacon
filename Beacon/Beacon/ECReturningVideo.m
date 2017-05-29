@@ -1,13 +1,13 @@
 //
-//  ECReturningTop5Video.m
+//  ECReturningVideo.m
 //  Beacon
 //
 //  Created by SeaHub on 2017/5/29.
 //  Copyright © 2017年 Echo. All rights reserved.
 //
 
-#import "ECReturningTop5Video.h"
-#import "ECTop5Video.h"
+#import "ECReturningVideo.h"
+#import "ECVideo.h"
 
 static NSString *const kA_idKey            = @"a_id";
 static NSString *const kDate_formatKey     = @"date_format";
@@ -26,7 +26,7 @@ static NSString *const kTv_idKey           = @"tv_id";
 static NSString *const kTypeKey            = @"type";
 static NSString *const kUpdate_numKey      = @"update_num";
 
-@implementation ECReturningTop5Video
+@implementation ECReturningVideo
 
 - (instancetype)initWithJSON:(NSDictionary *)json {
     
@@ -52,8 +52,8 @@ static NSString *const kUpdate_numKey      = @"update_num";
     return self;
 }
 
-- (ECTop5Video *)toRealObject {
-    return [[ECTop5Video alloc] initWithReturningModel:self];
+- (ECVideo *)toRealObject {
+    return [[ECVideo alloc] initWithReturningModel:self];
 }
 
 @end

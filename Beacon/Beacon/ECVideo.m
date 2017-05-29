@@ -1,17 +1,17 @@
 //
-//  ECTop5Video.m
+//  ECVideo.m
 //  Beacon
 //
 //  Created by SeaHub on 2017/5/29.
 //  Copyright © 2017年 Echo. All rights reserved.
 //
 
-#import "ECTop5Video.h"
-#import "ECReturningTop5Video.h"
+#import "ECVideo.h"
+#import "ECReturningVideo.h"
 
-@implementation ECTop5Video
+@implementation ECVideo
 
-- (instancetype)initWithReturningModel:(ECReturningTop5Video *)model {
+- (instancetype)initWithReturningModel:(ECReturningVideo *)model {
     if (self = [super init]) {
         _aID           = model.a_id;
         _dateFormat    = model.date_format;

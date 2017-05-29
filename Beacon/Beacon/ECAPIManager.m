@@ -9,7 +9,7 @@
 #import "ECAPIManager.h"
 #import <AFNetworking.h>
 #import "ECReturningVideoType.h"
-#import "ECReturningTop5Video.h"
+#import "ECReturningVideo.h"
 
 static NSString *const kBaseURLString    = @"https://beacon-flask.herokuapp.com";
 static const int kNetworkTimeoutInterval = 20;
@@ -60,7 +60,7 @@ static NSString *const kDatasKey         = @"datas";
             NSMutableArray *returnModels = [@[] mutableCopy];
             
             for (NSDictionary *dataJSON in dataJSONs) {
-                ECReturningTop5Video *model = [[ECReturningTop5Video alloc] initWithJSON:dataJSON];
+                ECReturningVideo *model = [[ECReturningVideo alloc] initWithJSON:dataJSON];
                 [returnModels addObject:model];
             }
             
@@ -76,8 +76,6 @@ static NSString *const kDatasKey         = @"datas";
         }];
     
     } else { // contains types, excute posting
-#warning something error
-       // NSString *jsonString = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:types options:NSJSONWritingPrettyPrinted error:nil] encoding:NSUTF8StringEncoding];
         NSDictionary *params = @{ @"types": types };
         [_manager POST:@"/beacon/v2/top5" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             debugLog(@"RawValue: %@", responseObject);
@@ -86,7 +84,7 @@ static NSString *const kDatasKey         = @"datas";
             NSMutableArray *returnModels = [@[] mutableCopy];
             
             for (NSDictionary *dataJSON in dataJSONs) {
-                ECReturningTop5Video *model = [[ECReturningTop5Video alloc] initWithJSON:dataJSON];
+                ECReturningVideo *model = [[ECReturningVideo alloc] initWithJSON:dataJSON];
                 [returnModels addObject:model];
             }
             
@@ -114,13 +112,8 @@ static NSString *const kDatasKey         = @"datas";
         _manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseURLString]];
         _manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
         _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", @"application/json", nil];
-        // _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain",
-                                                            // @"application/json", @"text/json",
-                                                            //  @"text/javascript", @"text/html", nil];
-        _manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-        [_manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        _manager.requestSerializer = [AFJSONRequestSerializer  serializer];
         [_manager.requestSerializer setTimeoutInterval:kNetworkTimeoutInterval];
-        #warning something error
         return self;
     }
     

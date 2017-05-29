@@ -1,5 +1,5 @@
 //
-//  ECTop5Video.h
+//  ECVideo.h
 //  Beacon
 //
 //  Created by SeaHub on 2017/5/29.
@@ -10,10 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class ECReturningTop5Video;
-@interface ECTop5Video : NSObject
+@class ECReturningVideo;
+@interface ECVideo : NSObject
 
-- (instancetype)initWithReturningModel:(ECReturningTop5Video *)model;
+- (instancetype)initWithReturningModel:(ECReturningVideo *)model;
 - (NSString *)description;
 
 @property (nonatomic, copy) NSString *aID;
