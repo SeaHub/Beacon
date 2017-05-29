@@ -7,6 +7,9 @@
 //
 
 #import "AppDelegate.h"
+#import "ECAPIManager.h"
+#import "ECReturningTop5Video.h"
+#import "ECTop5Video.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +19,13 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    [[ECAPIManager sharedManager] getTop5Videos:@[@"电影", @"电视剧", @"综艺"] withSuccessBlock:^(NSArray<ECReturningTop5Video *> * _Nonnull models) {
+        debugLog(@"=============");
+        for (ECReturningTop5Video *model in models) {
+            ECTop5Video *realModel = [model toRealObject];
+            debugLog(@"%@", realModel);
+        }
+    } withFailureBlock:nil];
     return YES;
 }
 
