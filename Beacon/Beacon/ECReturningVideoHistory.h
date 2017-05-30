@@ -11,10 +11,12 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class ECVideoHistory;
-@interface ECReturningVideoHistory : NSObject
+@interface ECReturningVideoHistory : NSObject <NSCoding>
 
 - (instancetype)initWithJSON:(NSDictionary *)json;
 - (ECVideoHistory *)toRealObject;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder;
+- (void)encodeWithCoder:(NSCoder *)aCoder;
 
 @property (nonatomic, copy, readonly) NSString *user_id;
 @property (nonatomic, copy, readonly) NSString *video_id;

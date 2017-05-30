@@ -11,8 +11,10 @@
 		520964441EDBBB41001F2A05 /* ECVideoType.m in Sources */ = {isa = PBXBuildFile; fileRef = 520964431EDBBB41001F2A05 /* ECVideoType.m */; };
 		520964471EDBBB5A001F2A05 /* ECReturningVideoType.m in Sources */ = {isa = PBXBuildFile; fileRef = 520964461EDBBB5A001F2A05 /* ECReturningVideoType.m */; };
 		5209644B1EDBC436001F2A05 /* ECReturningVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5209644A1EDBC436001F2A05 /* ECReturningVideo.m */; };
+		520A4E381EDDA53400FFA5CA /* CacheAPITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 520A4E371EDDA53400FFA5CA /* CacheAPITests.m */; };
 		5214C08A1EDBC55F00D09A06 /* ECVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5214C0891EDBC55F00D09A06 /* ECVideo.m */; };
 		5233909E1ED067B600C46419 /* ECMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5233909D1ED067B600C46419 /* ECMainViewController.m */; };
+		523EA4981EDD6EE900E02A95 /* ECCacheAPIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 523EA4971EDD6EE900E02A95 /* ECCacheAPIHelper.m */; };
 		525167431ED17BC500FA943C /* ECConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = 525167421ED17BC500FA943C /* ECConstant.m */; };
 		5281986D1EDBB1C8009D15FA /* ECAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5281986C1EDBB1C8009D15FA /* ECAPIManager.m */; };
 		52C90F7A1ED077A7009793DC /* ECPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C90F791ED077A7009793DC /* ECPlayerController.m */; };
@@ -20,6 +22,8 @@
 		52DE8C9E1EDC12CC00072C91 /* ECUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 52DE8C9D1EDC12CC00072C91 /* ECUtil.m */; };
 		52DE8CA51EDC19F000072C91 /* ECVideoHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 52DE8CA41EDC19F000072C91 /* ECVideoHistory.m */; };
 		52DE8CA91EDC1A1E00072C91 /* ECReturningVideoHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 52DE8CA81EDC1A1E00072C91 /* ECReturningVideoHistory.m */; };
+		52E227F11EDCF8660019E958 /* ECCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E227F01EDCF8660019E958 /* ECCacheManager.m */; };
+		52E227F41EDD01B30019E958 /* CacheTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E227F31EDD01B30019E958 /* CacheTests.m */; };
 		52EEB3611ED05AFD00CBDDBB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EEB3601ED05AFD00CBDDBB /* main.m */; };
 		52EEB3641ED05AFD00CBDDBB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EEB3631ED05AFD00CBDDBB /* AppDelegate.m */; };
 		52EEB36A1ED05AFD00CBDDBB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52EEB3681ED05AFD00CBDDBB /* Main.storyboard */; };
@@ -90,10 +94,13 @@
 		520964461EDBBB5A001F2A05 /* ECReturningVideoType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECReturningVideoType.m; sourceTree = "<group>"; };
 		520964491EDBC436001F2A05 /* ECReturningVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECReturningVideo.h; sourceTree = "<group>"; };
 		5209644A1EDBC436001F2A05 /* ECReturningVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECReturningVideo.m; sourceTree = "<group>"; };
+		520A4E371EDDA53400FFA5CA /* CacheAPITests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CacheAPITests.m; sourceTree = "<group>"; };
 		5214C0881EDBC55F00D09A06 /* ECVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECVideo.h; sourceTree = "<group>"; };
 		5214C0891EDBC55F00D09A06 /* ECVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECVideo.m; sourceTree = "<group>"; };
 		5233909C1ED067B600C46419 /* ECMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECMainViewController.h; sourceTree = "<group>"; };
 		5233909D1ED067B600C46419 /* ECMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECMainViewController.m; sourceTree = "<group>"; };
+		523EA4961EDD6EE900E02A95 /* ECCacheAPIHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECCacheAPIHelper.h; sourceTree = "<group>"; };
+		523EA4971EDD6EE900E02A95 /* ECCacheAPIHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECCacheAPIHelper.m; sourceTree = "<group>"; };
 		525167411ED17BC500FA943C /* ECConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECConstant.h; sourceTree = "<group>"; };
 		525167421ED17BC500FA943C /* ECConstant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECConstant.m; sourceTree = "<group>"; };
 		5281986B1EDBB1C8009D15FA /* ECAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECAPIManager.h; sourceTree = "<group>"; };
@@ -109,6 +116,9 @@
 		52DE8CA71EDC1A1E00072C91 /* ECReturningVideoHistory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECReturningVideoHistory.h; sourceTree = "<group>"; };
 		52DE8CA81EDC1A1E00072C91 /* ECReturningVideoHistory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECReturningVideoHistory.m; sourceTree = "<group>"; };
 		52E0C88D1ED065C0007D08D9 /* ECBeacon-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ECBeacon-Prefix.pch"; sourceTree = "<group>"; };
+		52E227EF1EDCF8660019E958 /* ECCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECCacheManager.h; sourceTree = "<group>"; };
+		52E227F01EDCF8660019E958 /* ECCacheManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECCacheManager.m; sourceTree = "<group>"; };
+		52E227F31EDD01B30019E958 /* CacheTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CacheTests.m; sourceTree = "<group>"; };
 		52EEB35C1ED05AFD00CBDDBB /* Beacon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Beacon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52EEB3601ED05AFD00CBDDBB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		52EEB3621ED05AFD00CBDDBB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../AppDelegate.h; sourceTree = "<group>"; };
@@ -274,6 +284,24 @@
 			name = Video;
 			sourceTree = "<group>";
 		};
+		523EA4941EDD6EBB00E02A95 /* CacheManager */ = {
+			isa = PBXGroup;
+			children = (
+				52E227EF1EDCF8660019E958 /* ECCacheManager.h */,
+				52E227F01EDCF8660019E958 /* ECCacheManager.m */,
+			);
+			name = CacheManager;
+			sourceTree = "<group>";
+		};
+		523EA4951EDD6EC500E02A95 /* CacheAPIHelper */ = {
+			isa = PBXGroup;
+			children = (
+				523EA4961EDD6EE900E02A95 /* ECCacheAPIHelper.h */,
+				523EA4971EDD6EE900E02A95 /* ECCacheAPIHelper.m */,
+			);
+			name = CacheAPIHelper;
+			sourceTree = "<group>";
+		};
 		5281986A1EDBB112009D15FA /* APIManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -338,6 +366,8 @@
 		528B21ED1EDBAB6400D1CE02 /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				52E227EE1EDCF8520019E958 /* Cache */,
+				52E227ED1EDCF83A0019E958 /* Constant */,
 				52DE8C961EDC109D00072C91 /* Tools */,
 				528B21E81EDBAB2500D1CE02 /* Network */,
 			);
@@ -409,6 +439,24 @@
 			name = VideoHistory;
 			sourceTree = "<group>";
 		};
+		52E227ED1EDCF83A0019E958 /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				525167411ED17BC500FA943C /* ECConstant.h */,
+				525167421ED17BC500FA943C /* ECConstant.m */,
+			);
+			name = Constant;
+			sourceTree = "<group>";
+		};
+		52E227EE1EDCF8520019E958 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				523EA4951EDD6EC500E02A95 /* CacheAPIHelper */,
+				523EA4941EDD6EBB00E02A95 /* CacheManager */,
+			);
+			name = Cache;
+			sourceTree = "<group>";
+		};
 		52EEB3531ED05AFD00CBDDBB = {
 			isa = PBXGroup;
 			children = (
@@ -451,8 +499,6 @@
 				52EEB3601ED05AFD00CBDDBB /* main.m */,
 				52EEB3701ED05AFD00CBDDBB /* Info.plist */,
 				52E0C88D1ED065C0007D08D9 /* ECBeacon-Prefix.pch */,
-				525167411ED17BC500FA943C /* ECConstant.h */,
-				525167421ED17BC500FA943C /* ECConstant.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -463,6 +509,8 @@
 				52EEB3791ED05AFD00CBDDBB /* BeaconTests.m */,
 				52EEB37B1ED05AFD00CBDDBB /* Info.plist */,
 				5205AD6C1EDBB59500DEACE8 /* NetworkTests.m */,
+				52E227F31EDD01B30019E958 /* CacheTests.m */,
+				520A4E371EDDA53400FFA5CA /* CacheAPITests.m */,
 			);
 			path = BeaconTests;
 			sourceTree = "<group>";
@@ -805,7 +853,9 @@
 			files = (
 				52C90F7A1ED077A7009793DC /* ECPlayerController.m in Sources */,
 				520964441EDBBB41001F2A05 /* ECVideoType.m in Sources */,
+				52E227F11EDCF8660019E958 /* ECCacheManager.m in Sources */,
 				520964471EDBBB5A001F2A05 /* ECReturningVideoType.m in Sources */,
+				523EA4981EDD6EE900E02A95 /* ECCacheAPIHelper.m in Sources */,
 				5214C08A1EDBC55F00D09A06 /* ECVideo.m in Sources */,
 				5233909E1ED067B600C46419 /* ECMainViewController.m in Sources */,
 				52DE8C9E1EDC12CC00072C91 /* ECUtil.m in Sources */,
@@ -828,7 +878,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				5205AD6D1EDBB59500DEACE8 /* NetworkTests.m in Sources */,
+				52E227F41EDD01B30019E958 /* CacheTests.m in Sources */,
 				52EEB37A1ED05AFD00CBDDBB /* BeaconTests.m in Sources */,
+				520A4E381EDDA53400FFA5CA /* CacheAPITests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

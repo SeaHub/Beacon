@@ -11,10 +11,12 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class ECVideo;
-@interface ECReturningVideo : NSObject
+@interface ECReturningVideo : NSObject <NSCoding>
 
 - (instancetype)initWithJSON:(NSDictionary *)json;
 - (ECVideo *)toRealObject;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder;
+- (void)encodeWithCoder:(NSCoder *)aCoder;
 
 @property (nonatomic, copy, readonly) NSString *a_id;
 @property (nonatomic, copy, readonly) NSString *date_format;

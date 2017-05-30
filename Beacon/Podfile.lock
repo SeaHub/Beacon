@@ -19,19 +19,22 @@ PODS:
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
   - SVProgressHUD (2.1.2)
+  - YYCache (1.0.4)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
   - Masonry
   - SDWebImage (~> 3.8)
   - SVProgressHUD
+  - YYCache
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
+  YYCache: 8105b6638f5e849296c71f331ff83891a4942952
 
-PODFILE CHECKSUM: b43e123aa80eb8bdaf85ee65eb3580be8e634268
+PODFILE CHECKSUM: 5b4ea251a02f3ee7dcd9f57c509cef9d24206cf3
 
 COCOAPODS: 1.2.0.rc.1
