@@ -11,10 +11,12 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class ECVideoType;
-@interface ECReturningVideoType : NSObject
+@interface ECReturningVideoType : NSObject <NSCoding>
 
 - (instancetype)initWithJSON:(NSDictionary *)json;
 - (ECVideoType *)toRealObject;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder;
+- (void)encodeWithCoder:(NSCoder *)aCoder;
 
 @property (nonatomic, copy, readonly) NSString *desc;
 @property (nonatomic, copy, readonly) NSString *identifier;

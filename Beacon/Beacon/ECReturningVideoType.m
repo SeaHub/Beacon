@@ -29,4 +29,20 @@ static NSString *const kNameKey = @"name";
     return [[ECVideoType alloc] initWithReturningModel:self];
 }
 
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super init]) {
+        _desc       = [aDecoder decodeObjectForKey:kDescKey];
+        _identifier = [aDecoder decodeObjectForKey:kIDKey];
+        _name       = [aDecoder decodeObjectForKey:kNameKey];
+    }
+    
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:_desc       forKey:kDescKey];
+    [aCoder encodeObject:_identifier forKey:kIDKey];
+    [aCoder encodeObject:_name       forKey:kNameKey];
+}
+
 @end

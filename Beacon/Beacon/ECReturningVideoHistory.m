@@ -29,4 +29,20 @@ static NSString *const kWatchDateKey = @"watch_date";
     return [[ECVideoHistory alloc] initWithReturningModel:self];
 }
 
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super init]) {
+        _user_id    = [aDecoder decodeObjectForKey:_user_id];
+        _video_id   = [aDecoder decodeObjectForKey:_video_id];
+        _watch_date = [aDecoder decodeObjectForKey:_watch_date];
+    }
+    
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:_user_id      forKey:kUserIDKey];
+    [aCoder encodeObject:_video_id     forKey:kVideoIDKey];
+    [aCoder encodeObject:kWatchDateKey forKey:kWatchDateKey];
+}
+
 @end
