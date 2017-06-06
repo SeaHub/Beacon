@@ -61,7 +61,7 @@
 
 - (IBAction)moreButtonClicked:(id)sender {
     debugLog(@"todo");
-    [self performSegueWithIdentifier:kSegueOfECPlayController sender:self];
+    [self performSegueWithIdentifier:kSegueOfECVideoController sender:self];
 }
 
 #pragma mark - Private Methods
