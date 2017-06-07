@@ -18,6 +18,7 @@
 		525167431ED17BC500FA943C /* ECConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = 525167421ED17BC500FA943C /* ECConstant.m */; };
 		526A56821EE7002400FCD30D /* ECVideoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 526A56811EE7002400FCD30D /* ECVideoTableViewController.m */; };
 		5281986D1EDBB1C8009D15FA /* ECAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5281986C1EDBB1C8009D15FA /* ECAPIManager.m */; };
+		52B9E0351EE853FA003E5CFF /* ECVideoPlayerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B9E0341EE853FA003E5CFF /* ECVideoPlayerTableViewCell.m */; };
 		52C90F7A1ED077A7009793DC /* ECPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C90F791ED077A7009793DC /* ECPlayerController.m */; };
 		52DE8C991EDC10AA00072C91 /* APKeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 52DE8C981EDC10AA00072C91 /* APKeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		52DE8C9E1EDC12CC00072C91 /* ECUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 52DE8C9D1EDC12CC00072C91 /* ECUtil.m */; };
@@ -108,6 +109,8 @@
 		526A56811EE7002400FCD30D /* ECVideoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECVideoTableViewController.m; sourceTree = "<group>"; };
 		5281986B1EDBB1C8009D15FA /* ECAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECAPIManager.h; sourceTree = "<group>"; };
 		5281986C1EDBB1C8009D15FA /* ECAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECAPIManager.m; sourceTree = "<group>"; };
+		52B9E0331EE853FA003E5CFF /* ECVideoPlayerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECVideoPlayerTableViewCell.h; sourceTree = "<group>"; };
+		52B9E0341EE853FA003E5CFF /* ECVideoPlayerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECVideoPlayerTableViewCell.m; sourceTree = "<group>"; };
 		52C90F781ED077A7009793DC /* ECPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPlayerController.h; sourceTree = "<group>"; };
 		52C90F791ED077A7009793DC /* ECPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECPlayerController.m; sourceTree = "<group>"; };
 		52DE8C971EDC10AA00072C91 /* APKeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APKeychainItemWrapper.h; sourceTree = "<group>"; };
@@ -308,6 +311,7 @@
 		526A567F1EE6FFFB00FCD30D /* Video */ = {
 			isa = PBXGroup;
 			children = (
+				52B9E0321EE8537B003E5CFF /* VideoTableViewCell */,
 				526A56801EE7002400FCD30D /* ECVideoTableViewController.h */,
 				526A56811EE7002400FCD30D /* ECVideoTableViewController.m */,
 			);
@@ -405,6 +409,23 @@
 				52DE8CA61EDC19F300072C91 /* VideoHistory */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		52B9E0321EE8537B003E5CFF /* VideoTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				52B9E0361EE854C0003E5CFF /* ECVideoPlayerTableViewCell */,
+			);
+			name = VideoTableViewCell;
+			sourceTree = "<group>";
+		};
+		52B9E0361EE854C0003E5CFF /* ECVideoPlayerTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				52B9E0331EE853FA003E5CFF /* ECVideoPlayerTableViewCell.h */,
+				52B9E0341EE853FA003E5CFF /* ECVideoPlayerTableViewCell.m */,
+			);
+			name = ECVideoPlayerTableViewCell;
 			sourceTree = "<group>";
 		};
 		52DE8C961EDC109D00072C91 /* Tools */ = {
@@ -881,6 +902,7 @@
 				525167431ED17BC500FA943C /* ECConstant.m in Sources */,
 				D5139B5D1EDBBE0900B6FB2C /* CCDraggableCardView.m in Sources */,
 				52DE8C991EDC10AA00072C91 /* APKeychainItemWrapper.m in Sources */,
+				52B9E0351EE853FA003E5CFF /* ECVideoPlayerTableViewCell.m in Sources */,
 				526A56821EE7002400FCD30D /* ECVideoTableViewController.m in Sources */,
 				52EEB3611ED05AFD00CBDDBB /* main.m in Sources */,
 				52DE8CA51EDC19F000072C91 /* ECVideoHistory.m in Sources */,

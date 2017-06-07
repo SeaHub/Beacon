@@ -8,14 +8,9 @@
 
 #import "ECVideoTableViewController.h"
 
-static NSString *const kECVideoTableVideoReuseIdentifier = @"kECVideoTableVideoReuseIdentifier";
-static NSString *const kECVideoTableIntroReuseIdentifier = @"kECVideoTableIntroReuseIdentifier";
-static NSString *const kECVideoTableGuessReuseIdentifier = @"kECVideoTableGuessReuseIdentifier";
-static NSString *const kECVideoCollectionReuseIdentifier = @"kECVideoCollectionReuseIdentifier";
-
-@interface ECVideoTableViewController ()
-
-@end
+static NSString *const kECVideoTablePlayerReuseIdentifier    = @"kECVideoTablePlayerReuseIdentifier";
+static NSString *const kECVideoTableGuessingReuseIdentifier  = @"kECVideoTableGuessingReuseIdentifier";
+static NSString *const kECVideoTableIntroductReuseIdentifier = @"kECVideoTableIntroductReuseIdentifier";
 
 @implementation ECVideoTableViewController
 
@@ -41,13 +36,13 @@ static NSString *const kECVideoCollectionReuseIdentifier = @"kECVideoCollectionR
     UITableViewCell *cell = nil;
     
     if (indexPath.row == 0) {
-        cell = [tableView dequeueReusableCellWithIdentifier:kECVideoTableVideoReuseIdentifier
+        cell = [tableView dequeueReusableCellWithIdentifier:kECVideoTablePlayerReuseIdentifier
                                                forIndexPath:indexPath];
     } else if (indexPath.row == 1) {
-        cell = [tableView dequeueReusableCellWithIdentifier:kECVideoTableIntroReuseIdentifier
+        cell = [tableView dequeueReusableCellWithIdentifier:kECVideoTableIntroductReuseIdentifier
                                                forIndexPath:indexPath];
     } else {
-        cell = [tableView dequeueReusableCellWithIdentifier:kECVideoTableGuessReuseIdentifier
+        cell = [tableView dequeueReusableCellWithIdentifier:kECVideoTableGuessingReuseIdentifier
                                                forIndexPath:indexPath];
     }
     
