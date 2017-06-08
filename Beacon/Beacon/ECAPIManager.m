@@ -58,7 +58,8 @@ static NSString *const kErrorCodeMsgKey  = @"msg";
      withSuccessBlock:(Top5VideosSuccessBlock)successBlock
      withFailureBlock:(FailureBlock)failureBlock {
     if (types == nil) { // excute getting
-        [_manager GET:@"/beacon/v2/top5" parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        // Test API
+        [_manager GET:@"/beacon/test/top5" parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             debugLog(@"RawValue: %@", responseObject);
             NSDictionary *JSON           = responseObject;
             NSArray *dataJSONs           = JSON[kDatasKey];

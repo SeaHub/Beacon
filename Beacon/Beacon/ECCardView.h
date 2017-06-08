@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 
 #import "CCDraggableCardView.h"
+#import "ECReturningVideo.h"
 
 @interface ECCardView : CCDraggableCardView
 
-- (void)initialData:(NSString *)image;
+- (void)initialData:(ECReturningVideo *)video;
 
 @end

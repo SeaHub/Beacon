@@ -8,7 +8,9 @@
 
 #import "ECMainViewController.h"
 #import "ECPlayerController.h"
+#import "ECReturningVideo.h"
 
+#import "ECCacheAPIHelper.h"
 #import "CCDraggableContainer.h"
 #import "ECCardView.h"
 
@@ -20,7 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *moreButton;
 
 @property (weak, nonatomic) IBOutlet CCDraggableContainer *container;
-@property (nonatomic, copy) NSArray *dataSources;
+@property (nonatomic, copy) NSArray<ECReturningVideo *> *dataSources;
 
 @end
 
@@ -43,11 +45,13 @@
 }
 
 - (void)loadDatas {
-    self.dataSources = @[
-                         @"cardA",
-                         @"cardB",
-                         @"cardC",
-                         ];
+    self.dataSources = @[];
+    [ECCacheAPIHelper getTop5VideosFromCache:YES withFinishedBlock:^(BOOL isCacheHitting, NSArray<ECReturningVideo *> * _Nullable cachedVideos) {
+        debugLog(@"%hhd %@", isCacheHitting, cachedVideos);
+        self.dataSources = cachedVideos;
+        [self.container reloadData];
+    }];
+    
 }
 
 #pragma mark - IBAction
@@ -105,7 +109,7 @@
 - (CCDraggableCardView *)draggableContainer:(CCDraggableContainer *)draggableContainer viewForIndex:(NSInteger)index {
     
     ECCardView *cardView = [[ECCardView alloc] initWithFrame:draggableContainer.bounds];
-    [cardView initialData:self.dataSources[index]];
+    [cardView initialData: self.dataSources[index]];
     return cardView;
 }
 
@@ -128,6 +132,8 @@
 - (void)draggableContainer:(CCDraggableContainer *)draggableContainer cardView:(CCDraggableCardView *)cardView didSelectIndex:(NSInteger)didSelectIndex {
     
     NSLog(@"点击了Tag为%ld的Card", (long)didSelectIndex);
+    
+    // TODO: 视频入口
 }
 
 - (void)draggableContainer:(CCDraggableContainer *)draggableContainer finishedDraggableLastCard:(BOOL)finishedDraggableLastCard {
