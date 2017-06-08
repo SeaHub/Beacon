@@ -9,6 +9,7 @@
 #import "ECMainViewController.h"
 #import "ECPlayerController.h"
 #import "ECReturningVideo.h"
+#import "ECMenuViewController.h"
 
 #import "ECCacheAPIHelper.h"
 #import "CCDraggableContainer.h"
@@ -64,8 +65,11 @@
 }
 
 - (IBAction)moreButtonClicked:(id)sender {
-    debugLog(@"todo");
-    [self performSegueWithIdentifier:kSegueOfECVideoController sender:self];
+    debugLog(@"Menu controller");
+    ECMenuViewController *menuVC = [ECMenuViewController new];
+//    menuVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    menuVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    [self presentViewController:menuVC animated:YES completion:nil];
 }
 
 #pragma mark - Private Methods
@@ -134,6 +138,7 @@
     NSLog(@"点击了Tag为%ld的Card", (long)didSelectIndex);
     
     // TODO: 视频入口
+    [self performSegueWithIdentifier:kSegueOfECVideoController sender:self];
 }
 
 - (void)draggableContainer:(CCDraggableContainer *)draggableContainer finishedDraggableLastCard:(BOOL)finishedDraggableLastCard {
