@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+@class ECReturningVideo;
 @interface ECVideoTableViewController : UITableViewController
+
+@property (nonatomic, strong, nullable) ECReturningVideo *videoOfUserChosen;
 
 @end

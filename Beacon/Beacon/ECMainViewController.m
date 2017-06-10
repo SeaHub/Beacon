@@ -7,13 +7,12 @@
 //
 
 #import "ECMainViewController.h"
-#import "ECPlayerController.h"
 #import "ECReturningVideo.h"
 #import "ECMenuViewController.h"
-
 #import "ECCacheAPIHelper.h"
 #import "CCDraggableContainer.h"
 #import "ECCardView.h"
+#import "ECVideoTableViewController.h"
 
 @interface ECMainViewController ()<CCDraggableContainerDelegate, CCDraggableContainerDataSource>
 
@@ -82,31 +81,12 @@
     [button addSubview:effectView];
 }
 
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    if ([segue.identifier isEqualToString:kSegueOfECVideoController]) {
-//        // TO Delete
-//        ECPlayerController *playerController = (ECPlayerController *)segue.destinationViewController;
-//        // Here is just a mock
-//        playerController.contentDict         = @{
-//            @"a_id": @"677870700",
-//            @"date_format": @"2017-05-12",
-//            @"date_timestamp": @"1494604800000",
-//            @"id": @"677870700",
-//            @"img": @"http://pic7.qiyipic.com/image/20170513/6d/a6/v_112314044_m_601_m1.jpg",
-//            @"is_vip": @"0",
-//            @"p_type": @"1",
-//            @"play_count": @"5423310",
-//            @"play_count_text": @"542.3\\U4e07",
-//            @"short_title": @"\\U9910\\U5385\\U8058\\U6bd4\\U57fa\\U5c3c\\U7f8e\\U5973\\U7aef\\U83dc",
-//            @"sns_score": @"",
-//            @"title": @"\\U5357\\U4eac\\U4e00\\U9910\\U5385\\U8058\\U6bd4\\U57fa\\U5c3c\\U7f8e\\U5973\\U7aef\\U83dc \\U8425\\U9500\\U624b\\U6bb5\\U60f9\\U4e89\\U8bae",
-//            @"total_num": @"1",
-//            @"tv_id": @"677870700",
-//            @"type": @"normal",
-//            @"update_num": @"1",
-//        };
-//    }
-//}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:kSegueOfECVideoController]) {
+        ECVideoTableViewController *videoController = (ECVideoTableViewController *)segue.destinationViewController;
+        videoController.videoOfUserChosen           = (ECReturningVideo *)sender;
+    }
+}
 
 #pragma mark - CCDraggableContainer DataSource
 
@@ -136,9 +116,7 @@
 - (void)draggableContainer:(CCDraggableContainer *)draggableContainer cardView:(CCDraggableCardView *)cardView didSelectIndex:(NSInteger)didSelectIndex {
     
     NSLog(@"点击了Tag为%ld的Card", (long)didSelectIndex);
-    
-    // TODO: 视频入口
-    [self performSegueWithIdentifier:kSegueOfECVideoController sender:self];
+    [self performSegueWithIdentifier:kSegueOfECVideoController sender:self.dataSources[didSelectIndex]];
 }
 
 - (void)draggableContainer:(CCDraggableContainer *)draggableContainer finishedDraggableLastCard:(BOOL)finishedDraggableLastCard {

@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ECVideoGuessingContentTableViewCell : UITableViewCell
 
 - (void)configureCellWithTitle:(NSString *)title
-                     withImage:(UIImage *)image
+            withImageURLString:(NSString *)imageURL
                      withTypes:(NSArray<NSString *> *)types;
 
 @end

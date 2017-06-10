@@ -14,14 +14,10 @@
 @interface ECCardView()
 
 @property (strong, nonatomic) UIImageView *imageView;
-@property (strong, nonatomic) UIView *effectView;
 @property (assign) BOOL *isStar;
-
-@property (strong, nonatomic) UIImageView *playButton;
 @property (strong, nonatomic) UILabel *duration;
 @property (strong, nonatomic) UILabel *title;
 @property (strong, nonatomic) UIImageView *star;
-
 @property (strong, nonatomic) UILabel *tag1;
 
 @end
@@ -50,14 +46,6 @@
     self.imageView.contentMode = UIViewContentModeScaleAspectFill;
     self.backgroundColor = [UIColor clearColor];
     
-    self.effectView = [[UIView alloc] init];
-    self.effectView.frame = self.imageView.frame;
-    self.effectView.backgroundColor = [UIColor blackColor];
-    self.effectView.alpha = 0.6;
-    
-    self.playButton = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"play"]];
-    self.playButton.alpha = 0.4;
-    
     self.duration = [[UILabel alloc] init];
     self.duration.backgroundColor = [UIColor blackColor];
     self.duration.text = @"1:20:00";
@@ -82,24 +70,17 @@
     self.tag1.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:12];
     
     [self addSubview:self.imageView];
-    [self addSubview:self.effectView];
-    [self addSubview:self.playButton];
     [self addSubview:self.duration];
     [self addSubview:self.title];
     [self addSubview:self.star];
     [self addSubview:self.tag1];
+    [ECUtil addToPlayEffectView:self.imageView];
     
     [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.mas_top);
         make.bottom.equalTo(self.mas_bottom);
         make.left.equalTo(self.mas_left);
         make.right.equalTo(self.mas_right);
-    }];
-    
-    [self.playButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(self);
-        make.width.equalTo(@100);
-        make.height.equalTo(@100);
     }];
     
     [self.duration mas_makeConstraints:^(MASConstraintMaker *make) {

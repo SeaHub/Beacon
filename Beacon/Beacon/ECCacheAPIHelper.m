@@ -32,7 +32,7 @@ typedef void(^SetTimestampOfExistedCacheBlock)(BOOL isSuccess);
                                 // 超出缓存有效期，缓存不命中，发起网络请求
                                 
                                 if (isAllowRequestingWhenCacheMisses) { // 若允许发起网络请求，并写入缓存
-                                    [[ECAPIManager sharedManager] getTop5Videos:nil withSuccessBlock:^(NSArray<ECReturningVideo *> * _Nonnull models) {
+                                    [[ECAPIManager sharedManager] getTop5Videos:@[@"电影"] withSuccessBlock:^(NSArray<ECReturningVideo *> * _Nonnull models) {
                                         
                                         // 写缓存
                                         [[ECCacheManager sharedManager] setObject:models forKey:kTop5VideosCacheIdentifier onlyMemory:NO withFinishedBlock:^{
@@ -67,7 +67,7 @@ typedef void(^SetTimestampOfExistedCacheBlock)(BOOL isSuccess);
                         }];
     } else {
         if (isAllowRequestingWhenCacheMisses) { // 若允许发起网络请求，并写入缓存
-            [[ECAPIManager sharedManager] getTop5Videos:nil withSuccessBlock:^(NSArray<ECReturningVideo *> * _Nonnull models) {
+            [[ECAPIManager sharedManager] getTop5Videos:@[@"电影"] withSuccessBlock:^(NSArray<ECReturningVideo *> * _Nonnull models) {
                 
                 // 写缓存
                 [[ECCacheManager sharedManager] setObject:models forKey:kTop5VideosCacheIdentifier onlyMemory:NO withFinishedBlock:^{

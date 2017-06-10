@@ -7,16 +7,37 @@
 //
 
 #import "ECVideoTableViewController.h"
+#import "ECReturningVideo.h"
+#import "ECVideoPlayerTableViewCell.h"
+#import "ECVideoIntroductTableViewCell.h"
+#import "ECVideoGuessingLabelTableViewCell.h"
+#import "ECVideoGuessingContentTableViewCell.h"
+#import "ECCacheAPIHelper.h"
 
 static NSString *const kECVideoTablePlayerReuseIdentifier          = @"kECVideoTablePlayerReuseIdentifier";
 static NSString *const kECVideoTableIntroductReuseIdentifier       = @"kECVideoTableIntroductReuseIdentifier";
 static NSString *const kECVideoTableGuessingLabelReuseIdentifier   = @"kECVideoTableGuessingLabelReuseIdentifier";
 static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoTableGuessingContentReuseIdentifier";
 
+@interface ECVideoTableViewController ()
+
+@property (nonatomic, copy, nullable) NSArray<ECReturningVideo *> *guessingDatas;
+
+@end
+
 @implementation ECVideoTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self _initialGuessingDatas];
+}
+
+- (void)_initialGuessingDatas {
+    self.guessingDatas     = @[];
+    [ECCacheAPIHelper getTop5VideosFromCache:YES withFinishedBlock:^(BOOL isCacheHitting, NSArray<ECReturningVideo *> * _Nullable cachedVideos) {
+        self.guessingDatas = cachedVideos;
+        [self.tableView reloadData];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -29,25 +50,37 @@ static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoT
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return 3 + self.guessingDatas.count;
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = nil;
     
     if (indexPath.row == 0) {
-        cell = [tableView dequeueReusableCellWithIdentifier:kECVideoTablePlayerReuseIdentifier
-                                               forIndexPath:indexPath];
+        ECVideoPlayerTableViewCell *playerCell = [tableView dequeueReusableCellWithIdentifier:kECVideoTablePlayerReuseIdentifier forIndexPath:indexPath];
+        [playerCell configureCellWithTitle:self.videoOfUserChosen.short_title withTypes:@[@"iQiYi"]
+                            withLikeNumber:self.videoOfUserChosen.play_count];
+        return playerCell;
+    
     } else if (indexPath.row == 1) {
-        cell = [tableView dequeueReusableCellWithIdentifier:kECVideoTableIntroductReuseIdentifier
-                                               forIndexPath:indexPath];
+        ECVideoIntroductTableViewCell *introductCell = [tableView dequeueReusableCellWithIdentifier:kECVideoTableIntroductReuseIdentifier forIndexPath:indexPath];
+        [introductCell configureCellWithIntroductionContent:self.videoOfUserChosen.title];
+        return introductCell;
+        
     } else if (indexPath.row == 2) {
-        cell = [tableView dequeueReusableCellWithIdentifier:kECVideoTableGuessingLabelReuseIdentifier
-                                               forIndexPath:indexPath];
+        ECVideoGuessingLabelTableViewCell *guessingLabelCell = [tableView dequeueReusableCellWithIdentifier:kECVideoTableGuessingLabelReuseIdentifier forIndexPath:indexPath];
+        return guessingLabelCell;
+        
     } else {
-        cell = [tableView dequeueReusableCellWithIdentifier:kECVideoTableGuessingContentReuseIdentifier
-                                               forIndexPath:indexPath];
+        ECVideoGuessingContentTableViewCell *guessingContentCell = [tableView dequeueReusableCellWithIdentifier:kECVideoTableGuessingContentReuseIdentifier forIndexPath:indexPath];
+        if (self.guessingDatas.count > 0) {
+            ECReturningVideo *cellData = self.guessingDatas[indexPath.row - 3];
+            [guessingContentCell configureCellWithTitle:cellData.title
+                                     withImageURLString:cellData.img
+                                              withTypes:@[@"iQiYi"]];
+        }
+        
+        return guessingContentCell;
     }
     
     return cell;

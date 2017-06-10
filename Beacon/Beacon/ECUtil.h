@@ -12,5 +12,6 @@
 
 + (void)saveUUIDToKeyChain;
 + (NSString *)readUUIDFromKeyChain;
++ (UIView *)addToPlayEffectView:(UIView *)view;
 
 @end
