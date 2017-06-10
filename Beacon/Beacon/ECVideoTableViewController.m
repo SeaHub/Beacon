@@ -8,9 +8,10 @@
 
 #import "ECVideoTableViewController.h"
 
-static NSString *const kECVideoTablePlayerReuseIdentifier    = @"kECVideoTablePlayerReuseIdentifier";
-static NSString *const kECVideoTableGuessingReuseIdentifier  = @"kECVideoTableGuessingReuseIdentifier";
-static NSString *const kECVideoTableIntroductReuseIdentifier = @"kECVideoTableIntroductReuseIdentifier";
+static NSString *const kECVideoTablePlayerReuseIdentifier          = @"kECVideoTablePlayerReuseIdentifier";
+static NSString *const kECVideoTableIntroductReuseIdentifier       = @"kECVideoTableIntroductReuseIdentifier";
+static NSString *const kECVideoTableGuessingLabelReuseIdentifier   = @"kECVideoTableGuessingLabelReuseIdentifier";
+static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoTableGuessingContentReuseIdentifier";
 
 @implementation ECVideoTableViewController
 
@@ -28,7 +29,7 @@ static NSString *const kECVideoTableIntroductReuseIdentifier = @"kECVideoTableIn
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return 10;
 }
 
 
@@ -41,8 +42,11 @@ static NSString *const kECVideoTableIntroductReuseIdentifier = @"kECVideoTableIn
     } else if (indexPath.row == 1) {
         cell = [tableView dequeueReusableCellWithIdentifier:kECVideoTableIntroductReuseIdentifier
                                                forIndexPath:indexPath];
+    } else if (indexPath.row == 2) {
+        cell = [tableView dequeueReusableCellWithIdentifier:kECVideoTableGuessingLabelReuseIdentifier
+                                               forIndexPath:indexPath];
     } else {
-        cell = [tableView dequeueReusableCellWithIdentifier:kECVideoTableGuessingReuseIdentifier
+        cell = [tableView dequeueReusableCellWithIdentifier:kECVideoTableGuessingContentReuseIdentifier
                                                forIndexPath:indexPath];
     }
     
@@ -55,13 +59,47 @@ static NSString *const kECVideoTableIntroductReuseIdentifier = @"kECVideoTableIn
         case 0:
             height = 390.0;
             break;
-        default:
+        case 1:
             height = 150.0;
+            break;
+        case 2:
+            height = 31.5;
+            break;
+        default:
+            height = 120.0;
             break;
     }
     
     return height;
 }
 
+#pragma mark - Button Action
+- (IBAction)backButtonClicked:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)likeButtonClicked:(id)sender {
+    debugLog(@"Like Button Clicked");
+}
+
+- (IBAction)dislikeButtonClicked:(id)sender {
+    debugLog(@"Dislike Button Clicked");
+}
+
+- (IBAction)moreButtonClicked:(id)sender {
+    debugLog(@"More Button Clicked");
+}
+
+- (IBAction)playButtonClicked:(id)sender {
+    debugLog(@"Play Button Clicked");
+}
+
+- (IBAction)shareButtonClicked:(id)sender {
+    debugLog(@"Share Button Clicked");
+}
+
+- (IBAction)fullScreenButtonClicked:(id)sender {
+    debugLog(@"FullScreen Button Clicked");
+}
 
 @end

@@ -18,6 +18,10 @@
 		525167431ED17BC500FA943C /* ECConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = 525167421ED17BC500FA943C /* ECConstant.m */; };
 		526A56821EE7002400FCD30D /* ECVideoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 526A56811EE7002400FCD30D /* ECVideoTableViewController.m */; };
 		5281986D1EDBB1C8009D15FA /* ECAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5281986C1EDBB1C8009D15FA /* ECAPIManager.m */; };
+		5289E06D1EEBE0FF0012D05E /* ECVideoIntroductTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5289E06C1EEBE0FF0012D05E /* ECVideoIntroductTableViewCell.m */; };
+		5289E0711EEBE6B40012D05E /* ECVideoGuessingLabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5289E0701EEBE6B40012D05E /* ECVideoGuessingLabelTableViewCell.m */; };
+		5289E0751EEBE8240012D05E /* ECVideoGuessingContentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5289E0741EEBE8240012D05E /* ECVideoGuessingContentTableViewCell.m */; };
+		5289E0791EEBF3890012D05E /* ECVideoResourceTypeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5289E0781EEBF3890012D05E /* ECVideoResourceTypeCollectionViewCell.m */; };
 		52B9E0351EE853FA003E5CFF /* ECVideoPlayerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B9E0341EE853FA003E5CFF /* ECVideoPlayerTableViewCell.m */; };
 		52C90F7A1ED077A7009793DC /* ECPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C90F791ED077A7009793DC /* ECPlayerController.m */; };
 		52DE8C991EDC10AA00072C91 /* APKeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 52DE8C981EDC10AA00072C91 /* APKeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -114,6 +118,14 @@
 		526A56811EE7002400FCD30D /* ECVideoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECVideoTableViewController.m; sourceTree = "<group>"; };
 		5281986B1EDBB1C8009D15FA /* ECAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECAPIManager.h; sourceTree = "<group>"; };
 		5281986C1EDBB1C8009D15FA /* ECAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECAPIManager.m; sourceTree = "<group>"; };
+		5289E06B1EEBE0FF0012D05E /* ECVideoIntroductTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECVideoIntroductTableViewCell.h; sourceTree = "<group>"; };
+		5289E06C1EEBE0FF0012D05E /* ECVideoIntroductTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECVideoIntroductTableViewCell.m; sourceTree = "<group>"; };
+		5289E06F1EEBE6B40012D05E /* ECVideoGuessingLabelTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECVideoGuessingLabelTableViewCell.h; sourceTree = "<group>"; };
+		5289E0701EEBE6B40012D05E /* ECVideoGuessingLabelTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECVideoGuessingLabelTableViewCell.m; sourceTree = "<group>"; };
+		5289E0731EEBE8240012D05E /* ECVideoGuessingContentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECVideoGuessingContentTableViewCell.h; sourceTree = "<group>"; };
+		5289E0741EEBE8240012D05E /* ECVideoGuessingContentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECVideoGuessingContentTableViewCell.m; sourceTree = "<group>"; };
+		5289E0771EEBF3890012D05E /* ECVideoResourceTypeCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECVideoResourceTypeCollectionViewCell.h; sourceTree = "<group>"; };
+		5289E0781EEBF3890012D05E /* ECVideoResourceTypeCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECVideoResourceTypeCollectionViewCell.m; sourceTree = "<group>"; };
 		52B9E0331EE853FA003E5CFF /* ECVideoPlayerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECVideoPlayerTableViewCell.h; sourceTree = "<group>"; };
 		52B9E0341EE853FA003E5CFF /* ECVideoPlayerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECVideoPlayerTableViewCell.m; sourceTree = "<group>"; };
 		52C90F781ED077A7009793DC /* ECPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPlayerController.h; sourceTree = "<group>"; };
@@ -341,6 +353,42 @@
 			name = APIManager;
 			sourceTree = "<group>";
 		};
+		5289E06A1EEBE0C30012D05E /* IntroductTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				5289E06B1EEBE0FF0012D05E /* ECVideoIntroductTableViewCell.h */,
+				5289E06C1EEBE0FF0012D05E /* ECVideoIntroductTableViewCell.m */,
+			);
+			name = IntroductTableViewCell;
+			sourceTree = "<group>";
+		};
+		5289E06E1EEBE66F0012D05E /* GuessingLabelTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				5289E06F1EEBE6B40012D05E /* ECVideoGuessingLabelTableViewCell.h */,
+				5289E0701EEBE6B40012D05E /* ECVideoGuessingLabelTableViewCell.m */,
+			);
+			name = GuessingLabelTableViewCell;
+			sourceTree = "<group>";
+		};
+		5289E0721EEBE7F60012D05E /* GuessingContentTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				5289E0731EEBE8240012D05E /* ECVideoGuessingContentTableViewCell.h */,
+				5289E0741EEBE8240012D05E /* ECVideoGuessingContentTableViewCell.m */,
+			);
+			name = GuessingContentTableViewCell;
+			sourceTree = "<group>";
+		};
+		5289E0761EEBF3430012D05E /* ResourceTypeCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				5289E0771EEBF3890012D05E /* ECVideoResourceTypeCollectionViewCell.h */,
+				5289E0781EEBF3890012D05E /* ECVideoResourceTypeCollectionViewCell.m */,
+			);
+			name = ResourceTypeCollectionViewCell;
+			sourceTree = "<group>";
+		};
 		528B21E61EDBAAD700D1CE02 /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -430,18 +478,22 @@
 		52B9E0321EE8537B003E5CFF /* VideoTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				52B9E0361EE854C0003E5CFF /* ECVideoPlayerTableViewCell */,
+				5289E0761EEBF3430012D05E /* ResourceTypeCollectionViewCell */,
+				5289E0721EEBE7F60012D05E /* GuessingContentTableViewCell */,
+				5289E06E1EEBE66F0012D05E /* GuessingLabelTableViewCell */,
+				5289E06A1EEBE0C30012D05E /* IntroductTableViewCell */,
+				52B9E0361EE854C0003E5CFF /* PlayerTableViewCell */,
 			);
 			name = VideoTableViewCell;
 			sourceTree = "<group>";
 		};
-		52B9E0361EE854C0003E5CFF /* ECVideoPlayerTableViewCell */ = {
+		52B9E0361EE854C0003E5CFF /* PlayerTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
 				52B9E0331EE853FA003E5CFF /* ECVideoPlayerTableViewCell.h */,
 				52B9E0341EE853FA003E5CFF /* ECVideoPlayerTableViewCell.m */,
 			);
-			name = ECVideoPlayerTableViewCell;
+			name = PlayerTableViewCell;
 			sourceTree = "<group>";
 		};
 		52DE8C961EDC109D00072C91 /* Tools */ = {
@@ -886,7 +938,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		B1F466833B575D8EE43031F5 /* [CP] Copy Pods Resources */ = {
@@ -931,7 +983,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -944,6 +996,7 @@
 				52C90F7A1ED077A7009793DC /* ECPlayerController.m in Sources */,
 				520964441EDBBB41001F2A05 /* ECVideoType.m in Sources */,
 				52E227F11EDCF8660019E958 /* ECCacheManager.m in Sources */,
+				5289E0711EEBE6B40012D05E /* ECVideoGuessingLabelTableViewCell.m in Sources */,
 				D5A8F8411EE96BC200B73670 /* ECMenuItemTableViewCell.m in Sources */,
 				520964471EDBBB5A001F2A05 /* ECReturningVideoType.m in Sources */,
 				523EA4981EDD6EE900E02A95 /* ECCacheAPIHelper.m in Sources */,
@@ -956,10 +1009,13 @@
 				5281986D1EDBB1C8009D15FA /* ECAPIManager.m in Sources */,
 				52DE8CA91EDC1A1E00072C91 /* ECReturningVideoHistory.m in Sources */,
 				D5139B5E1EDBBE0900B6FB2C /* CCDraggableContainer.m in Sources */,
+				5289E0751EEBE8240012D05E /* ECVideoGuessingContentTableViewCell.m in Sources */,
 				D5139B641EDBC43700B6FB2C /* ECCardView.m in Sources */,
+				5289E0791EEBF3890012D05E /* ECVideoResourceTypeCollectionViewCell.m in Sources */,
 				525167431ED17BC500FA943C /* ECConstant.m in Sources */,
 				D5139B5D1EDBBE0900B6FB2C /* CCDraggableCardView.m in Sources */,
 				52DE8C991EDC10AA00072C91 /* APKeychainItemWrapper.m in Sources */,
+				5289E06D1EEBE0FF0012D05E /* ECVideoIntroductTableViewCell.m in Sources */,
 				52B9E0351EE853FA003E5CFF /* ECVideoPlayerTableViewCell.m in Sources */,
 				526A56821EE7002400FCD30D /* ECVideoTableViewController.m in Sources */,
 				52EEB3611ED05AFD00CBDDBB /* main.m in Sources */,

@@ -137,7 +137,7 @@
     NSInteger len = range.length;
     if (len != 0) {
         NSString *imageHD = [image stringByReplacingOccurrencesOfString:@".jpg" withString:@"_480_360.jpg"];
-        debugLog(imageHD);
+        debugLog(@"%@", imageHD);
         [self.imageView sd_setImageWithURL:[NSURL URLWithString:imageHD]];
     } else {
         [self.imageView sd_setImageWithURL:[NSURL URLWithString:image]];

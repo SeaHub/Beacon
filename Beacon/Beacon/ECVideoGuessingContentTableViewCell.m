@@ -1,32 +1,29 @@
 //
-//  ECVideoPlayerTableViewCell.m
+//  ECVideoGuessingContentTableViewCell.m
 //  Beacon
 //
-//  Created by SeaHub on 2017/6/7.
+//  Created by SeaHub on 2017/6/10.
 //  Copyright © 2017年 Echo. All rights reserved.
 //
 
-#import "ECVideoPlayerTableViewCell.h"
+#import "ECVideoGuessingContentTableViewCell.h"
 #import "ECVideoResourceTypeCollectionViewCell.h"
 
-static NSString *const kECVideoPlayerCellCollectionReuseIdentifier = @"kECVideoPlayerCellCollectionReuseIdentifier";
-@interface ECVideoPlayerTableViewCell () <UICollectionViewDelegate, UICollectionViewDataSource>
+static NSString *const kECVideoGuessingCellCollectionReuseIdentifier = @"GuessingCellCollectionReuseIdentifier";
+@interface ECVideoGuessingContentTableViewCell () <UICollectionViewDelegate, UICollectionViewDataSource>
 
-@property (weak, nonatomic) IBOutlet UIView *playerScreen;
-@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *resourceTitleLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *resourceImageView;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UICollectionView *resourceTypeCollectionView;
-@property (weak, nonatomic) IBOutlet UILabel *resourceLikeLabel;
 @property (copy, nonatomic) NSArray <NSString *> *resourceTypes;
 
 @end
 
-@implementation ECVideoPlayerTableViewCell
+@implementation ECVideoGuessingContentTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    debugLog(@"playerScreen needs to set up");
-    debugLog(@"timeLabel needs to set up");
+    [self _hideSeperate];
     self.resourceTypeCollectionView.delegate   = self;
     self.resourceTypeCollectionView.dataSource = self;
     self.resourceTypes                         = @[];
@@ -36,20 +33,25 @@ static NSString *const kECVideoPlayerCellCollectionReuseIdentifier = @"kECVideoP
     [super setSelected:selected animated:animated];
 }
 
+- (void)_hideSeperate {
+    CGFloat widthOfInset = [UIScreen mainScreen].bounds.size.width / 2;
+    self.separatorInset  = UIEdgeInsetsMake(0, widthOfInset, 0, widthOfInset);
+}
+
 - (void)configureCellWithTitle:(NSString *)title
-                     withTypes:(NSArray<NSString *> *)types
-                withLikeNumber:(NSString *)likeNumber {
+                     withImage:(UIImage *)image
+                     withTypes:(NSArray<NSString *> *)types {
     
-    self.resourceTitleLabel.text = title;
+    self.titleLabel.text         = title;
+    self.resourceImageView.image = image;
     self.resourceTypes           = types;
-    self.resourceLikeLabel.text  = likeNumber;
 }
 
 #pragma mark - UICollectionView Related
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    ECVideoResourceTypeCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kECVideoPlayerCellCollectionReuseIdentifier
+    ECVideoResourceTypeCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kECVideoGuessingCellCollectionReuseIdentifier
                                                                                             forIndexPath:indexPath];
     [cell configureCellWithTitle:self.resourceTypes[indexPath.row]];
     return cell;
