@@ -14,5 +14,7 @@
 @interface ECCardView : CCDraggableCardView
 
 - (void)initialData:(ECReturningVideo *)video;
+- (void)setIsLove;
+- (void)setCancelLove;
 
 @end

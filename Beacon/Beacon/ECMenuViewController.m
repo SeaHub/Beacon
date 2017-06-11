@@ -26,10 +26,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self initialDatas];
     [self initialViews];
     [self addViews];
     [self setLayouts];
+}
+
+- (void)initialDatas {
+    
 }
 
 - (void)initialViews {

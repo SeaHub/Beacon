@@ -14,7 +14,10 @@
 @interface ECCardView()
 
 @property (strong, nonatomic) UIImageView *imageView;
-@property (assign) BOOL *isStar;
+@property (strong, nonatomic) UIView *effectView;
+@property (assign) BOOL isStar;
+
+@property (strong, nonatomic) UIImageView *playButton;
 @property (strong, nonatomic) UILabel *duration;
 @property (strong, nonatomic) UILabel *title;
 @property (strong, nonatomic) UIImageView *star;
@@ -124,9 +127,30 @@
         [self.imageView sd_setImageWithURL:[NSURL URLWithString:image]];
     }
     
+    if (video.isLove) {
+        [self setIsLove];
+    } else {
+        [self setCancelLove];
+    }
+    
     self.title.text = video.title;
     self.duration.text = video.play_count_text;
 }
+
+- (void)setIsLove {
+    if (self.isStar == NO && self.star.alpha == 0) {
+        self.isStar = YES;
+        self.star.alpha = 1;
+    }
+}
+
+- (void)setCancelLove {
+    if (self.isStar == YES && self.star.alpha == 1) {
+        self.isStar = NO;
+        self.star.alpha = 0;
+    }
+}
+
 
 - (void)convertToBlurImage:(UIImageView *)imageView {
     CIFilter *gaussianBlurFilter = [CIFilter filterWithName:@"CIGaussianBlur"];

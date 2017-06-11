@@ -11,6 +11,8 @@
 #import "CCDraggableConfig.h"
 #import "CCDraggableCardView.h"
 
+typedef void (^removeBlock)(NSInteger, UIView*);
+
 @class CCDraggableContainer;
 
 
@@ -56,6 +58,9 @@
 
 @property (nonatomic) CCDraggableStyle     style;
 @property (nonatomic) CCDraggableDirection direction;
+
+@property (nonatomic, copy) removeBlock removeFromLeftCallback;
+@property (nonatomic, copy) removeBlock removeFromRightCallback;
 
 - (instancetype)initWithFrame:(CGRect)frame style:(CCDraggableStyle)style;
 - (void)removeForDirection:(CCDraggableDirection)direction;

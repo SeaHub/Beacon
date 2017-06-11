@@ -22,7 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *moreButton;
 
 @property (weak, nonatomic) IBOutlet CCDraggableContainer *container;
-@property (nonatomic, copy) NSArray<ECReturningVideo *> *dataSources;
+@property (nonatomic, copy, nonnull) NSArray<ECReturningVideo *> *dataSources;
 
 @end
 
@@ -41,6 +41,18 @@
     self.container.delegate = self;
     self.container.dataSource = self;
     self.container.backgroundColor = [UIColor clearColor];
+    
+    self.container.removeFromLeftCallback = ^(NSInteger index, UIView *card) {
+        ECCardView *cardView = (ECCardView *)card;
+        self.dataSources[index].isLove = NO;
+        [cardView setCancelLove];
+    };
+    
+    self.container.removeFromRightCallback = ^(NSInteger index, UIView *card) {
+        ECCardView *cardView = (ECCardView *)card;
+        self.dataSources[index].isLove = YES;
+        [cardView setIsLove];
+    };
     [self.container reloadData];
 }
 
@@ -56,11 +68,13 @@
 
 #pragma mark - IBAction
 - (IBAction)downButtonClicked:(id)sender {
-    debugLog(@"todo");
+    debugLog(@"Down");
+    [self.container removeForDirection:CCDraggableDirectionLeft];
 }
 
 - (IBAction)upButtonClicked:(id)sender {
     debugLog(@"todo");
+    [self.container removeForDirection:CCDraggableDirectionRight];
 }
 
 - (IBAction)moreButtonClicked:(id)sender {

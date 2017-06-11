@@ -35,6 +35,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly) NSString *type;
 @property (nonatomic, copy, readonly) NSString *update_num;
 
+@property (assign) BOOL isLove;
+
 @end
 
 NS_ASSUME_NONNULL_END

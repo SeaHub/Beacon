@@ -27,12 +27,24 @@
 - (instancetype)initWithFrame:(CGRect)frame style:(CCDraggableStyle)style {
     self = [self initWithFrame:frame];
     self.style = style;
+    self.removeFromLeftCallback = ^(NSInteger index, UIView *card) {
+        debugLog(@"Callback: remove from left");
+    };
+    self.removeFromRightCallback = ^(NSInteger index, UIView *card) {
+        debugLog(@"Callback: remove from right");
+    };
     return self;
 }
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.style = CCDraggableStyleUpOverlay;
+    self.removeFromLeftCallback = ^(NSInteger index, UIView *card) {
+        debugLog(@"Callback: remove from left. index: %d", index);
+    };
+    self.removeFromRightCallback = ^(NSInteger index, UIView *card) {
+        debugLog(@"Callback: remove from right. index: %d", index);
+    };
 }
 
 // 每次执行reloadData, UI、数据进行刷新
@@ -122,7 +134,7 @@
                 // 总数indexs, 计算以及加载到了第几个index
                 self.loadedIndex += 1;
                 
-                NSLog(@"loaded %ld card", (long)self.loadedIndex);
+                debugLog(@"loaded %ld card", (long)self.loadedIndex);
             }
         }
     } else {
@@ -200,7 +212,6 @@
         float widthRatio = (gesture.view.center.x - self.cardCenter.x) / self.cardCenter.x;
         float moveWidth  = (gesture.view.center.x  - self.cardCenter.x);
         float moveHeight = (gesture.view.center.y - self.cardCenter.y);
-
         [self finishedPanGesture:gesture.view direction:self.direction scale:(moveWidth / moveHeight) disappear:fabs(widthRatio) > kBoundaryRatio];
     }
 }
@@ -240,6 +251,12 @@
                              cardView.center = CGPointMake(CCWidth * flag, CCWidth * flag / scale + self.cardCenter.y);
                          } completion:^(BOOL finished) {
                              [cardView removeFromSuperview];
+                             if (self.direction == CCDraggableDirectionLeft) {
+                                 self.removeFromLeftCallback(cardView.tag, cardView);
+                             }
+                             if (self.direction == CCDraggableDirectionRight) {
+                                 self.removeFromRightCallback(cardView.tag, cardView);
+                             }
                          }];
         [self.currentCards removeObject:cardView];
         [self setMoving:NO];
@@ -257,6 +274,8 @@
         CGPoint cardCenter = CGPointZero;
         CGFloat flag = 0;
         
+        UIView *firstView = [self.currentCards firstObject];
+        
         switch (direction) {
             case CCDraggableDirectionLeft:
                 cardCenter = CGPointMake(-CCWidth / 2, self.cardCenter.y);
@@ -270,7 +289,6 @@
                 break;
         }
         
-        UIView *firstView = [self.currentCards firstObject];
         
         [UIView animateWithDuration:0.35 animations:^{
             
@@ -279,6 +297,12 @@
             firstView.center = cardCenter;
 
         } completion:^(BOOL finished) {
+            if (direction == CCDraggableDirectionLeft) {
+                self.removeFromLeftCallback(firstView.tag, firstView);
+            }
+            if (direction == CCDraggableDirectionRight) {
+                self.removeFromRightCallback(firstView.tag, firstView);
+            }
             
             [firstView removeFromSuperview];
             [self.currentCards removeObject:firstView];
@@ -373,7 +397,7 @@
             case 0:
             {
                 cardView.frame = frame;
-                NSLog(@"第一个Card的Y：%f", CGRectGetMinY(cardView.frame));
+                debugLog(@"第一个Card的Y：%f", CGRectGetMinY(cardView.frame));
             }
                 break;
             case 1:
@@ -389,7 +413,7 @@
                 cardView.frame = frame;
                 cardView.transform = CGAffineTransformScale(CGAffineTransformIdentity, kTherdCardScale, 1);
 
-                NSLog(@"第三个Card距容器视图底部：%f", CGRectGetHeight(self.frame) - CGRectGetMaxY(cardView.frame));
+                debugLog(@"第三个Card距容器视图底部：%f", CGRectGetHeight(self.frame) - CGRectGetMaxY(cardView.frame));
 
                 if (CGRectIsEmpty(self.lastCardFrame)) {
                     self.lastCardFrame = frame;

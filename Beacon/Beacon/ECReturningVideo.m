@@ -47,6 +47,8 @@ static NSString *const kUpdate_numKey      = @"update_num";
         _tv_id           = json[kTv_idKey];
         _type            = json[kTv_idKey];
         _update_num      = json[kUpdate_numKey];
+        
+        _isLove = NO;
     }
     
     return self;
@@ -74,6 +76,8 @@ static NSString *const kUpdate_numKey      = @"update_num";
         _tv_id           = [aDecoder decodeObjectForKey:kTv_idKey];
         _type            = [aDecoder decodeObjectForKey:_type];
         _update_num      = [aDecoder decodeObjectForKey:kUpdate_numKey];
+        
+        _isLove = NO;
     }
     
     return self;
