@@ -76,6 +76,7 @@
 		D5139B5D1EDBBE0900B6FB2C /* CCDraggableCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5139B591EDBBE0900B6FB2C /* CCDraggableCardView.m */; };
 		D5139B5E1EDBBE0900B6FB2C /* CCDraggableContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = D5139B5C1EDBBE0900B6FB2C /* CCDraggableContainer.m */; };
 		D5139B641EDBC43700B6FB2C /* ECCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5139B631EDBC43700B6FB2C /* ECCardView.m */; };
+		D55AAA581EEDFFEC0095D5CE /* IQActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = D55AAA571EEDFFEC0095D5CE /* IQActivityIndicatorView.m */; };
 		D5A8F8371EE8DABE00B73670 /* ECMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5A8F8361EE8DABE00B73670 /* ECMenuViewController.m */; };
 		D5A8F83B1EE9020900B73670 /* UIView+LSCore.m in Sources */ = {isa = PBXBuildFile; fileRef = D5A8F83A1EE9020900B73670 /* UIView+LSCore.m */; };
 		D5A8F8411EE96BC200B73670 /* ECMenuItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D5A8F83F1EE96BC200B73670 /* ECMenuItemTableViewCell.m */; };
@@ -212,6 +213,8 @@
 		D5139B5C1EDBBE0900B6FB2C /* CCDraggableContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCDraggableContainer.m; sourceTree = "<group>"; };
 		D5139B621EDBC43700B6FB2C /* ECCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECCardView.h; sourceTree = "<group>"; };
 		D5139B631EDBC43700B6FB2C /* ECCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECCardView.m; sourceTree = "<group>"; };
+		D55AAA561EEDFFEC0095D5CE /* IQActivityIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQActivityIndicatorView.h; sourceTree = "<group>"; };
+		D55AAA571EEDFFEC0095D5CE /* IQActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQActivityIndicatorView.m; sourceTree = "<group>"; };
 		D5A8F8351EE8DABE00B73670 /* ECMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECMenuViewController.h; sourceTree = "<group>"; };
 		D5A8F8361EE8DABE00B73670 /* ECMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECMenuViewController.m; sourceTree = "<group>"; };
 		D5A8F8391EE9020900B73670 /* UIView+LSCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+LSCore.h"; sourceTree = "<group>"; };
@@ -725,6 +728,7 @@
 		D5139B561EDBBD8800B6FB2C /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				D55AAA551EEDFFB90095D5CE /* IQActivityIndicatorView */,
 				D5139B5F1EDBC3BB00B6FB2C /* ECCardView */,
 				D5139B571EDBBDF500B6FB2C /* CCDraggableCard */,
 			);
@@ -750,6 +754,15 @@
 				D5139B631EDBC43700B6FB2C /* ECCardView.m */,
 			);
 			name = ECCardView;
+			sourceTree = "<group>";
+		};
+		D55AAA551EEDFFB90095D5CE /* IQActivityIndicatorView */ = {
+			isa = PBXGroup;
+			children = (
+				D55AAA561EEDFFEC0095D5CE /* IQActivityIndicatorView.h */,
+				D55AAA571EEDFFEC0095D5CE /* IQActivityIndicatorView.m */,
+			);
+			name = IQActivityIndicatorView;
 			sourceTree = "<group>";
 		};
 		D5A8F8341EE8DA9000B73670 /* Menu */ = {
@@ -1009,6 +1022,7 @@
 				5281986D1EDBB1C8009D15FA /* ECAPIManager.m in Sources */,
 				52DE8CA91EDC1A1E00072C91 /* ECReturningVideoHistory.m in Sources */,
 				D5139B5E1EDBBE0900B6FB2C /* CCDraggableContainer.m in Sources */,
+				D55AAA581EEDFFEC0095D5CE /* IQActivityIndicatorView.m in Sources */,
 				5289E0751EEBE8240012D05E /* ECVideoGuessingContentTableViewCell.m in Sources */,
 				D5139B641EDBC43700B6FB2C /* ECCardView.m in Sources */,
 				5289E0791EEBF3890012D05E /* ECVideoResourceTypeCollectionViewCell.m in Sources */,

@@ -95,8 +95,11 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="ablumImageView" destination="AMc-x5-6DC" id="0yJ-kk-66i"/>
                 <outlet property="bottomLine" destination="VfQ-HG-JIz" id="0a5-nN-31k"/>
+                <outlet property="titleLabel" destination="R3M-ZJ-2FM" id="nXF-6V-5Ue"/>
                 <outlet property="topLine" destination="mbl-92-0Jh" id="Q4r-jK-Gp7"/>
+                <outlet property="watchLabel" destination="Obf-cw-Trn" id="VPs-CS-3WR"/>
             </connections>
             <point key="canvasLocation" x="33.5" y="66"/>
         </tableViewCell>

@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ECReturningVideo.h"
 
 @interface ECMenuItemTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIView *bottomLine;
 @property (weak, nonatomic) IBOutlet UIView *topLine;
 
+- (void)configureCellByModel: (ECReturningVideo *)video;
 @end
