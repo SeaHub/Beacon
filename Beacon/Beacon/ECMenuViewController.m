@@ -8,6 +8,8 @@
 
 #import "ECMenuViewController.h"
 #import "ECMenuItemTableViewCell.h"
+#import "ECAPIManager.h"
+#import "ECReturningVideo.h"
 
 #import "Masonry.h"
 
@@ -19,6 +21,7 @@
 @property (nonatomic, strong) UIButton *history;
 
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, copy) NSArray<ECReturningVideo *> *dataSource;
 
 @end
 
@@ -33,7 +36,12 @@
 }
 
 - (void)initialDatas {
-    
+    [[ECAPIManager sharedManager] getLikedVideoWithSuccessBlock:^(NSArray<ECReturningVideo *> * datas) {
+        self.dataSource = datas;
+        [self.tableView reloadData];
+    } withFailureBlock:^(NSError * error) {
+        debugLog(@"%@", error);
+    }];
 }
 
 - (void)initialViews {
@@ -140,19 +148,23 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    return self.dataSource.count + 1;
 }
 
 #pragma mark - UITableDataSource
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row < 4) {
+    if (indexPath.row < self.dataSource.count) {
         ECMenuItemTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ECMenuItemTableViewCell" forIndexPath:indexPath];
-        if (indexPath.row != 3) {
-            cell.bottomLine.alpha = 0;
+        [cell configureCellByModel:self.dataSource[indexPath.row]];
+        cell.bottomLine.alpha = 0;
+        if (indexPath.row == self.dataSource.count - 1) {
+            cell.bottomLine.alpha = 0.1;
         }
         return cell;
     } else {
-        return [UITableViewCell new];
+        UITableViewCell *cell = [UITableViewCell new];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
     }
 }
 

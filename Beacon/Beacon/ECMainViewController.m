@@ -13,6 +13,7 @@
 #import "CCDraggableContainer.h"
 #import "ECCardView.h"
 #import "ECVideoTableViewController.h"
+#import "ECAPIManager.h"
 
 @interface ECMainViewController ()<CCDraggableContainerDelegate, CCDraggableContainerDataSource>
 
@@ -52,6 +53,12 @@
         ECCardView *cardView = (ECCardView *)card;
         self.dataSources[index].isLove = YES;
         [cardView setIsLove];
+        NSString *videoId = self.dataSources[index].a_id;
+        [[ECAPIManager sharedManager] addLikedVideoWithVideoID:videoId withSuccessBlock:^(BOOL success) {
+            
+        } withFailureBlock:^(NSError * _Nonnull error) {
+            
+        }];
     };
     [self.container reloadData];
 }
