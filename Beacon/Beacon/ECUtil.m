@@ -46,8 +46,27 @@
     return effectView;
 }
 
-#pragma mark - Private Methods
++ (CGSize)calculateLabelSize:(NSString *)text
+                    withFont:(UIFont *)font
+                 withMaxSize:(CGSize)maxSize {
+    
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
+    paragraphStyle.lineBreakMode            = NSLineBreakByWordWrapping;
+    NSDictionary *attributes = @{NSFontAttributeName: font,
+                                 NSParagraphStyleAttributeName: paragraphStyle.copy};
+    
+    CGSize labelSize = [text boundingRectWithSize: maxSize
+                                          options: NSStringDrawingUsesLineFragmentOrigin |
+                                                    NSStringDrawingUsesFontLeading |
+                                                    NSStringDrawingTruncatesLastVisibleLine
+                                       attributes:attributes
+                                          context:nil].size;
+    labelSize.height = ceil(labelSize.height);
+    labelSize.width  = ceil(labelSize.width);
+    return labelSize;
+}
 
+#pragma mark - Private Methods
 + (NSString *)_getUUIDString {
     CFUUIDRef uuidRef    = CFUUIDCreate(kCFAllocatorDefault);
     CFStringRef strRef   = CFUUIDCreateString(kCFAllocatorDefault , uuidRef);

@@ -78,6 +78,7 @@ static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoT
             [guessingContentCell configureCellWithTitle:cellData.title
                                      withImageURLString:cellData.img
                                               withTypes:@[@"iQiYi"]];
+            
         }
         
         return guessingContentCell;
@@ -92,9 +93,13 @@ static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoT
         case 0:
             height = 390.0;
             break;
-        case 1:
-            height = 150.0;
-            break;
+        case 1: {
+            CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+            CGSize newSize      = [ECUtil calculateLabelSize:self.videoOfUserChosen.title
+                                                    withFont:[UIFont systemFontOfSize:15]
+                                                 withMaxSize:CGSizeMake(screenWidth - 42, CGFLOAT_MAX)];
+            height = 60 + newSize.height;
+        } break;
         case 2:
             height = 31.5;
             break;

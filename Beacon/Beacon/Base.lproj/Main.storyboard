@@ -140,7 +140,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="390"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hvs-kf-CB8" id="9I6-tR-8P2">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="389"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="390"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XGX-qa-I2t">
@@ -301,7 +301,7 @@
                                                 <constraint firstAttribute="height" constant="15" id="TQG-oK-ucr"/>
                                                 <constraint firstAttribute="width" constant="16" id="fnd-0b-gpr"/>
                                             </constraints>
-                                            <state key="normal" image="like"/>
+                                            <state key="normal" image="watch"/>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1606" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PMh-xD-25C">
                                             <rect key="frame" x="44" y="355" width="34" height="18"/>
@@ -309,7 +309,7 @@
                                                 <constraint firstAttribute="height" constant="18" id="uFk-tX-1Rv"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
-                                            <color key="textColor" red="1" green="0.34509803921568627" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="textColor" red="0.49803921579999999" green="0.49803921579999999" blue="0.49803921579999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qgZ-wR-u3M">
@@ -370,7 +370,7 @@
                                 <rect key="frame" x="0.0" y="418" width="375" height="150"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lgz-vP-5gO" id="BnT-k3-Csh">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="149"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Introduction" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="deK-IJ-hrw">
@@ -384,7 +384,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WB0-n6-csF">
-                                            <rect key="frame" x="21" y="37" width="325" height="102"/>
+                                            <rect key="frame" x="21" y="37" width="325" height="101.5"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <string key="text">     In the near future, Major is the first of her kind : A human saved from a terrible crash, who  is cyber enhanced to be a perfect soldier devoted to stop-ping the world's most dangerous criminals.</string>
                                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -409,7 +409,7 @@
                                 <rect key="frame" x="0.0" y="568" width="375" height="32"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iY0-qK-lY0" id="Vch-06-sh6">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="31"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="32"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Guess what you like" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n78-Ou-Qei">
@@ -437,7 +437,7 @@
                                 <rect key="frame" x="0.0" y="600" width="375" height="120"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ROO-Uu-i0d" id="yhl-op-zbI">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="119"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="guessFilm" translatesAutoresizingMaskIntoConstraints="NO" id="TtP-lp-tTs">
@@ -447,7 +447,7 @@
                                                 <constraint firstAttribute="height" constant="93" id="OAr-MB-ckB"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Star War The Third Gathers: Backstroke of the West HD" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0dy-Df-I7U">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Star War The Third Gathers: Backstroke of the West HD" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0dy-Df-I7U">
                                             <rect key="frame" x="132" y="17" width="218" height="45"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
                                             <nil key="textColor"/>
@@ -467,7 +467,7 @@
                                             </collectionViewFlowLayout>
                                             <cells>
                                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GuessingCellCollectionReuseIdentifier" id="dKz-pd-CyB" customClass="ECVideoResourceTypeCollectionViewCell">
-                                                    <rect key="frame" x="0.0" y="1" width="59" height="20"/>
+                                                    <rect key="frame" x="0.0" y="0.5" width="59" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                         <rect key="frame" x="0.0" y="0.0" width="59" height="20"/>
@@ -635,7 +635,6 @@
         <image name="dislikeButton" width="44" height="44"/>
         <image name="down" width="69" height="69"/>
         <image name="guessFilm" width="93" height="94"/>
-        <image name="like" width="16" height="15"/>
         <image name="likeButton" width="44" height="44"/>
         <image name="more" width="69" height="69"/>
         <image name="moreButton" width="44" height="44"/>
@@ -645,5 +644,6 @@
         <image name="toolShare" width="17" height="19"/>
         <image name="toolTimeBg" width="139" height="33"/>
         <image name="up" width="69" height="69"/>
+        <image name="watch" width="200" height="200"/>
     </resources>
 </document>
