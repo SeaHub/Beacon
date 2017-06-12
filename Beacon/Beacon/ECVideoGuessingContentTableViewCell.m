@@ -9,6 +9,7 @@
 #import "ECVideoGuessingContentTableViewCell.h"
 #import "ECVideoResourceTypeCollectionViewCell.h"
 #import <UIImageView+WebCache.h>
+#import "ECReturningVideo.h"
 
 static NSString *const kECVideoGuessingCellCollectionReuseIdentifier = @"GuessingCellCollectionReuseIdentifier";
 @interface ECVideoGuessingContentTableViewCell () <UICollectionViewDelegate, UICollectionViewDataSource>
@@ -17,6 +18,7 @@ static NSString *const kECVideoGuessingCellCollectionReuseIdentifier = @"Guessin
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UICollectionView *resourceTypeCollectionView;
 @property (copy, nonatomic) NSArray<NSString *> *resourceTypes;
+@property (strong, nonatomic) ECReturningVideo *video;
 
 @end
 
@@ -29,6 +31,7 @@ static NSString *const kECVideoGuessingCellCollectionReuseIdentifier = @"Guessin
     self.resourceTypeCollectionView.dataSource = self;
     self.resourceTypes                         = @[];
     [ECUtil addToPlayEffectView:self.resourceImageView];
+    [self _addImageViewGesture];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -40,13 +43,28 @@ static NSString *const kECVideoGuessingCellCollectionReuseIdentifier = @"Guessin
     self.separatorInset  = UIEdgeInsetsMake(0, widthOfInset, 0, widthOfInset);
 }
 
-- (void)configureCellWithTitle:(NSString *)title
-            withImageURLString:(NSString *)imageURL
-                     withTypes:(NSArray<NSString *> *)types {
-    
-    self.titleLabel.text = title;
-    self.resourceTypes   = types;
-    [self.resourceImageView sd_setImageWithURL:[NSURL URLWithString:imageURL]];
+- (void)_addImageViewGesture {
+    UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                            action:@selector(_videoImageViewDidClicked)];
+    tapGR.numberOfTapsRequired              = 1;
+    self.resourceImageView.userInteractionEnabled = YES;
+    [self.resourceImageView addGestureRecognizer:tapGR];
+}
+
+- (void)_videoImageViewDidClicked {
+    if (self.delegate) {
+        if ([self.delegate respondsToSelector:@selector(videoGuessingContentCell:imageViewDidClickedWithVideo:)]) {
+            [self.delegate videoGuessingContentCell:self
+                       imageViewDidClickedWithVideo:self.video];
+        }
+    }
+}
+
+- (void)configureCellWithVideo:(ECReturningVideo *)video {
+    self.video           = video;
+    self.titleLabel.text = video.title;
+    self.resourceTypes   = @[@"iQiYi"];
+    [self.resourceImageView sd_setImageWithURL:[NSURL URLWithString:video.img]];
     [self.resourceTypeCollectionView reloadData];
 }
 

@@ -43,4 +43,15 @@
                     withFont:(UIFont *)font
                  withMaxSize:(CGSize)maxSize;
 
+/**
+ 弹出确认提示框
+
+ @param viewController 控制器
+ @param title 提示框标题
+ @param msg 提示框内容
+ */
++ (void)showCancelAlertController:(UIViewController *)viewController
+                        withTitle:(NSString *)title
+                          withMsg:(NSString *)msg;
+
 @end

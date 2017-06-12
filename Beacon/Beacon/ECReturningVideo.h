@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (ECVideo *)toRealObject;
 - (instancetype)initWithCoder:(NSCoder *)aDecoder;
 - (void)encodeWithCoder:(NSCoder *)aCoder;
+- (BOOL)isEqual:(id)object;
 
 @property (nonatomic, copy, readonly) NSString *a_id;
 @property (nonatomic, copy, readonly) NSString *date_format;

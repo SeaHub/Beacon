@@ -102,4 +102,9 @@ static NSString *const kUpdate_numKey      = @"update_num";
     [aCoder encodeObject:_update_num      forKey:kUpdate_numKey];
 }
 
+- (BOOL)isEqual:(id)object {
+    return [object isMemberOfClass:[self class]] &&
+            [_a_id isEqualToString:((ECReturningVideo *)object).a_id];
+}
+
 @end

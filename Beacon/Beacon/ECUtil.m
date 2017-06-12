@@ -66,6 +66,22 @@
     return labelSize;
 }
 
++ (void)showCancelAlertController:(UIViewController *)viewController
+                        withTitle:(NSString *)title
+                          withMsg:(NSString *)msg {
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title
+                                                                             message:msg
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction            = [UIAlertAction actionWithTitle:@"确定"
+                                                                  style:UIAlertActionStyleCancel
+                                                                handler:nil];
+    [alertController addAction:okAction];
+    [viewController presentViewController:alertController
+                                 animated:YES
+                               completion:nil];
+}
+
 #pragma mark - Private Methods
 + (NSString *)_getUUIDString {
     CFUUIDRef uuidRef    = CFUUIDCreate(kCFAllocatorDefault);

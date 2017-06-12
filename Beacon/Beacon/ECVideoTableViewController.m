@@ -13,15 +13,17 @@
 #import "ECVideoGuessingLabelTableViewCell.h"
 #import "ECVideoGuessingContentTableViewCell.h"
 #import "ECCacheAPIHelper.h"
+#import "ECAPIManager.h"
+#import "ECVideo.h"
 
 static NSString *const kECVideoTablePlayerReuseIdentifier          = @"kECVideoTablePlayerReuseIdentifier";
 static NSString *const kECVideoTableIntroductReuseIdentifier       = @"kECVideoTableIntroductReuseIdentifier";
 static NSString *const kECVideoTableGuessingLabelReuseIdentifier   = @"kECVideoTableGuessingLabelReuseIdentifier";
 static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoTableGuessingContentReuseIdentifier";
 
-@interface ECVideoTableViewController ()
+@interface ECVideoTableViewController () <ECVideoGuessingContentCellDelegate>
 
-@property (nonatomic, copy, nullable) NSArray<ECReturningVideo *> *guessingDatas;
+@property (nonatomic, strong, nullable) NSMutableArray<ECReturningVideo *> *guessingDatas;
 
 @end
 
@@ -33,9 +35,15 @@ static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoT
 }
 
 - (void)_initialGuessingDatas {
-    self.guessingDatas     = @[];
+    self.guessingDatas     = [@[] mutableCopy];
     [ECCacheAPIHelper getTop5VideosFromCache:YES withFinishedBlock:^(BOOL isCacheHitting, NSArray<ECReturningVideo *> * _Nullable cachedVideos) {
-        self.guessingDatas = cachedVideos;
+        
+        for (ECReturningVideo *video in cachedVideos) {
+            if (![video isEqual:self.videoOfUserChosen]) {
+                [self.guessingDatas addObject:video];
+            }
+        }
+    
         [self.tableView reloadData];
     }];
 }
@@ -74,11 +82,9 @@ static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoT
     } else {
         ECVideoGuessingContentTableViewCell *guessingContentCell = [tableView dequeueReusableCellWithIdentifier:kECVideoTableGuessingContentReuseIdentifier forIndexPath:indexPath];
         if (self.guessingDatas.count > 0) {
-            ECReturningVideo *cellData = self.guessingDatas[indexPath.row - 3];
-            [guessingContentCell configureCellWithTitle:cellData.title
-                                     withImageURLString:cellData.img
-                                              withTypes:@[@"iQiYi"]];
-            
+            ECReturningVideo *cellData   = self.guessingDatas[indexPath.row - 3];
+            guessingContentCell.delegate = self;
+            [guessingContentCell configureCellWithVideo:cellData];
         }
         
         return guessingContentCell;
@@ -118,6 +124,17 @@ static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoT
 
 - (IBAction)likeButtonClicked:(id)sender {
     debugLog(@"Like Button Clicked");
+    
+    [[ECAPIManager sharedManager] addLikedVideoWithVideoID:self.videoOfUserChosen.a_id
+                                          withSuccessBlock:^(BOOL status) {
+                                              if (status) {
+                                                  [ECUtil showCancelAlertController:self
+                                                                          withTitle:@"提示"
+                                                                            withMsg:@"成功添加至喜爱列表"];
+                                              }
+                                          } withFailureBlock:^(NSError * _Nonnull error) {
+                                              debugLog(@"%@", [error description]);
+                                          }];
 }
 
 - (IBAction)dislikeButtonClicked:(id)sender {
@@ -138,6 +155,26 @@ static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoT
 
 - (IBAction)fullScreenButtonClicked:(id)sender {
     debugLog(@"FullScreen Button Clicked");
+}
+
+#pragma mark - ECVideoGuessingContentCellDelegate
+- (void)videoGuessingContentCell:(ECVideoGuessingContentTableViewCell *)cell
+    imageViewDidClickedWithVideo:(ECReturningVideo *)video {
+    
+    NSIndexPath *indexPath            =  [self.tableView indexPathForCell:cell];
+    NSIndexPath *playerIndexPath      = [NSIndexPath indexPathForRow:0 inSection:0];
+    NSIndexPath *descriptionIndexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+    
+    // Swap data source
+    self.guessingDatas[indexPath.row - 3] = self.videoOfUserChosen;
+    self.videoOfUserChosen                = video;
+    
+    // Reload data with animation and scroll to top
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath, playerIndexPath, descriptionIndexPath]
+                          withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableView scrollToRowAtIndexPath:playerIndexPath
+                          atScrollPosition:UITableViewScrollPositionTop
+                                  animated:YES];
 }
 
 @end

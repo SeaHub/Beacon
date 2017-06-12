@@ -10,11 +10,20 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class ECVideoGuessingContentTableViewCell;
+@class ECReturningVideo;
+@protocol ECVideoGuessingContentCellDelegate <NSObject>
+
+- (void)videoGuessingContentCell:(ECVideoGuessingContentTableViewCell *)cell
+    imageViewDidClickedWithVideo:(ECReturningVideo *)video;
+
+@end
+
 @interface ECVideoGuessingContentTableViewCell : UITableViewCell
 
-- (void)configureCellWithTitle:(NSString *)title
-            withImageURLString:(NSString *)imageURL
-                     withTypes:(NSArray<NSString *> *)types;
+@property (nonatomic, weak, nullable) id<ECVideoGuessingContentCellDelegate> delegate;
+
+- (void)configureCellWithVideo:(ECReturningVideo *)video;
 
 @end
 
