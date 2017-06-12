@@ -63,9 +63,9 @@ static NSString *const kIsVipKey   = @"is_vip";
     [playerController setPlayerFrame:_originalPlayerFrame];
     [playerController setDelegate:self];
     [_playerView addSubview:playerController.view];
-    [[QYPlayerController sharedInstance] openPlayerByAlbumId:_contentDict[kAlbumIDKey]
-                                                        tvId:_contentDict[kTVIDKey]
-                                                       isVip:_contentDict[kIsVipKey]];
+    [[QYPlayerController sharedInstance] openPlayerByAlbumId:_video.a_id
+                                                        tvId:_video.tv_id
+                                                       isVip:_video.is_vip];
     [_videoProgressBar setProgress:0.0 animated:NO];
     [_cacheProgressBar setProgress:0.0 animated:NO];
 }

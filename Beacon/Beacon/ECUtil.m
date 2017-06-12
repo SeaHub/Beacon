@@ -9,6 +9,7 @@
 #import "ECUtil.h"
 #import "APKeychainItemWrapper.h"
 #import <Masonry.h>
+#import <AFNetworkReachabilityManager.h>
 
 @implementation ECUtil
 
@@ -66,9 +67,8 @@
     return labelSize;
 }
 
-+ (void)showCancelAlertController:(UIViewController *)viewController
-                        withTitle:(NSString *)title
-                          withMsg:(NSString *)msg {
++ (void)showCancelAlertWithTitle:(NSString *)title
+                         withMsg:(NSString *)msg {
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title
                                                                              message:msg
@@ -77,7 +77,9 @@
                                                                   style:UIAlertActionStyleCancel
                                                                 handler:nil];
     [alertController addAction:okAction];
-    [viewController presentViewController:alertController
+    UIWindow *keyWindow                  = [UIApplication sharedApplication].keyWindow;
+    UIViewController *rootViewController = keyWindow.rootViewController;
+    [rootViewController presentViewController:alertController
                                  animated:YES
                                completion:nil];
 }
@@ -90,6 +92,47 @@
     CFRelease(strRef);
     CFRelease(uuidRef);
     return uuidString;
+}
+
++ (void)monitoringNetworkWithErrorBlock:(ECNetworkMonitoringBlock)errorBlock
+                          withWWANBlock:(ECNetworkMonitoringBlock)wwanBlock
+                          withWiFiBlock:(ECNetworkMonitoringBlock)wifiBlock {
+    
+    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        switch (status) {
+            case AFNetworkReachabilityStatusNotReachable:
+            case AFNetworkReachabilityStatusUnknown: {
+                [[AFNetworkReachabilityManager sharedManager] stopMonitoring];
+                if (errorBlock) {
+                    errorBlock();
+                }
+            } break;
+                
+            case AFNetworkReachabilityStatusReachableViaWWAN: {
+                [[AFNetworkReachabilityManager sharedManager] stopMonitoring];
+                if (wwanBlock) {
+                    wwanBlock();
+                }
+            } break;
+                
+            case AFNetworkReachabilityStatusReachableViaWiFi: {
+                [[AFNetworkReachabilityManager sharedManager] stopMonitoring];
+                if (wifiBlock) {
+                    wifiBlock();
+                }
+            } break;
+        }
+    }];
+    
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+}
+
++ (NSString *)convertTimeIntervalToDateString:(NSTimeInterval)timeInterval {
+    NSInteger interval = (NSInteger)timeInterval;
+    NSInteger seconds  = interval % 60;
+    NSInteger minutes  = (interval / 60) % 60;
+    NSInteger hours    = (interval / 3600);
+    return [NSString stringWithFormat:@"%02ld:%02ld:%02ld", (long)hours, (long)minutes, (long)seconds];
 }
 
 @end

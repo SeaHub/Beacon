@@ -10,11 +10,24 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class ECVideoPlayerTableViewCell;
+@class ECReturningVideo;
+@protocol ECVideoPlayerTableViewCellDelegate <NSObject>
+
+- (void)videoPlayerCell:(ECVideoPlayerTableViewCell *)cell
+setFullScreenWithPlayer:(UIView *)player
+    isCurrentFullScreen:(BOOL)isFullScreen;
+
+- (void)videoPlayerCell:(ECVideoPlayerTableViewCell *)cell closeLightWithCurrentState:(BOOL)isLightClosed;
+
+@end
+
 @interface ECVideoPlayerTableViewCell : UITableViewCell
 
-- (void)configureCellWithTitle:(NSString *)title
-                     withTypes:(NSArray<NSString *> *)types
-                withLikeNumber:(NSString *)likeNumber;
+@property (nonatomic, weak, nullable) id<ECVideoPlayerTableViewCellDelegate> delegate;
+
+- (void)configureCellWithVideo:(ECReturningVideo *)video;
+- (void)cellWillAppear;
 
 @end
 

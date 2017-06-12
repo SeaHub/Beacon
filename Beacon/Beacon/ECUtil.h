@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
+typedef void(^ECNetworkMonitoringBlock)(void);
+
 @interface ECUtil : NSObject
 
 /**
@@ -44,14 +48,33 @@
                  withMaxSize:(CGSize)maxSize;
 
 /**
- 弹出确认提示框
+ 在最顶层 Controller 弹出确认提示框
 
- @param viewController 控制器
  @param title 提示框标题
  @param msg 提示框内容
  */
-+ (void)showCancelAlertController:(UIViewController *)viewController
-                        withTitle:(NSString *)title
-                          withMsg:(NSString *)msg;
++ (void)showCancelAlertWithTitle:(NSString *)title
+                         withMsg:(NSString *)msg;
+
+/**
+ 监控网络状态
+
+ @param errorBlock 网络不可用状态
+ @param wwanBlock 网络为流量状态
+ @param wifiBlock 网络为 WiFi 状态
+ */
++ (void)monitoringNetworkWithErrorBlock:(nullable ECNetworkMonitoringBlock)errorBlock
+                          withWWANBlock:(nullable ECNetworkMonitoringBlock)wwanBlock
+                          withWiFiBlock:(nullable ECNetworkMonitoringBlock)wifiBlock;
+
+/**
+ 根据传入的毫秒值生成 HH:MM:SS 格式的时间字符串
+
+ @param timeInterval 毫秒值
+ @return HH:MM:SS 格式的时间字符串
+ */
++ (NSString *)convertTimeIntervalToDateString:(NSTimeInterval)timeInterval;
 
 @end
+
+NS_ASSUME_NONNULL_END

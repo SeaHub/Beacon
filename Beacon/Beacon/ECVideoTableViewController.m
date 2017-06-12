@@ -15,15 +15,20 @@
 #import "ECCacheAPIHelper.h"
 #import "ECAPIManager.h"
 #import "ECVideo.h"
+#import <AFNetworkReachabilityManager.h>
+#import "QYPlayerController.h"
 
 static NSString *const kECVideoTablePlayerReuseIdentifier          = @"kECVideoTablePlayerReuseIdentifier";
 static NSString *const kECVideoTableIntroductReuseIdentifier       = @"kECVideoTableIntroductReuseIdentifier";
 static NSString *const kECVideoTableGuessingLabelReuseIdentifier   = @"kECVideoTableGuessingLabelReuseIdentifier";
 static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoTableGuessingContentReuseIdentifier";
 
-@interface ECVideoTableViewController () <ECVideoGuessingContentCellDelegate>
+@interface ECVideoTableViewController () <ECVideoGuessingContentCellDelegate, ECVideoPlayerTableViewCellDelegate>
 
 @property (nonatomic, strong, nullable) NSMutableArray<ECReturningVideo *> *guessingDatas;
+@property (nonatomic, strong, nullable) UIView *fullScreenView;
+@property (nonatomic, assign) AFNetworkReachabilityStatus networkStatus;
+@property (nonatomic, assign) NSInteger numberOfRowsInSectionZero;
 
 @end
 
@@ -31,11 +36,13 @@ static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoT
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.numberOfRowsInSectionZero = 3;
+    [self _checkNetworkStatus];
     [self _initialGuessingDatas];
 }
 
 - (void)_initialGuessingDatas {
-    self.guessingDatas     = [@[] mutableCopy];
+    self.guessingDatas = [@[] mutableCopy];
     [ECCacheAPIHelper getTop5VideosFromCache:YES withFinishedBlock:^(BOOL isCacheHitting, NSArray<ECReturningVideo *> * _Nullable cachedVideos) {
         
         for (ECReturningVideo *video in cachedVideos) {
@@ -43,8 +50,21 @@ static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoT
                 [self.guessingDatas addObject:video];
             }
         }
-    
+        self.numberOfRowsInSectionZero = 3 + self.guessingDatas.count;
         [self.tableView reloadData];
+    }];
+}
+
+- (void)_checkNetworkStatus {
+    [ECUtil monitoringNetworkWithErrorBlock:^{
+        [ECUtil showCancelAlertWithTitle:@"提示" withMsg:@"网络不可用，请连接 WiFi"];
+        self.networkStatus = AFNetworkReachabilityStatusUnknown;
+    } withWWANBlock:^{
+        [ECUtil showCancelAlertWithTitle:@"提示" withMsg:@"目前使用蜂窝数据，建议使用 WiFi 观看视频]"];
+        self.networkStatus = AFNetworkReachabilityStatusReachableViaWWAN;
+    } withWiFiBlock:^{
+        self.networkStatus = AFNetworkReachabilityStatusReachableViaWiFi;
+        debugLog(@"Current network status is WiFi");
     }];
 }
 
@@ -58,7 +78,7 @@ static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoT
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3 + self.guessingDatas.count;
+    return self.numberOfRowsInSectionZero;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -66,8 +86,8 @@ static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoT
     
     if (indexPath.row == 0) {
         ECVideoPlayerTableViewCell *playerCell = [tableView dequeueReusableCellWithIdentifier:kECVideoTablePlayerReuseIdentifier forIndexPath:indexPath];
-        [playerCell configureCellWithTitle:self.videoOfUserChosen.short_title withTypes:@[@"iQiYi"]
-                            withLikeNumber:self.videoOfUserChosen.play_count];
+        playerCell.delegate                    = self;
+        [playerCell configureCellWithVideo:self.videoOfUserChosen];
         return playerCell;
     
     } else if (indexPath.row == 1) {
@@ -117,44 +137,17 @@ static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoT
     return height;
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell
+forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 0) {
+        [(ECVideoPlayerTableViewCell *)cell cellWillAppear];
+    }
+}
+
 #pragma mark - Button Action
 - (IBAction)backButtonClicked:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (IBAction)likeButtonClicked:(id)sender {
-    debugLog(@"Like Button Clicked");
-    
-    [[ECAPIManager sharedManager] addLikedVideoWithVideoID:self.videoOfUserChosen.a_id
-                                          withSuccessBlock:^(BOOL status) {
-                                              if (status) {
-                                                  [ECUtil showCancelAlertController:self
-                                                                          withTitle:@"提示"
-                                                                            withMsg:@"成功添加至喜爱列表"];
-                                              }
-                                          } withFailureBlock:^(NSError * _Nonnull error) {
-                                              debugLog(@"%@", [error description]);
-                                          }];
-}
-
-- (IBAction)dislikeButtonClicked:(id)sender {
-    debugLog(@"Dislike Button Clicked");
-}
-
-- (IBAction)moreButtonClicked:(id)sender {
-    debugLog(@"More Button Clicked");
-}
-
-- (IBAction)playButtonClicked:(id)sender {
-    debugLog(@"Play Button Clicked");
-}
-
-- (IBAction)shareButtonClicked:(id)sender {
-    debugLog(@"Share Button Clicked");
-}
-
-- (IBAction)fullScreenButtonClicked:(id)sender {
-    debugLog(@"FullScreen Button Clicked");
+    [[QYPlayerController sharedInstance] stopPlayer];
 }
 
 #pragma mark - ECVideoGuessingContentCellDelegate
@@ -175,6 +168,62 @@ static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoT
     [self.tableView scrollToRowAtIndexPath:playerIndexPath
                           atScrollPosition:UITableViewScrollPositionTop
                                   animated:YES];
+}
+
+#pragma mark - ECVideoPlayerTableViewCellDelegate
+- (void)videoPlayerCell:(ECVideoPlayerTableViewCell *)cell
+setFullScreenWithPlayer:(UIView *)player
+    isCurrentFullScreen:(BOOL)isFullScreen {
+    
+//    CGRect originalPlayerViewFrame = player.frame;
+//    CGRect originalPlayerFrame     = CGRectMake(0,
+//                                                0,
+//                                                CGRectGetWidth(player.bounds),
+//                                                CGRectGetHeight(player.bounds));
+//    
+//    CGRect newPlayerFrame     = isFullScreen ? originalPlayerFrame     : self.view.frame;
+//    CGRect newPlayerViewFrame = isFullScreen ? originalPlayerViewFrame : self.view.frame;
+//    isFullScreen              = !isFullScreen;
+//    
+//    [UIView animateWithDuration:0.5 animations:^{
+//        player.frame = newPlayerViewFrame;
+//        [[QYPlayerController sharedInstance] setPlayerFrame:newPlayerFrame];
+//    }];
+#warning Bugs here - need repairing
+    
+    if (!isFullScreen) {
+        self.fullScreenView                 = [[UIView alloc] initWithFrame:self.view.frame];
+        self.fullScreenView.backgroundColor = [UIColor blackColor];
+        player.frame                        = self.fullScreenView.frame;
+        [[QYPlayerController sharedInstance] setPlayerFrame:self.fullScreenView.frame];
+        [self.fullScreenView addSubview:player];
+        [self.tableView addSubview:self.fullScreenView];
+    } else {
+        [self.fullScreenView removeFromSuperview];
+    }
+}
+
+- (void)videoPlayerCell:(ECVideoPlayerTableViewCell *)cell closeLightWithCurrentState:(BOOL)isLightClosed {
+    // Calculate which cell should be reload, don't reload player cell or it will miss all status of player cell
+    NSMutableArray<NSIndexPath *> *indexPaths = [@[] mutableCopy];
+    for (int i = 1; i < self.guessingDatas.count + 3; ++i) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+        [indexPaths addObject:indexPath];
+    }
+    
+    if (!isLightClosed) {
+        self.numberOfRowsInSectionZero = 1;
+        [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+        [UIView animateWithDuration:0.5 animations:^{
+            self.tableView.backgroundColor = [UIColor blackColor];
+        }];
+    } else {
+        self.numberOfRowsInSectionZero = 3 + self.guessingDatas.count;
+        [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+        [UIView animateWithDuration:0.5 animations:^{
+            self.tableView.backgroundColor = [UIColor whiteColor];
+        }];
+    }
 }
 
 @end

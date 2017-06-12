@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ECReturningVideo.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ECPlayerController : UIViewController
 
-@property (nonatomic, copy) NSDictionary *contentDict;
+@property (nonatomic, strong) ECReturningVideo *video;
 
 @end
 
