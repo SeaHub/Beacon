@@ -28,6 +28,8 @@ static NSString *const kECVideoGuessingCellCollectionReuseIdentifier = @"Guessin
     self.resourceTypeCollectionView.delegate   = self;
     self.resourceTypeCollectionView.dataSource = self;
     self.resourceTypes                         = @[];
+    self.resourceImageView.layer.masksToBounds = YES;
+    self.resourceImageView.layer.cornerRadius  = 5;
     [ECUtil addToPlayEffectView:self.resourceImageView];
 }
 
