@@ -17,6 +17,8 @@
 #import "ECVideo.h"
 #import <AFNetworkReachabilityManager.h>
 #import "QYPlayerController.h"
+#import "ECFullScreenPlayerController.h"
+#import "ECPlayerViewModel.h"
 
 static NSString *const kECVideoTablePlayerReuseIdentifier          = @"kECVideoTablePlayerReuseIdentifier";
 static NSString *const kECVideoTableIntroductReuseIdentifier       = @"kECVideoTableIntroductReuseIdentifier";
@@ -29,6 +31,7 @@ static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoT
 @property (nonatomic, strong, nullable) UIView *fullScreenView;
 @property (nonatomic, assign) AFNetworkReachabilityStatus networkStatus;
 @property (nonatomic, assign) NSInteger numberOfRowsInSectionZero;
+@property (nonatomic, assign) CGRect playerOriginFrame;
 
 @end
 
@@ -171,36 +174,11 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 }
 
 #pragma mark - ECVideoPlayerTableViewCellDelegate
-- (void)videoPlayerCell:(ECVideoPlayerTableViewCell *)cell
-setFullScreenWithPlayer:(UIView *)player
-    isCurrentFullScreen:(BOOL)isFullScreen {
-    
-//    CGRect originalPlayerViewFrame = player.frame;
-//    CGRect originalPlayerFrame     = CGRectMake(0,
-//                                                0,
-//                                                CGRectGetWidth(player.bounds),
-//                                                CGRectGetHeight(player.bounds));
-//    
-//    CGRect newPlayerFrame     = isFullScreen ? originalPlayerFrame     : self.view.frame;
-//    CGRect newPlayerViewFrame = isFullScreen ? originalPlayerViewFrame : self.view.frame;
-//    isFullScreen              = !isFullScreen;
-//    
-//    [UIView animateWithDuration:0.5 animations:^{
-//        player.frame = newPlayerViewFrame;
-//        [[QYPlayerController sharedInstance] setPlayerFrame:newPlayerFrame];
-//    }];
-#warning Bugs here - need repairing
-    
-    if (!isFullScreen) {
-        self.fullScreenView                 = [[UIView alloc] initWithFrame:self.view.frame];
-        self.fullScreenView.backgroundColor = [UIColor blackColor];
-        player.frame                        = self.fullScreenView.frame;
-        [[QYPlayerController sharedInstance] setPlayerFrame:self.fullScreenView.frame];
-        [self.fullScreenView addSubview:player];
-        [self.tableView addSubview:self.fullScreenView];
-    } else {
-        [self.fullScreenView removeFromSuperview];
-    }
+- (void)videoPlayerCell:(ECVideoPlayerTableViewCell *)cell withPlayerModel:(ECPlayerViewModel *)playerViewModel {
+    UIStoryboard *storyBoard                       = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    ECFullScreenPlayerController *playerController = [storyBoard instantiateViewControllerWithIdentifier:kFullScreenPlayerStoryboardIdentifier];
+    playerController.viewModel                     = playerViewModel;
+    [self presentViewController:playerController animated:YES completion:nil];
 }
 
 - (void)videoPlayerCell:(ECVideoPlayerTableViewCell *)cell closeLightWithCurrentState:(BOOL)isLightClosed {

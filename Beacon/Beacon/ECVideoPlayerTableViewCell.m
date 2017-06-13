@@ -11,7 +11,7 @@
 #import "QYPlayerController.h"
 #import "ECReturningVideo.h"
 #import "ECAPIManager.h"
-#import "ECPlayerController.h"
+#import "ECPlayerViewModel.h"
 
 static NSString *const kECVideoPlayerCellCollectionReuseIdentifier = @"kECVideoPlayerCellCollectionReuseIdentifier";
 @interface ECVideoPlayerTableViewCell () <UICollectionViewDelegate, UICollectionViewDataSource, QYPlayerControllerDelegate>
@@ -24,6 +24,8 @@ static NSString *const kECVideoPlayerCellCollectionReuseIdentifier = @"kECVideoP
 @property (nonatomic, assign) BOOL   isLightClosed;
 @property (nonatomic, assign) CGRect originalPlayerViewFrame;
 @property (nonatomic, assign) CGRect originalPlayerFrame;
+@property (nonatomic, assign) NSTimeInterval currentTime;
+@property (nonatomic, assign) NSTimeInterval totalTime;
 // Following are IBOutlet properties
 @property (weak, nonatomic) IBOutlet UIView *playerScreen;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
@@ -109,9 +111,9 @@ static NSString *const kECVideoPlayerCellCollectionReuseIdentifier = @"kECVideoP
 
 - (IBAction)muteButtonClicked:(id)sender {
     if (!self.isMute) {
-        [self.playButton setImage:[UIImage imageNamed:@"toolVolumeMute"] forState:UIControlStateNormal];
+        [self.muteButton setImage:[UIImage imageNamed:@"toolMute"] forState:UIControlStateNormal];
     } else {
-        [self.playButton setImage:[UIImage imageNamed:@"toolVolumeNoneMute"] forState:UIControlStateNormal];
+        [self.muteButton setImage:[UIImage imageNamed:@"toolNoneMute"] forState:UIControlStateNormal];
     }
     
     self.isMute = !self.isMute;
@@ -179,11 +181,15 @@ static NSString *const kECVideoPlayerCellCollectionReuseIdentifier = @"kECVideoP
 
 - (void)_setFullScreen {
     if (self.delegate) {
-        if ([self.delegate respondsToSelector:@selector(videoPlayerCell:setFullScreenWithPlayer:isCurrentFullScreen:)]) {
+        if ([self.delegate respondsToSelector:@selector(videoPlayerCell:withPlayerModel:)]) {
             
-            [self.delegate videoPlayerCell:self
-                   setFullScreenWithPlayer:self.playerScreen
-                       isCurrentFullScreen:self.isFullScreen];
+            ECPlayerViewModel *viewModel = [[ECPlayerViewModel alloc] initWithReturningVideo:self.video
+                                                                             withCurrentTime:self.currentTime
+                                                                               withTotalTime:self.totalTime
+                                                                               withMuteStaus:self.isMute
+                                                                           withPlayingStatus:self.isPlaying];
+            
+            [self.delegate videoPlayerCell:self withPlayerModel:viewModel];
             self.isFullScreen = !self.isFullScreen;
         }
     }
@@ -201,6 +207,8 @@ static NSString *const kECVideoPlayerCellCollectionReuseIdentifier = @"kECVideoP
 
 - (void)playbackTimeChanged:(QYPlayerController *)player {
     debugLog(@"Delegate: Time Changed...");
+    self.currentTime                = player.currentPlaybackTime;
+    self.totalTime                  = player.duration;
     NSString *currentPlayTimeString = [ECUtil convertTimeIntervalToDateString:player.currentPlaybackTime];
     NSString *totalPlayTimeString   = [ECUtil convertTimeIntervalToDateString:player.duration];
     self.timeLabel.text             = [NSString stringWithFormat:@"%@ / %@", currentPlayTimeString, totalPlayTimeString];

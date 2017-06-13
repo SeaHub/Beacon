@@ -17,13 +17,14 @@
 		523EA4981EDD6EE900E02A95 /* ECCacheAPIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 523EA4971EDD6EE900E02A95 /* ECCacheAPIHelper.m */; };
 		525167431ED17BC500FA943C /* ECConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = 525167421ED17BC500FA943C /* ECConstant.m */; };
 		526A56821EE7002400FCD30D /* ECVideoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 526A56811EE7002400FCD30D /* ECVideoTableViewController.m */; };
+		526F34F81EF0566C004AB51B /* ECPlayerViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 526F34F71EF0566C004AB51B /* ECPlayerViewModel.m */; };
 		5281986D1EDBB1C8009D15FA /* ECAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5281986C1EDBB1C8009D15FA /* ECAPIManager.m */; };
 		5289E06D1EEBE0FF0012D05E /* ECVideoIntroductTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5289E06C1EEBE0FF0012D05E /* ECVideoIntroductTableViewCell.m */; };
 		5289E0711EEBE6B40012D05E /* ECVideoGuessingLabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5289E0701EEBE6B40012D05E /* ECVideoGuessingLabelTableViewCell.m */; };
 		5289E0751EEBE8240012D05E /* ECVideoGuessingContentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5289E0741EEBE8240012D05E /* ECVideoGuessingContentTableViewCell.m */; };
 		5289E0791EEBF3890012D05E /* ECVideoResourceTypeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5289E0781EEBF3890012D05E /* ECVideoResourceTypeCollectionViewCell.m */; };
 		52B9E0351EE853FA003E5CFF /* ECVideoPlayerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B9E0341EE853FA003E5CFF /* ECVideoPlayerTableViewCell.m */; };
-		52C90F7A1ED077A7009793DC /* ECPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C90F791ED077A7009793DC /* ECPlayerController.m */; };
+		52C90F7A1ED077A7009793DC /* ECFullScreenPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C90F791ED077A7009793DC /* ECFullScreenPlayerController.m */; };
 		52DE8C991EDC10AA00072C91 /* APKeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 52DE8C981EDC10AA00072C91 /* APKeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		52DE8C9E1EDC12CC00072C91 /* ECUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 52DE8C9D1EDC12CC00072C91 /* ECUtil.m */; };
 		52DE8CA51EDC19F000072C91 /* ECVideoHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 52DE8CA41EDC19F000072C91 /* ECVideoHistory.m */; };
@@ -117,6 +118,8 @@
 		525167421ED17BC500FA943C /* ECConstant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECConstant.m; sourceTree = "<group>"; };
 		526A56801EE7002400FCD30D /* ECVideoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECVideoTableViewController.h; sourceTree = "<group>"; };
 		526A56811EE7002400FCD30D /* ECVideoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECVideoTableViewController.m; sourceTree = "<group>"; };
+		526F34F61EF0566C004AB51B /* ECPlayerViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPlayerViewModel.h; sourceTree = "<group>"; };
+		526F34F71EF0566C004AB51B /* ECPlayerViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECPlayerViewModel.m; sourceTree = "<group>"; };
 		5281986B1EDBB1C8009D15FA /* ECAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECAPIManager.h; sourceTree = "<group>"; };
 		5281986C1EDBB1C8009D15FA /* ECAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECAPIManager.m; sourceTree = "<group>"; };
 		5289E06B1EEBE0FF0012D05E /* ECVideoIntroductTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECVideoIntroductTableViewCell.h; sourceTree = "<group>"; };
@@ -129,8 +132,8 @@
 		5289E0781EEBF3890012D05E /* ECVideoResourceTypeCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECVideoResourceTypeCollectionViewCell.m; sourceTree = "<group>"; };
 		52B9E0331EE853FA003E5CFF /* ECVideoPlayerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECVideoPlayerTableViewCell.h; sourceTree = "<group>"; };
 		52B9E0341EE853FA003E5CFF /* ECVideoPlayerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECVideoPlayerTableViewCell.m; sourceTree = "<group>"; };
-		52C90F781ED077A7009793DC /* ECPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPlayerController.h; sourceTree = "<group>"; };
-		52C90F791ED077A7009793DC /* ECPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECPlayerController.m; sourceTree = "<group>"; };
+		52C90F781ED077A7009793DC /* ECFullScreenPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECFullScreenPlayerController.h; sourceTree = "<group>"; };
+		52C90F791ED077A7009793DC /* ECFullScreenPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECFullScreenPlayerController.m; sourceTree = "<group>"; };
 		52DE8C971EDC10AA00072C91 /* APKeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APKeychainItemWrapper.h; sourceTree = "<group>"; };
 		52DE8C981EDC10AA00072C91 /* APKeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APKeychainItemWrapper.m; sourceTree = "<group>"; };
 		52DE8C9C1EDC12CC00072C91 /* ECUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECUtil.h; sourceTree = "<group>"; };
@@ -347,6 +350,15 @@
 			name = Video;
 			sourceTree = "<group>";
 		};
+		526F34F51EF0563B004AB51B /* PlayerViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				526F34F61EF0566C004AB51B /* ECPlayerViewModel.h */,
+				526F34F71EF0566C004AB51B /* ECPlayerViewModel.m */,
+			);
+			name = PlayerViewModel;
+			sourceTree = "<group>";
+		};
 		5281986A1EDBB112009D15FA /* APIManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -401,13 +413,13 @@
 			name = Main;
 			sourceTree = "<group>";
 		};
-		528B21E71EDBAAF300D1CE02 /* Player(Desperated) */ = {
+		528B21E71EDBAAF300D1CE02 /* FullScreenPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				52C90F781ED077A7009793DC /* ECPlayerController.h */,
-				52C90F791ED077A7009793DC /* ECPlayerController.m */,
+				52C90F781ED077A7009793DC /* ECFullScreenPlayerController.h */,
+				52C90F791ED077A7009793DC /* ECFullScreenPlayerController.m */,
 			);
-			name = "Player(Desperated)";
+			name = FullScreenPlayer;
 			sourceTree = "<group>";
 		};
 		528B21E81EDBAB2500D1CE02 /* Network */ = {
@@ -440,7 +452,7 @@
 			children = (
 				D5A8F8341EE8DA9000B73670 /* Menu */,
 				526A567F1EE6FFFB00FCD30D /* Video */,
-				528B21E71EDBAAF300D1CE02 /* Player(Desperated) */,
+				528B21E71EDBAAF300D1CE02 /* FullScreenPlayer */,
 				528B21E61EDBAAD700D1CE02 /* Main */,
 			);
 			name = Controller;
@@ -471,6 +483,7 @@
 		528B21F01EDBABBD00D1CE02 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				526F34F51EF0563B004AB51B /* PlayerViewModel */,
 				5214C0871EDBC54F00D09A06 /* Video */,
 				5214C0861EDBC54700D09A06 /* VideoType */,
 				52DE8CA61EDC19F300072C91 /* VideoHistory */,
@@ -1006,7 +1019,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52C90F7A1ED077A7009793DC /* ECPlayerController.m in Sources */,
+				52C90F7A1ED077A7009793DC /* ECFullScreenPlayerController.m in Sources */,
 				520964441EDBBB41001F2A05 /* ECVideoType.m in Sources */,
 				52E227F11EDCF8660019E958 /* ECCacheManager.m in Sources */,
 				5289E0711EEBE6B40012D05E /* ECVideoGuessingLabelTableViewCell.m in Sources */,
@@ -1035,6 +1048,7 @@
 				52EEB3611ED05AFD00CBDDBB /* main.m in Sources */,
 				52DE8CA51EDC19F000072C91 /* ECVideoHistory.m in Sources */,
 				D5A8F8371EE8DABE00B73670 /* ECMenuViewController.m in Sources */,
+				526F34F81EF0566C004AB51B /* ECPlayerViewModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

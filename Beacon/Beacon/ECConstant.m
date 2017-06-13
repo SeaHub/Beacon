@@ -8,8 +8,10 @@
 
 #import "ECConstant.h"
 
-NSString *const kSegueOfECVideoController = @"kSegueOfECVideoController";
-NSString *const kBundleIdentifier         = @"com.Echo.Beacon";
+NSString *const kSegueOfECVideoController             = @"kSegueOfECVideoController";
+NSString *const kBundleIdentifier                     = @"com.Echo.Beacon";
+NSString *const kFullScreenPlayerStoryboardIdentifier = @"kFullScreenPlayerStoryboardIdentifier";
+
 
 @implementation ECConstant
 

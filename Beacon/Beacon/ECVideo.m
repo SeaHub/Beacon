@@ -31,7 +31,9 @@
 }
 
 - (BOOL)isEqual:(id)object {
-    return [_identifier isEqualToString:((ECVideo *)object).identifier];
+    return [_aID isEqualToString:((ECVideo *)object).aID]
+        && [_tvID isEqualToString:((ECVideo *)object).tvID]
+        && [_isVip isEqualToString:((ECVideo *)object).isVip];;
 }
 
 @end

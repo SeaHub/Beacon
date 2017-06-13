@@ -10,8 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-extern NSString *const kSegueOfECVideoController;
 extern NSString *const kBundleIdentifier;
+extern NSString *const kSegueOfECVideoController;
+extern NSString *const kFullScreenPlayerStoryboardIdentifier;
 
 @interface ECConstant : NSObject
 
