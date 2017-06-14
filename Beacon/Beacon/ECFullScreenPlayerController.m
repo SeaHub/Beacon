@@ -9,7 +9,7 @@
 #import "ECFullScreenPlayerController.h"
 #import "QYPlayerController.h"
 #import "ECPlayerViewModel.h"
-#import "ECVideo.h"
+#import "ECReturningVideo.h"
 
 @interface ECFullScreenPlayerController () <QYPlayerControllerDelegate>
 
@@ -17,6 +17,10 @@
 @property (nonatomic, assign) BOOL isMute;
 @property (nonatomic, assign) BOOL isPlaying;
 @property (nonatomic, assign) BOOL isControlHidden;
+@property (nonatomic, assign) BOOL isTimeUsed;
+@property (nonatomic, assign) NSTimeInterval currentTime;
+@property (nonatomic, assign) NSTimeInterval totalTime;
+
 // Following are IBOutlet properties
 @property (weak, nonatomic) IBOutlet UIView *playerView;
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
@@ -43,6 +47,18 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [[QYPlayerController sharedInstance] stopPlayer];
+    if (self.delegate) {
+        if ([self.delegate respondsToSelector:@selector(fullScreenController:viewWillDisappearWithModel:)]) {
+            
+            ECPlayerViewModel *viewModel = [[ECPlayerViewModel alloc] initWithReturningVideo:self.viewModel.videoSource
+                                                                             withCurrentTime:self.currentTime
+                                                                               withTotalTime:self.totalTime
+                                                                               withMuteStaus:self.isMute
+                                                                           withPlayingStatus:self.isPlaying];
+            
+            [self.delegate fullScreenController:self viewWillDisappearWithModel:viewModel];
+        }
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -58,29 +74,32 @@
     self.isFullScreen    = NO;
     self.isMute          = NO;
     self.isControlHidden = NO;
+    self.currentTime     = self.viewModel.currentTime;
+    self.totalTime       = self.viewModel.totalTime;
+    self.isTimeUsed      = NO;
 }
 
 - (void)_setupPlayerView {
+    ECPlayerViewModel *viewModel = self.viewModel;
+    
     QYPlayerController *playerController  = [QYPlayerController sharedInstance];
     [_playerView addSubview:playerController.view];
     [playerController setPlayerFrame:_playerView.frame];
     [playerController setDelegate:self];
-    [playerController openPlayerByAlbumId:self.viewModel.videoSource.aID
-                                     tvId:self.viewModel.videoSource.tvID
-                                    isVip:self.viewModel.videoSource.isVip];
-    
-    // Be same as Mini-Screen status
-    NSString *currentPlayTimeString = [ECUtil convertTimeIntervalToDateString:self.viewModel.currentTime];
-    NSString *totalPlayTimeString   = [ECUtil convertTimeIntervalToDateString:self.viewModel.totalTime];
-    self.timeLabel.text             = [NSString stringWithFormat:@"%@ / %@", currentPlayTimeString, totalPlayTimeString];
-    [self.videoProgressView setProgress:self.viewModel.currentTime / self.viewModel.totalTime animated:NO];
+    [playerController openPlayerByAlbumId:viewModel.videoSource.a_id
+                                     tvId:viewModel.videoSource.tv_id
+                                    isVip:viewModel.videoSource.is_vip];
     
     UITapGestureRecognizer *tapGR =  [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                              action:@selector(_videoViewDidClicked)];
     tapGR.numberOfTapsRequired    = 1;
     [playerController.view addGestureRecognizer:tapGR];
+   
+    // Following code guarantee self status to be the same as Mini-Screen status
+    self.timeLabel.text = [ECUtil jointPlayTimeString:viewModel.currentTime withTotalTime:viewModel.totalTime];
+    [self.videoProgressView setProgress:viewModel.currentTime / viewModel.totalTime animated:NO];
     
-    if (self.viewModel.isPlaying) {
+    if (viewModel.isPlaying) {
         [self.playButton setImage:[UIImage imageNamed:@"toolStop"] forState:UIControlStateNormal];
         [[QYPlayerController sharedInstance] play];
     } else {
@@ -88,7 +107,7 @@
         [[QYPlayerController sharedInstance] pause];
     }
     
-    if (self.viewModel.isMute) {
+    if (viewModel.isMute) {
         [self.muteButton setImage:[UIImage imageNamed:@"toolMute"] forState:UIControlStateNormal];
     } else {
        [self.muteButton setImage:[UIImage imageNamed:@"toolNoneMute"] forState:UIControlStateNormal];
@@ -126,6 +145,14 @@
     }];
 }
 
+- (void)_updateTimeStatusWithCurrentPlayer:(QYPlayerController *)player {
+    if (self.isTimeUsed) { // Guarantee the time of view model is used before update
+        self.currentTime    = player.currentPlaybackTime;
+        self.totalTime      = player.duration;
+        self.timeLabel.text = [ECUtil jointPlayTimeString:player.currentPlaybackTime withTotalTime:player.duration];
+    }
+}
+
 #pragma mark - IBAction
 - (IBAction)playButtonClicked:(id)sender {
     if (!self.isPlaying) {
@@ -157,25 +184,25 @@
 #pragma mark - QYPlayControllerDelegate
 - (void)startLoading:(QYPlayerController *)player {
     debugLog(@"Delegate: Start Loading...");
+    [self _updateTimeStatusWithCurrentPlayer:player];
+
 //    [_cacheProgressBar setProgress:player.playableDuration / player.duration animated:YES];
 }
 
 - (void)stopLoading:(QYPlayerController *)player {
     debugLog(@"Delegate: Stop Loading...");
 //    [_cacheProgressBar setProgress:1.0 animated:YES];
+    [self _updateTimeStatusWithCurrentPlayer:player];
 }
 
 - (void)playbackTimeChanged:(QYPlayerController *)player {
-    debugLog(@"Delegate: Time Changed...");
-    NSString *currentPlayTimeString = [ECUtil convertTimeIntervalToDateString:player.currentPlaybackTime];
-    NSString *totalPlayTimeString   = [ECUtil convertTimeIntervalToDateString:player.duration];
-    self.timeLabel.text             = [NSString stringWithFormat:@"%@ / %@", currentPlayTimeString, totalPlayTimeString];
-     [self.videoProgressView setProgress:player.currentPlaybackTime / player.duration animated:YES];
+    [self _updateTimeStatusWithCurrentPlayer:player];
 }
 
 - (void)playbackFinshed:(QYPlayerController *)player {
     debugLog(@"Delegate: Finished watching...");
-     [self.videoProgressView setProgress:1.0 animated:YES];
+    [self _updateTimeStatusWithCurrentPlayer:player];
+    [self.videoProgressView setProgress:1.0 animated:YES];
 }
 
 - (void)playerNetworkChanged:(QYPlayerController *)player {
@@ -193,6 +220,7 @@
 
 - (void)onContentStartPlay:(QYPlayerController *)player {
     debugLog(@"Delegate: The content starts playing");
+    self.isTimeUsed = YES;
     [[QYPlayerController sharedInstance] seekToTime:self.viewModel.currentTime];
     
     if (self.viewModel.isPlaying) {

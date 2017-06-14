@@ -12,11 +12,11 @@
 
 @implementation ECPlayerViewModel
 
-- (instancetype)initWithVideo:(ECVideo *)video
-              withCurrentTime:(NSTimeInterval)currentTime
-                withTotalTime:(NSTimeInterval)totalTime
-                withMuteStaus:(BOOL)isMute
-            withPlayingStatus:(BOOL)isPlaying {
+- (instancetype)initWithReturningVideo:(ECReturningVideo *)video
+                       withCurrentTime:(NSTimeInterval)currentTime
+                         withTotalTime:(NSTimeInterval)totalTime
+                         withMuteStaus:(BOOL)isMute
+                     withPlayingStatus:(BOOL)isPlaying {
     
     if (self = [super init]) {
         _videoSource = video;
@@ -25,26 +25,14 @@
         _isMute      = isMute;
         _isPlaying   = isPlaying;
     }
-
-    return self;
-}
-
-- (instancetype)initWithReturningVideo:(ECReturningVideo *)video
-                       withCurrentTime:(NSTimeInterval)currentTime
-                         withTotalTime:(NSTimeInterval)totalTime
-                         withMuteStaus:(BOOL)isMute
-                     withPlayingStatus:(BOOL)isPlaying {
     
-    return [self initWithVideo:[video toRealObject]
-               withCurrentTime:currentTime withTotalTime:totalTime
-                 withMuteStaus:isMute
-            withPlayingStatus:isPlaying];
+    return self;
 }
 
 - (NSString *)description {
     NSString *isMuteString    = self.isMute ? @"YES" : @"NO";
     NSString *isPlayingString = self.isPlaying ? @"YES" : @"NO";
-    return [NSString stringWithFormat:@"aID: %@, tvID: %@, isVip: %@ | currentTimeString: %@, totalTimeString: %@ | isMute: %@, isPlaying: %@", self.videoSource.aID, self.videoSource.tvID, self.videoSource.isVip, [ECUtil convertTimeIntervalToDateString:self.currentTime], [ECUtil convertTimeIntervalToDateString:self.totalTime], isMuteString, isPlayingString];
+    return [NSString stringWithFormat:@"aID: %@, tvID: %@, isVip: %@ | currentTimeString: %@, totalTimeString: %@ | isMute: %@, isPlaying: %@", self.videoSource.a_id, self.videoSource.tv_id, self.videoSource.is_vip, [ECUtil convertTimeIntervalToDateString:self.currentTime], [ECUtil convertTimeIntervalToDateString:self.totalTime], isMuteString, isPlayingString];
 }
 
 - (BOOL)isEqual:(id)object {

@@ -135,4 +135,10 @@
     return [NSString stringWithFormat:@"%02ld:%02ld:%02ld", (long)hours, (long)minutes, (long)seconds];
 }
 
++ (NSString *)jointPlayTimeString:(NSTimeInterval)currentPlayTime withTotalTime:(NSTimeInterval)totalTime {
+    NSString *currentPlayTimeString = [ECUtil convertTimeIntervalToDateString:currentPlayTime];
+    NSString *totalPlayTimeString   = [ECUtil convertTimeIntervalToDateString:totalTime];
+    return [NSString stringWithFormat:@"%@ / %@", currentPlayTimeString, totalPlayTimeString];
+}
+
 @end

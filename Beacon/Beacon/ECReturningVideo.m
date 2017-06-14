@@ -104,7 +104,9 @@ static NSString *const kUpdate_numKey      = @"update_num";
 
 - (BOOL)isEqual:(id)object {
     return [object isMemberOfClass:[self class]] &&
-            [_a_id isEqualToString:((ECReturningVideo *)object).a_id];
+    [_a_id isEqualToString:((ECReturningVideo *)object).a_id] &&
+    [_tv_id isEqualToString:((ECReturningVideo *)object).tv_id] &&
+    [_is_vip isEqualToString:((ECReturningVideo *)object).is_vip];
 }
 
 @end

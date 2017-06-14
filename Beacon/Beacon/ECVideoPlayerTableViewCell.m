@@ -12,6 +12,7 @@
 #import "ECReturningVideo.h"
 #import "ECAPIManager.h"
 #import "ECPlayerViewModel.h"
+#import "ECFullScreenPlayerController.h"
 
 static NSString *const kECVideoPlayerCellCollectionReuseIdentifier = @"kECVideoPlayerCellCollectionReuseIdentifier";
 @interface ECVideoPlayerTableViewCell () <UICollectionViewDelegate, UICollectionViewDataSource, QYPlayerControllerDelegate>
@@ -22,10 +23,10 @@ static NSString *const kECVideoPlayerCellCollectionReuseIdentifier = @"kECVideoP
 @property (nonatomic, assign) BOOL   isMute;
 @property (nonatomic, assign) BOOL   isPlaying;
 @property (nonatomic, assign) BOOL   isLightClosed;
-@property (nonatomic, assign) CGRect originalPlayerViewFrame;
-@property (nonatomic, assign) CGRect originalPlayerFrame;
+@property (nonatomic, assign) BOOL   isTimeUsed;
 @property (nonatomic, assign) NSTimeInterval currentTime;
 @property (nonatomic, assign) NSTimeInterval totalTime;
+
 // Following are IBOutlet properties
 @property (weak, nonatomic) IBOutlet UIView *playerScreen;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
@@ -54,6 +55,10 @@ static NSString *const kECVideoPlayerCellCollectionReuseIdentifier = @"kECVideoP
     self.loveButton.alpha    = 0;
     self.remenuButton.alpha  = 0;
     self.dislikeButton.alpha = 0;
+    
+    self.currentTime = 0;
+    self.totalTime   = 0;
+    self.isTimeUsed  = YES;
 }
 
 - (void)cellWillAppear {
@@ -68,8 +73,37 @@ static NSString *const kECVideoPlayerCellCollectionReuseIdentifier = @"kECVideoP
     self.video                   = video;
     self.resourceTitleLabel.text = video.title;
     self.resourceTypes           = @[@"iQiYi"];
-    self.resourceLikeLabel.text  = video.play_count;
+    self.resourceLikeLabel.text  = [NSString stringWithFormat:@"%@%@", video.play_count, @"次"];
     [self.resourceTypeCollectionView reloadData];
+}
+
+- (void)updateCurrentPlayingStatusWithViewModel:(ECPlayerViewModel *)viewModel {
+    // Following code guarantee self status to be the same as Full-Screen status
+    
+//    [self.videoProgressView setProgress:viewModel.currentTime / viewModel.totalTime animated:NO];
+    [self _setupPlayer];
+    [self configureCellWithVideo:viewModel.videoSource];
+    
+    self.isPlaying      = viewModel.isPlaying;
+    self.isMute         = viewModel.isMute;
+    self.currentTime    = viewModel.currentTime;
+    self.totalTime      = viewModel.totalTime;
+    self.timeLabel.text = [ECUtil jointPlayTimeString:viewModel.currentTime withTotalTime:viewModel.totalTime];
+    self.isTimeUsed     = NO;
+    
+    if (viewModel.isPlaying) {
+        [self.playButton setImage:[UIImage imageNamed:@"toolStop"] forState:UIControlStateNormal];
+        [[QYPlayerController sharedInstance] play];
+    } else {
+        [self.playButton setImage:[UIImage imageNamed:@"toolPlay"] forState:UIControlStateNormal];
+        [[QYPlayerController sharedInstance] pause];
+    }
+    
+    if (viewModel.isMute) {
+        [self.muteButton setImage:[UIImage imageNamed:@"toolMute"] forState:UIControlStateNormal];
+    } else {
+        [self.muteButton setImage:[UIImage imageNamed:@"toolNoneMute"] forState:UIControlStateNormal];
+    }
 }
 
 #pragma mark - IBActions
@@ -152,18 +186,17 @@ static NSString *const kECVideoPlayerCellCollectionReuseIdentifier = @"kECVideoP
     self.isFullScreen            = NO;
     self.isMute                  = NO;
     self.isLightClosed           = NO;
-    self.originalPlayerViewFrame = self.playerScreen.frame;
-    self.originalPlayerFrame     = CGRectMake(0,
-                                              0,
-                                              CGRectGetWidth(self.playerScreen.bounds),
-                                              CGRectGetHeight(self.playerScreen.bounds));
 }
 
 - (void)_setupPlayerView {
     QYPlayerController *playerController  = [QYPlayerController sharedInstance];
     playerController.view.backgroundColor = UIColor.redColor;
-    [playerController setPlayerFrame:_originalPlayerFrame];
+    CGRect playerFrame                    = CGRectMake(0,
+                                                       0,
+                                                       CGRectGetWidth(self.playerScreen.bounds),
+                                                       CGRectGetHeight(self.playerScreen.bounds));
     [playerController setDelegate:self];
+    [playerController setPlayerFrame:playerFrame];
     [self.playerScreen addSubview:playerController.view];
     [[QYPlayerController sharedInstance] openPlayerByAlbumId:self.video.a_id
                                                         tvId:self.video.tv_id
@@ -190,33 +223,43 @@ static NSString *const kECVideoPlayerCellCollectionReuseIdentifier = @"kECVideoP
                                                                            withPlayingStatus:self.isPlaying];
             
             [self.delegate videoPlayerCell:self withPlayerModel:viewModel];
+            [[QYPlayerController sharedInstance] stopPlayer];
             self.isFullScreen = !self.isFullScreen;
         }
     }
 }
+
+- (void)_updateTimeStatusWithCurrentPlayer:(QYPlayerController *)player {
+    if (self.isTimeUsed) { // Guarantee the time of view model is used before update
+        self.currentTime    = player.currentPlaybackTime;
+        self.totalTime      = player.duration;
+        self.timeLabel.text = [ECUtil jointPlayTimeString:player.currentPlaybackTime withTotalTime:player.duration];
+    }
+}
+
 #pragma mark - QYPlayControllerDelegate
 - (void)startLoading:(QYPlayerController *)player {
     debugLog(@"Delegate: Start Loading...");
 //    [_cacheProgressBar setProgress:player.playableDuration / player.duration animated:YES];
+    [self _updateTimeStatusWithCurrentPlayer:player];
 }
 
 - (void)stopLoading:(QYPlayerController *)player {
     debugLog(@"Delegate: Stop Loading...");
+    [self _updateTimeStatusWithCurrentPlayer:player];
 //    [_cacheProgressBar setProgress:1.0 animated:YES];
 }
 
 - (void)playbackTimeChanged:(QYPlayerController *)player {
     debugLog(@"Delegate: Time Changed...");
-    self.currentTime                = player.currentPlaybackTime;
-    self.totalTime                  = player.duration;
-    NSString *currentPlayTimeString = [ECUtil convertTimeIntervalToDateString:player.currentPlaybackTime];
-    NSString *totalPlayTimeString   = [ECUtil convertTimeIntervalToDateString:player.duration];
-    self.timeLabel.text             = [NSString stringWithFormat:@"%@ / %@", currentPlayTimeString, totalPlayTimeString];
+    [self _updateTimeStatusWithCurrentPlayer:player];
     //    [_videoProgressBar setProgress:player.currentPlaybackTime / player.duration animated:YES];
 }
 
 - (void)playbackFinshed:(QYPlayerController *)player {
     debugLog(@"Delegate: Finished watching...");
+    [self _updateTimeStatusWithCurrentPlayer:player];
+    
 //    [_videoProgressBar setProgress:1.0 animated:YES];
 }
 
@@ -235,7 +278,16 @@ static NSString *const kECVideoPlayerCellCollectionReuseIdentifier = @"kECVideoP
 
 - (void)onContentStartPlay:(QYPlayerController *)player {
     debugLog(@"Delegate: The content starts playing");
-    [[QYPlayerController sharedInstance] pause];
+    self.isTimeUsed = YES;
+    [[QYPlayerController sharedInstance] seekToTime:self.currentTime];
+    
+    if (self.isPlaying) {
+        [self.playButton setImage:[UIImage imageNamed:@"toolStop"] forState:UIControlStateNormal];
+        [[QYPlayerController sharedInstance] play];
+    } else {
+        [self.playButton setImage:[UIImage imageNamed:@"toolPlay"] forState:UIControlStateNormal];
+        [[QYPlayerController sharedInstance] pause];
+    }
 }
 
 #pragma mark - UICollectionView Related

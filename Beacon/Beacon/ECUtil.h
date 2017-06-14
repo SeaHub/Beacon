@@ -75,6 +75,15 @@ typedef void(^ECNetworkMonitoringBlock)(void);
  */
 + (NSString *)convertTimeIntervalToDateString:(NSTimeInterval)timeInterval;
 
+/**
+ 拼接生成'播放器时间戳格式'字符串，'播放器时间戳格式' eg: 00:10:05 / 01:00:00
+
+ @param currentPlayTime 当前播放时间戳
+ @param totalTime 总时间戳
+ @return '播放器时间戳格式'字符串
+ */
++ (NSString *)jointPlayTimeString:(NSTimeInterval)currentPlayTime withTotalTime:(NSTimeInterval)totalTime;
+
 @end
 
 NS_ASSUME_NONNULL_END

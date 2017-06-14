@@ -11,8 +11,16 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class ECPlayerViewModel;
+@protocol ECFullScreenPlayerControllerDelegate <NSObject>
+
+- (void)fullScreenController:(UIViewController *)controller
+  viewWillDisappearWithModel:(ECPlayerViewModel *)viewModel;
+
+@end
+
 @interface ECFullScreenPlayerController : UIViewController
 
+@property (nonatomic, weak, nullable) id<ECFullScreenPlayerControllerDelegate> delegate;
 @property (nonatomic, strong, nullable) ECPlayerViewModel *viewModel;
 
 @end

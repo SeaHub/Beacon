@@ -28,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)configureCellWithVideo:(ECReturningVideo *)video;
 - (void)cellWillAppear;
+- (void)updateCurrentPlayingStatusWithViewModel:(ECPlayerViewModel *)viewModel;
 
 @end
 

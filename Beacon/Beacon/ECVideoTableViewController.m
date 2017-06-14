@@ -25,7 +25,7 @@ static NSString *const kECVideoTableIntroductReuseIdentifier       = @"kECVideoT
 static NSString *const kECVideoTableGuessingLabelReuseIdentifier   = @"kECVideoTableGuessingLabelReuseIdentifier";
 static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoTableGuessingContentReuseIdentifier";
 
-@interface ECVideoTableViewController () <ECVideoGuessingContentCellDelegate, ECVideoPlayerTableViewCellDelegate>
+@interface ECVideoTableViewController () <ECVideoGuessingContentCellDelegate, ECVideoPlayerTableViewCellDelegate, ECFullScreenPlayerControllerDelegate>
 
 @property (nonatomic, strong, nullable) NSMutableArray<ECReturningVideo *> *guessingDatas;
 @property (nonatomic, strong, nullable) UIView *fullScreenView;
@@ -157,7 +157,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 - (void)videoGuessingContentCell:(ECVideoGuessingContentTableViewCell *)cell
     imageViewDidClickedWithVideo:(ECReturningVideo *)video {
     
-    NSIndexPath *indexPath            =  [self.tableView indexPathForCell:cell];
+    NSIndexPath *indexPath            = [self.tableView indexPathForCell:cell];
     NSIndexPath *playerIndexPath      = [NSIndexPath indexPathForRow:0 inSection:0];
     NSIndexPath *descriptionIndexPath = [NSIndexPath indexPathForRow:1 inSection:0];
     
@@ -173,11 +173,45 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
                                   animated:YES];
 }
 
+#pragma mark - Special For 3D Touch
+- (ECReturningVideo *)_getRandomVideoFromStaticAppVideos {
+#warning TODO - should provide some static JSON datas in main bundle
+    NSInteger const kNumberOfStaticJSON = 0; // should be modify to number of static data
+    NSMutableArray <NSDictionary *> *staticJSONDatas = [@[] mutableCopy];
+    
+    for (NSInteger i = 0; i < kNumberOfStaticJSON; ++i) {
+        NSBundle *bundle   = [NSBundle mainBundle];
+        NSString *filename = [NSString stringWithFormat:@"StaticJSON%d", i];
+        NSString *path     = [bundle pathForResource:filename ofType:nil];
+        NSDictionary *JSON = [NSDictionary dictionaryWithContentsOfFile:path];
+
+        [staticJSONDatas addObject:JSON];
+    }
+    
+    NSInteger randomNumber = arc4random() % staticJSONDatas.count; // create randomNumber in [0, staticDatas.count)
+    return [[ECReturningVideo alloc] initWithJSON:staticJSONDatas[randomNumber]];
+}
+
+- (void)enterFullScreenFromAppStart {
+    ECReturningVideo  *video     = [self _getRandomVideoFromStaticAppVideos];
+    ECPlayerViewModel *viewModel = [[ECPlayerViewModel alloc] initWithReturningVideo:video
+                                                                     withCurrentTime:0
+                                                                       withTotalTime:0
+                                                                       withMuteStaus:NO
+                                                                   withPlayingStatus:YES];
+    UIStoryboard *storyBoard                       = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    ECFullScreenPlayerController *playerController = [storyBoard instantiateViewControllerWithIdentifier:kFullScreenPlayerStoryboardIdentifier];
+    playerController.viewModel                     = viewModel;
+    playerController.delegate                      = self;
+    [self presentViewController:playerController animated:YES completion:nil];
+}
+
 #pragma mark - ECVideoPlayerTableViewCellDelegate
 - (void)videoPlayerCell:(ECVideoPlayerTableViewCell *)cell withPlayerModel:(ECPlayerViewModel *)playerViewModel {
     UIStoryboard *storyBoard                       = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ECFullScreenPlayerController *playerController = [storyBoard instantiateViewControllerWithIdentifier:kFullScreenPlayerStoryboardIdentifier];
     playerController.viewModel                     = playerViewModel;
+    playerController.delegate                      = self;
     [self presentViewController:playerController animated:YES completion:nil];
 }
 
@@ -203,5 +237,15 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
         }];
     }
 }
+
+#pragma mark - ECFullScreenPlayerControllerDelegate
+- (void)fullScreenController:(UIViewController *)controller
+  viewWillDisappearWithModel:(ECPlayerViewModel *)viewModel {
+    
+    NSIndexPath *playerIndexPath           = [NSIndexPath indexPathForRow:0 inSection:0];
+    ECVideoPlayerTableViewCell *playerCell = [self.tableView cellForRowAtIndexPath:playerIndexPath];
+    [playerCell updateCurrentPlayingStatusWithViewModel:viewModel];
+}
+
 
 @end

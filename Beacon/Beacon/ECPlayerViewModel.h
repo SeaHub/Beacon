@@ -10,15 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class ECVideo;
 @class ECReturningVideo;
 @interface ECPlayerViewModel : NSObject
 
-- (instancetype)initWithVideo:(ECVideo *)video
-              withCurrentTime:(NSTimeInterval)currentTime
-                withTotalTime:(NSTimeInterval)totalTime
-                withMuteStaus:(BOOL)isMute
-            withPlayingStatus:(BOOL)isPlaying;
 - (instancetype)initWithReturningVideo:(ECReturningVideo *)video
                        withCurrentTime:(NSTimeInterval)currentTime
                          withTotalTime:(NSTimeInterval)totalTime
@@ -27,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)description;
 - (BOOL)isEqual:(id)object;
 
-@property (nonatomic, strong, readonly) ECVideo *videoSource;
+@property (nonatomic, strong, readonly) ECReturningVideo *videoSource;
 @property (nonatomic, assign, readonly) NSTimeInterval currentTime;
 @property (nonatomic, assign, readonly) NSTimeInterval totalTime;
 @property (nonatomic, assign, readonly) BOOL isMute;
