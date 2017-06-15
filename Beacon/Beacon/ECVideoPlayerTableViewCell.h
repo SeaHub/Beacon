@@ -18,8 +18,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)videoPlayerCell:(ECVideoPlayerTableViewCell *)cell
         withPlayerModel:(ECPlayerViewModel *)playerViewModel;
 
-- (void)videoPlayerCell:(ECVideoPlayerTableViewCell *)cell closeLightWithCurrentState:(BOOL)isLightClosed;
-
 @end
 
 @interface ECVideoPlayerTableViewCell : UITableViewCell

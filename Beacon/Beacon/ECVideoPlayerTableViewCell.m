@@ -22,7 +22,6 @@ static NSString *const kECVideoPlayerCellCollectionReuseIdentifier = @"kECVideoP
 @property (nonatomic, assign) BOOL   isFullScreen;
 @property (nonatomic, assign) BOOL   isMute;
 @property (nonatomic, assign) BOOL   isPlaying;
-@property (nonatomic, assign) BOOL   isLightClosed;
 @property (nonatomic, assign) BOOL   isTimeUsed;
 @property (nonatomic, assign) NSTimeInterval currentTime;
 @property (nonatomic, assign) NSTimeInterval totalTime;
@@ -156,7 +155,6 @@ static NSString *const kECVideoPlayerCellCollectionReuseIdentifier = @"kECVideoP
 
 - (IBAction)fullScreenButtonClicked:(id)sender {
     [self _setFullScreen];
-//    [self _closeLight];
 }
 
 - (IBAction)likeButtonClicked:(id)sender {
@@ -185,7 +183,6 @@ static NSString *const kECVideoPlayerCellCollectionReuseIdentifier = @"kECVideoP
     self.isPlaying               = NO;
     self.isFullScreen            = NO;
     self.isMute                  = NO;
-    self.isLightClosed           = NO;
 }
 
 - (void)_setupPlayerView {
@@ -201,15 +198,6 @@ static NSString *const kECVideoPlayerCellCollectionReuseIdentifier = @"kECVideoP
     [[QYPlayerController sharedInstance] openPlayerByAlbumId:self.video.a_id
                                                         tvId:self.video.tv_id
                                                        isVip:self.video.is_vip];
-}
-
-- (void)_closeLight {
-    if (self.delegate) {
-        if ([self.delegate respondsToSelector:@selector(videoPlayerCell:closeLightWithCurrentState:)]) {
-            [self.delegate videoPlayerCell:self closeLightWithCurrentState:self.isLightClosed];
-            self.isLightClosed = !self.isLightClosed;
-        }
-    }
 }
 
 - (void)_setFullScreen {
