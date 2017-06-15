@@ -135,6 +135,34 @@ static NSString *const kErrorCodeMsgKey  = @"msg";
     }];
 }
 
+- (void)delPlayedHistoryWithVideoID:(NSString *)videoID
+                   withSuccessBlock:(DelLikedVideoSuccessBlock)successBlock
+                   withFailureBlock:(FailureBlock)failureBlock {
+    NSDictionary *params = @{ @"uuid": [ECUtil readUUIDFromKeyChain], @"video_id": videoID };
+    [_manager POST:@"/beacon/v2/del_play_history" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        debugLog(@"RawValue: %@", responseObject);
+        NSDictionary *JSON           = responseObject;
+        NSNumber *errorCode          = JSON[kErrorCodeKey];
+        
+        if ([errorCode unsignedIntegerValue] == 200) {
+            if (successBlock) {
+                successBlock(YES);
+            }
+            
+        } else {
+            if (successBlock) {
+                successBlock(NO);
+            }
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        debugLog(@"Network error: %@", [error description]);
+        if (failureBlock) {
+            failureBlock(error);
+        }
+    }];
+}
+
 - (void)getPlayedHistroyWithSuccessBlock:(VideoHistorySuccessBlock)successBlock
                         withFailureBlock:(FailureBlock)failureBlock {
     NSString *getAddress = [NSString stringWithFormat:@"/beacon/v2/get_play_history/%@",
@@ -190,6 +218,34 @@ static NSString *const kErrorCodeMsgKey  = @"msg";
     }];
 }
 
+- (void)delLikedVideoWithVideoID:(NSString *)videoID
+                withSuccessBlock:(DelLikedVideoSuccessBlock)successBlock
+                withFailureBlock:(FailureBlock)failureBlock {
+    NSDictionary *params = @{ @"uuid": [ECUtil readUUIDFromKeyChain], @"video_id": videoID };
+    [_manager POST:@"/beacon/v2/del_like_video" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        debugLog(@"RawValue: %@", responseObject);
+        NSDictionary *JSON           = responseObject;
+        NSNumber *errorCode          = JSON[kErrorCodeKey];
+        
+        if ([errorCode unsignedIntegerValue] == 200) {
+            if (successBlock) {
+                successBlock(YES);
+            }
+            
+        } else {
+            if (successBlock) {
+                successBlock(NO);
+            }
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        debugLog(@"Network error: %@", [error description]);
+        if (failureBlock) {
+            failureBlock(error);
+        }
+    }];
+}
+
 - (void)getLikedVideoWithSuccessBlock:(LikedVideoSuccessBlock)successBlock
                      withFailureBlock:(FailureBlock)failureBlock {
     NSString *getAddress = [NSString stringWithFormat:@"/beacon/v2/get_like_video/%@",
@@ -198,6 +254,33 @@ static NSString *const kErrorCodeMsgKey  = @"msg";
         debugLog(@"RawValue: %@", responseObject);
         NSDictionary *JSON           = responseObject;
         NSArray *dataJSONs           = JSON[kDataKey];
+        NSMutableArray *returnModels = [@[] mutableCopy];
+        
+        for (NSDictionary *dataJSON in dataJSONs) {
+            ECReturningVideo *model = [[ECReturningVideo alloc] initWithJSON:dataJSON];
+            [returnModels addObject:model];
+        }
+        
+        if (successBlock) {
+            successBlock(returnModels);
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        debugLog(@"Network error: %@", [error description]);
+        if (failureBlock) {
+            failureBlock(error);
+        }
+    }];
+}
+
+- (void)getGuessVideoWithSuccessBlock:(GuessingVideoSuccessBlock)successBlock
+                     withFailureBlock:(FailureBlock)failureBlock {
+    NSString *getAddress = [NSString stringWithFormat:@"/beacon/v2/guess_you_like/%@",
+                            [ECUtil readUUIDFromKeyChain]];
+    [_manager GET:getAddress parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        debugLog(@"RawValue: %@", responseObject);
+        NSDictionary *JSON           = responseObject;
+        NSArray *dataJSONs           = JSON[kDatasKey];
         NSMutableArray *returnModels = [@[] mutableCopy];
         
         for (NSDictionary *dataJSON in dataJSONs) {

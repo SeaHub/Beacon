@@ -14,13 +14,16 @@ NS_ASSUME_NONNULL_BEGIN
 @class ECReturningVideo;
 @class ECReturningVideoHistory;
 
-typedef void(^VideoTypeSuccessBlock)(NSArray<ECReturningVideoType *> *);
-typedef void(^Top5VideosSuccessBlock)(NSArray<ECReturningVideo *> *);
-typedef void(^AddPlayedHistorySuccessBlock)(BOOL);
-typedef void(^VideoHistorySuccessBlock)(NSArray<ECReturningVideoHistory *> *);
-typedef void(^AddLikedVideoSuccessBlock)(BOOL);
-typedef void(^LikedVideoSuccessBlock)(NSArray<ECReturningVideo *> *);
-typedef void(^FailureBlock)(NSError *);
+typedef void(^VideoTypeSuccessBlock)(NSArray<ECReturningVideoType *> *videoTypes);
+typedef void(^Top5VideosSuccessBlock)(NSArray<ECReturningVideo *> *videos);
+typedef void(^AddPlayedHistorySuccessBlock)(BOOL isSuccess);
+typedef void(^DelPlayedHistorySuccessBlock)(BOOL isSuccess);
+typedef void(^VideoHistorySuccessBlock)(NSArray<ECReturningVideoHistory *> *histories);
+typedef void(^AddLikedVideoSuccessBlock)(BOOL isSuccess);
+typedef void(^DelLikedVideoSuccessBlock)(BOOL isSuccess);
+typedef void(^LikedVideoSuccessBlock)(NSArray<ECReturningVideo *> *videos);
+typedef void(^GuessingVideoSuccessBlock)(NSArray<ECReturningVideo *> *videos);
+typedef void(^FailureBlock)(NSError * error);
 
 @interface ECAPIManager : NSObject
 
@@ -63,6 +66,17 @@ typedef void(^FailureBlock)(NSError *);
                    withFailureBlock:(FailureBlock __nullable)failureBlock;
 
 /**
+ 删除视频播放记录
+
+ @param videoID 已播放的视频ID
+ @param successBlock 成功回调函数：返回添加状态（YES 为删除成功，NO 为删除失败）
+ @param failureBlock 失败回调函数
+ */
+- (void)delPlayedHistoryWithVideoID:(NSString *)videoID
+                   withSuccessBlock:(DelPlayedHistorySuccessBlock __nullable)successBlock
+                   withFailureBlock:(FailureBlock __nullable)failureBlock;
+
+/**
  查看视频播放记录
 
  @param successBlock 成功回调函数：返回历史信息数组
@@ -83,12 +97,32 @@ typedef void(^FailureBlock)(NSError *);
                 withFailureBlock:(FailureBlock __nullable)failureBlock;
 
 /**
+ 删除收藏视频
+
+ @param videoID 视频ID
+ @param successBlock 成功回调函数：返回添加状态（YES 为删除成功，NO 为删除失败）
+ @param failureBlock 失败回调函数
+ */
+- (void)delLikedVideoWithVideoID:(NSString *)videoID
+                withSuccessBlock:(DelLikedVideoSuccessBlock)successBlock
+                withFailureBlock:(FailureBlock)failureBlock;
+
+/**
  查看收藏视频
 
  @param successBlock 成功回调函数：返回视频数组
  @param failureBlock 失败回调函数
  */
 - (void)getLikedVideoWithSuccessBlock:(LikedVideoSuccessBlock __nullable)successBlock
+                     withFailureBlock:(FailureBlock __nullable)failureBlock;
+
+/**
+ 获取 Guess you like 视频 (相比 GetTop5 接口获取更多数据)
+
+ @param successBlock 成功回调函数：返回视频数组
+ @param failureBlock 失败回调函数
+ */
+- (void)getGuessVideoWithSuccessBlock:(GuessingVideoSuccessBlock __nullable)successBlock
                      withFailureBlock:(FailureBlock __nullable)failureBlock;
 
 @end

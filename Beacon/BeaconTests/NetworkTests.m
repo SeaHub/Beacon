@@ -62,6 +62,23 @@ static const double kTestCaseTimeOutInterval = 20.0;
     [self waitForExpectationsWithTimeout:kTestCaseTimeOutInterval handler:nil];
 }
 
+- (void)testGetGuessVideos {
+    XCTestExpectation *exception = [self expectationWithDescription:@"Wait callback"];
+    
+    [[ECAPIManager sharedManager] getGuessVideoWithSuccessBlock:^(NSArray<ECReturningVideo *> * _Nonnull models) {
+        for (ECReturningVideo *model in models) {
+            ECVideo *realModel = [model toRealObject];
+            XCTAssert(realModel != nil);
+        }
+        
+        [exception fulfill];
+    } withFailureBlock:^(NSError * _Nonnull error) {
+        XCTAssert(error == nil);
+    }];
+    
+    [self waitForExpectationsWithTimeout:kTestCaseTimeOutInterval handler:nil];
+}
+
 - (void)testGetTop5VideosWithParams {
     XCTestExpectation *exception = [self expectationWithDescription:@"Wait callback"];
     
@@ -85,21 +102,44 @@ static const double kTestCaseTimeOutInterval = 20.0;
                                withSuccessBlock:^(NSArray<ECReturningVideo *> * _Nonnull models) {
         
         [[ECAPIManager sharedManager] addPlayedHistoryWithVideoID:models.firstObject.identifier
-                                                 withSuccessBlock:^(BOOL status) {
-            if (status) {
-                [exception fulfill];
-            } else {
-                XCTAssert(NO);
-            }
-            
-        } withFailureBlock:^(NSError * _Nonnull error) {
-            XCTAssert(error == nil);
-        }];
+                                                 withSuccessBlock:^(BOOL isSuccess) {
+                                                     
+                                                     [exception fulfill];
+                                                     if (!isSuccess) {
+                                                         XCTAssert(NO);
+                                                     }
+                                                     
+                                                 } withFailureBlock:^(NSError * _Nonnull error) {
+                                                     [exception fulfill];
+                                                     XCTAssert(error == nil);
+                                                 }];
         
     } withFailureBlock:^(NSError * _Nonnull error) {
         XCTAssert(error == nil);
     }];
     
+    [self waitForExpectationsWithTimeout:kTestCaseTimeOutInterval * 2 handler:nil];
+}
+
+- (void)testDelPlayedHistory {
+    XCTestExpectation *exception = [self expectationWithDescription:@"Wait callback"];
+    [[ECAPIManager sharedManager] getTop5Videos:nil
+                               withSuccessBlock:^(NSArray<ECReturningVideo *> * _Nonnull models) {
+                                   
+                                   [[ECAPIManager sharedManager] delLikedVideoWithVideoID:models.firstObject.identifier withSuccessBlock:^(BOOL isSuccess) {
+                                       
+                                       [exception fulfill];
+                                       if (!isSuccess) {
+                                           XCTAssert(NO);
+                                       }
+                                   } withFailureBlock:^(NSError * _Nonnull error) {
+                                       [exception fulfill];
+                                       XCTAssert(error == nil);
+                                   }];
+                                   
+                               } withFailureBlock:^(NSError * _Nonnull error) {
+                                   XCTAssert(error == nil);
+                               }];
     [self waitForExpectationsWithTimeout:kTestCaseTimeOutInterval * 2 handler:nil];
 }
 
@@ -124,21 +164,42 @@ static const double kTestCaseTimeOutInterval = 20.0;
     [[ECAPIManager sharedManager] getTop5Videos:nil
                                withSuccessBlock:^(NSArray<ECReturningVideo *> * _Nonnull models) {
                                    
-            [[ECAPIManager sharedManager] addLikedVideoWithVideoID:models.firstObject.identifier withSuccessBlock:^(BOOL status) {
-                                      
-                    if (status) {
-                        [exception fulfill];
-                    } else {
+            [[ECAPIManager sharedManager] addLikedVideoWithVideoID:models.firstObject.identifier withSuccessBlock:^(BOOL isSuccess) {
+                    [exception fulfill];
+                    if (!isSuccess) {
                         XCTAssert(NO);
                     }
-                                      
+                
                 } withFailureBlock:^(NSError * _Nonnull error) {
+                    [exception fulfill];
                     XCTAssert(error == nil);
                 }];
                                    
     } withFailureBlock:^(NSError * _Nonnull error) {
         XCTAssert(error == nil);
     }];
+    
+    [self waitForExpectationsWithTimeout:kTestCaseTimeOutInterval * 2 handler:nil];
+}
+
+- (void)testDelLikedVideo {
+    XCTestExpectation *exception = [self expectationWithDescription:@"Wait callback"];
+    [[ECAPIManager sharedManager] getTop5Videos:nil
+                               withSuccessBlock:^(NSArray<ECReturningVideo *> * _Nonnull models) {
+                                   
+                                   [[ECAPIManager sharedManager] delLikedVideoWithVideoID:@"686568800" withSuccessBlock:^(BOOL isSuccess) {
+                                       [exception fulfill];
+                                       if (!isSuccess) {
+                                           XCTAssert(NO);
+                                       }
+                                   } withFailureBlock:^(NSError * _Nonnull error) {
+                                       [exception fulfill];
+                                       XCTAssert(error == nil);
+                                   }];
+                                   
+                               } withFailureBlock:^(NSError * _Nonnull error) {
+                                   XCTAssert(error == nil);
+                               }];
     
     [self waitForExpectationsWithTimeout:kTestCaseTimeOutInterval * 2 handler:nil];
 }
