@@ -126,8 +126,8 @@ static const double kTestCaseTimeOutInterval = 20.0;
     [[ECAPIManager sharedManager] getTop5Videos:nil
                                withSuccessBlock:^(NSArray<ECReturningVideo *> * _Nonnull models) {
                                    
-                                   [[ECAPIManager sharedManager] delLikedVideoWithVideoID:models.firstObject.identifier withSuccessBlock:^(BOOL isSuccess) {
-                                       
+                                   [[ECAPIManager sharedManager] delPlayedHistoryWithVideoID:models.firstObject.identifier withSuccessBlock:^(BOOL isSuccess) {
+                                      
                                        [exception fulfill];
                                        if (!isSuccess) {
                                            XCTAssert(NO);
@@ -187,7 +187,7 @@ static const double kTestCaseTimeOutInterval = 20.0;
     [[ECAPIManager sharedManager] getTop5Videos:nil
                                withSuccessBlock:^(NSArray<ECReturningVideo *> * _Nonnull models) {
                                    
-                                   [[ECAPIManager sharedManager] delLikedVideoWithVideoID:@"686568800" withSuccessBlock:^(BOOL isSuccess) {
+                                   [[ECAPIManager sharedManager] delLikedVideoWithVideoID:models.firstObject.identifier withSuccessBlock:^(BOOL isSuccess) {
                                        [exception fulfill];
                                        if (!isSuccess) {
                                            XCTAssert(NO);
