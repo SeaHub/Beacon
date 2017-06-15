@@ -31,7 +31,7 @@ static NSString *const kECVideoPlayerCellCollectionReuseIdentifier = @"kECVideoP
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *resourceTitleLabel;
 @property (weak, nonatomic) IBOutlet UICollectionView *resourceTypeCollectionView;
-@property (weak, nonatomic) IBOutlet UILabel *resourceLikeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *resourceWatchTimeLabel;
 @property (weak, nonatomic) IBOutlet UIButton *loveButton;
 @property (weak, nonatomic) IBOutlet UIButton *dislikeButton;
 @property (weak, nonatomic) IBOutlet UIButton *menuButton;
@@ -45,8 +45,6 @@ static NSString *const kECVideoPlayerCellCollectionReuseIdentifier = @"kECVideoP
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    debugLog(@"playerScreen needs to set up");
-    debugLog(@"timeLabel needs to set up");
     self.resourceTypeCollectionView.delegate   = self;
     self.resourceTypeCollectionView.dataSource = self;
     self.resourceTypes                         = @[];
@@ -69,10 +67,10 @@ static NSString *const kECVideoPlayerCellCollectionReuseIdentifier = @"kECVideoP
 }
 
 - (void)configureCellWithVideo:(ECReturningVideo *)video {
-    self.video                   = video;
-    self.resourceTitleLabel.text = video.title;
-    self.resourceTypes           = @[@"iQiYi"];
-    self.resourceLikeLabel.text  = [NSString stringWithFormat:@"%@%@", video.play_count, @"次"];
+    self.video                        = video;
+    self.resourceTitleLabel.text      = video.title;
+    self.resourceTypes                = @[@"iQiYi"];
+    self.resourceWatchTimeLabel.text  = [NSString stringWithFormat:@"%@%@", video.play_count, @" 次"];
     [self.resourceTypeCollectionView reloadData];
 }
 

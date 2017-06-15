@@ -19,6 +19,7 @@ static NSString *const kECVideoGuessingCellCollectionReuseIdentifier = @"Guessin
 @property (weak, nonatomic) IBOutlet UICollectionView *resourceTypeCollectionView;
 @property (copy, nonatomic) NSArray<NSString *> *resourceTypes;
 @property (strong, nonatomic) ECReturningVideo *video;
+@property (weak, nonatomic) IBOutlet UILabel *resourceWatchTimeLabel;
 
 @end
 
@@ -63,9 +64,10 @@ static NSString *const kECVideoGuessingCellCollectionReuseIdentifier = @"Guessin
 }
 
 - (void)configureCellWithVideo:(ECReturningVideo *)video {
-    self.video           = video;
-    self.titleLabel.text = video.title;
-    self.resourceTypes   = @[@"iQiYi"];
+    self.video                       = video;
+    self.titleLabel.text             = video.title;
+    self.resourceTypes               = @[@"iQiYi"];
+    self.resourceWatchTimeLabel.text = [NSString stringWithFormat:@"%@%@", video.play_count, @" 次"];
     [self.resourceImageView sd_setImageWithURL:[NSURL URLWithString:video.img]];
     [self.resourceTypeCollectionView reloadData];
 }
