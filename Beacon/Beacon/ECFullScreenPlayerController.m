@@ -34,6 +34,14 @@
 @implementation ECFullScreenPlayerController
 
 #pragma mark - Life Cycle
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskLandscapeRight;
+}
+
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 }
@@ -47,6 +55,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [[QYPlayerController sharedInstance] stopPlayer];
+    
     if (self.delegate) {
         if ([self.delegate respondsToSelector:@selector(fullScreenController:viewWillDisappearWithModel:)]) {
             

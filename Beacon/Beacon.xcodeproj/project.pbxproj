@@ -23,6 +23,7 @@
 		5289E0711EEBE6B40012D05E /* ECVideoGuessingLabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5289E0701EEBE6B40012D05E /* ECVideoGuessingLabelTableViewCell.m */; };
 		5289E0751EEBE8240012D05E /* ECVideoGuessingContentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5289E0741EEBE8240012D05E /* ECVideoGuessingContentTableViewCell.m */; };
 		5289E0791EEBF3890012D05E /* ECVideoResourceTypeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5289E0781EEBF3890012D05E /* ECVideoResourceTypeCollectionViewCell.m */; };
+		529332DB1EF3F5DF00AB2EB4 /* ECNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 529332DA1EF3F5DF00AB2EB4 /* ECNavigationViewController.m */; };
 		52B9E0351EE853FA003E5CFF /* ECVideoPlayerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B9E0341EE853FA003E5CFF /* ECVideoPlayerTableViewCell.m */; };
 		52C90F7A1ED077A7009793DC /* ECFullScreenPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C90F791ED077A7009793DC /* ECFullScreenPlayerController.m */; };
 		52DE8C991EDC10AA00072C91 /* APKeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 52DE8C981EDC10AA00072C91 /* APKeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -130,6 +131,8 @@
 		5289E0741EEBE8240012D05E /* ECVideoGuessingContentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECVideoGuessingContentTableViewCell.m; sourceTree = "<group>"; };
 		5289E0771EEBF3890012D05E /* ECVideoResourceTypeCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECVideoResourceTypeCollectionViewCell.h; sourceTree = "<group>"; };
 		5289E0781EEBF3890012D05E /* ECVideoResourceTypeCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECVideoResourceTypeCollectionViewCell.m; sourceTree = "<group>"; };
+		529332D91EF3F5DF00AB2EB4 /* ECNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECNavigationViewController.h; sourceTree = "<group>"; };
+		529332DA1EF3F5DF00AB2EB4 /* ECNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECNavigationViewController.m; sourceTree = "<group>"; };
 		52B9E0331EE853FA003E5CFF /* ECVideoPlayerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECVideoPlayerTableViewCell.h; sourceTree = "<group>"; };
 		52B9E0341EE853FA003E5CFF /* ECVideoPlayerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECVideoPlayerTableViewCell.m; sourceTree = "<group>"; };
 		52C90F781ED077A7009793DC /* ECFullScreenPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECFullScreenPlayerController.h; sourceTree = "<group>"; };
@@ -450,6 +453,7 @@
 		528B21EC1EDBAB5A00D1CE02 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				529332D81EF3F5BC00AB2EB4 /* Navigation */,
 				D5A8F8341EE8DA9000B73670 /* Menu */,
 				526A567F1EE6FFFB00FCD30D /* Video */,
 				528B21E71EDBAAF300D1CE02 /* FullScreenPlayer */,
@@ -489,6 +493,15 @@
 				52DE8CA61EDC19F300072C91 /* VideoHistory */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		529332D81EF3F5BC00AB2EB4 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				529332D91EF3F5DF00AB2EB4 /* ECNavigationViewController.h */,
+				529332DA1EF3F5DF00AB2EB4 /* ECNavigationViewController.m */,
+			);
+			name = Navigation;
 			sourceTree = "<group>";
 		};
 		52B9E0321EE8537B003E5CFF /* VideoTableViewCell */ = {
@@ -1027,6 +1040,7 @@
 				520964471EDBBB5A001F2A05 /* ECReturningVideoType.m in Sources */,
 				523EA4981EDD6EE900E02A95 /* ECCacheAPIHelper.m in Sources */,
 				D5A8F83B1EE9020900B73670 /* UIView+LSCore.m in Sources */,
+				529332DB1EF3F5DF00AB2EB4 /* ECNavigationViewController.m in Sources */,
 				5214C08A1EDBC55F00D09A06 /* ECVideo.m in Sources */,
 				5233909E1ED067B600C46419 /* ECMainViewController.m in Sources */,
 				52DE8C9E1EDC12CC00072C91 /* ECUtil.m in Sources */,
