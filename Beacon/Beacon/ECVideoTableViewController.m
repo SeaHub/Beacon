@@ -30,9 +30,11 @@ static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoT
 @interface ECVideoTableViewController () <ECVideoGuessingContentCellDelegate, ECVideoPlayerTableViewCellDelegate, ECFullScreenPlayerControllerDelegate>
 
 @property (nonatomic, assign) BOOL isLightClosed;
+@property (nonatomic, assign) BOOL isVideoSwapped;
 @property (nonatomic, assign) NSInteger numberOfRowsInSectionZero;
 @property (nonatomic, assign) AFNetworkReachabilityStatus networkStatus;
-@property (nonatomic, strong, nullable) NSMutableArray<ECReturningVideo *> *guessingDatas;
+@property (nonatomic, strong) NSMutableArray<ECReturningVideo *> *guessingDatas;
+@property (nonatomic, strong) ECVideoPlayerTableViewCell *playerCell; // Retain and not reuse it
 
 @end
 
@@ -48,6 +50,7 @@ static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoT
 - (void)_initialPropertyStatus {
     self.numberOfRowsInSectionZero = kNumberOfNoneGuessingContentCell;
     self.isLightClosed             = NO;
+    self.isVideoSwapped            = NO;
 }
 
 - (void)_initialGuessingDatas {
@@ -100,10 +103,15 @@ static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoT
     
     if (!self.isLightClosed) { // Normal Status
         if (indexPath.row == 0) {
-            ECVideoPlayerTableViewCell *playerCell = [tableView dequeueReusableCellWithIdentifier:kECVideoTablePlayerReuseIdentifier forIndexPath:indexPath];
-            playerCell.delegate                    = self;
-            [playerCell configureCellWithVideo:self.videoOfUserChosen];
-            return playerCell;
+            if (!self.playerCell || self.isVideoSwapped) {
+                self.playerCell = [tableView dequeueReusableCellWithIdentifier:kECVideoTablePlayerReuseIdentifier
+                                                                  forIndexPath:indexPath];
+                self.playerCell.delegate = self;
+                self.isVideoSwapped      = NO;
+            }
+            
+            [self.playerCell configureCellWithVideo:self.videoOfUserChosen];
+            return self.playerCell;
             
         } else if (indexPath.row == 1) {
             ECVideoIntroductTableViewCell *introductCell = [tableView dequeueReusableCellWithIdentifier:kECVideoTableIntroductReuseIdentifier forIndexPath:indexPath];
@@ -131,10 +139,15 @@ static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoT
             return emptyCell;
             
         } else if (indexPath.row == 1) {
-            ECVideoPlayerTableViewCell *playerCell = [tableView dequeueReusableCellWithIdentifier:kECVideoTablePlayerReuseIdentifier forIndexPath:indexPath];
-            playerCell.delegate                    = self;
-            [playerCell configureCellWithVideo:self.videoOfUserChosen];
-            return playerCell;
+            if (!self.playerCell || self.isVideoSwapped) {
+                self.playerCell = [tableView dequeueReusableCellWithIdentifier:kECVideoTablePlayerReuseIdentifier
+                                                                  forIndexPath:indexPath];
+                self.playerCell.delegate = self;
+                self.isVideoSwapped      = NO;
+            }
+            
+            [self.playerCell configureCellWithVideo:self.videoOfUserChosen];
+            return self.playerCell;
         }   
     }
     
@@ -176,13 +189,6 @@ static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoT
     return height;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell
-forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0) {
-        [(ECVideoPlayerTableViewCell *)cell cellWillAppear]; // Use to notify PlayerCell to setup player
-    }
-}
-
 #pragma mark - Button Action
 - (IBAction)backButtonClicked:(id)sender {
     [[QYPlayerController sharedInstance] stopPlayer];
@@ -197,9 +203,10 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
     NSIndexPath *indexPathOfPlayerCell    = [NSIndexPath indexPathForRow:0 inSection:0];
     NSIndexPath *indexPathOfIntroductCell = [NSIndexPath indexPathForRow:1 inSection:0];
     
-    // Swap data source
+    // Swap data source and change flag
     self.videoOfUserChosen                                                            = video;
-    self.guessingDatas[indexPathOfClickedCell.row - kNumberOfNoneGuessingContentCell] = self.videoOfUserChosen; //
+    self.guessingDatas[indexPathOfClickedCell.row - kNumberOfNoneGuessingContentCell] = self.videoOfUserChosen;
+    self.isVideoSwapped                                                               = YES;
     
     // Reload data with animation and scroll to top (Not use pushing controller because we afraid stack overflow happens)
     [self.tableView reloadRowsAtIndexPaths:@[indexPathOfClickedCell, indexPathOfPlayerCell, indexPathOfIntroductCell]

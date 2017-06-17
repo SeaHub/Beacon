@@ -25,7 +25,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak, nullable) id<ECVideoPlayerTableViewCellDelegate> delegate;
 
 - (void)configureCellWithVideo:(ECReturningVideo *)video;
-- (void)cellWillAppear;
 - (void)updateCurrentPlayingStatusWithViewModel:(ECPlayerViewModel *)viewModel;
 
 @end

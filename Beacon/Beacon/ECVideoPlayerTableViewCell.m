@@ -58,20 +58,20 @@ static NSString *const kECVideoPlayerCellCollectionReuseIdentifier = @"kECVideoP
     self.isTimeUsed  = YES;
 }
 
-- (void)cellWillAppear {
-    [self _setupPlayer];
-}
-
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 }
 
 - (void)configureCellWithVideo:(ECReturningVideo *)video {
-    self.video                        = video;
-    self.resourceTitleLabel.text      = video.title;
-    self.resourceTypes                = @[@"iQiYi"];
-    self.resourceWatchTimeLabel.text  = [NSString stringWithFormat:@"%@%@", video.play_count, @" 次"];
-    [self.resourceTypeCollectionView reloadData];
+    if (!self.video && ![self.video isEqual:video]) {
+        self.video = video;
+        [self _setupPlayer];
+    
+        self.resourceTitleLabel.text      = video.title;
+        self.resourceTypes                = @[@"iQiYi"];
+        self.resourceWatchTimeLabel.text  = [NSString stringWithFormat:@"%@%@", video.play_count, @" 次"];
+        [self.resourceTypeCollectionView reloadData];
+    }
 }
 
 - (void)updateCurrentPlayingStatusWithViewModel:(ECPlayerViewModel *)viewModel {
