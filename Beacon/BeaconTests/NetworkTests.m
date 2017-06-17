@@ -91,6 +91,7 @@ static const double kTestCaseTimeOutInterval = 20.0;
         [exception fulfill];
     } withFailureBlock:^(NSError * _Nonnull error) {
         XCTAssert(error == nil);
+        [exception fulfill];
     }];
     
     [self waitForExpectationsWithTimeout:kTestCaseTimeOutInterval handler:nil];

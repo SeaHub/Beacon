@@ -163,15 +163,13 @@ static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoT
     if (!self.isLightClosed) { // Normal Status
         switch (indexPath.row) {
             case 0:
-                height = 390.0;
+                height = 366 + [self _calculateSizeWithString:self.videoOfUserChosen.short_title
+                                                 withFontSize:20];
                 break;
-            case 1: {
-                CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
-                CGSize newSize      = [ECUtil calculateLabelSize:self.videoOfUserChosen.title
-                                                        withFont:[UIFont systemFontOfSize:15]
-                                                     withMaxSize:CGSizeMake(screenWidth - 42, CGFLOAT_MAX)];
-                height = 60 + newSize.height;
-            } break;
+            case 1:
+                height = 60.0 + [self _calculateSizeWithString:self.videoOfUserChosen.title
+                                                  withFontSize:15];
+                break;
             case 2:
                 height = 31.5;
                 break;
@@ -183,14 +181,24 @@ static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoT
     } else { // Light-Closed Status
         switch (indexPath.row) {
             case 0:
-                height = 0.23 * [UIScreen mainScreen].bounds.size.height; // Here is a magic number by testing constantly
+                height = 0.23 * [UIScreen mainScreen].bounds.size.height; // 0.23 is a magic number testing constantly
                 break;
             case 1:
-                height = 390.0;
+                height = 366 + [self _calculateSizeWithString:self.videoOfUserChosen.short_title
+                                                 withFontSize:20];
+                break;
         }
     }
     
     return height;
+}
+
+- (CGFloat)_calculateSizeWithString:(NSString *)string withFontSize:(CGFloat)fontSize {
+    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+    CGSize newSize      = [ECUtil calculateLabelSize:string
+                                            withFont:[UIFont systemFontOfSize:fontSize]
+                                         withMaxSize:CGSizeMake(screenWidth - 42, CGFLOAT_MAX)];
+    return newSize.height;
 }
 
 #pragma mark - Button Action
@@ -208,8 +216,8 @@ static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoT
     NSIndexPath *indexPathOfIntroductCell = [NSIndexPath indexPathForRow:1 inSection:0];
     
     // Swap data source and change flag
-    self.videoOfUserChosen                                                            = video;
     self.guessingDatas[indexPathOfClickedCell.row - kNumberOfNoneGuessingContentCell] = self.videoOfUserChosen;
+    self.videoOfUserChosen                                                            = video;
     self.isVideoSwapped                                                               = YES;
     
     // Reload data with animation and scroll to top (Not use pushing controller because we afraid stack overflow happens)

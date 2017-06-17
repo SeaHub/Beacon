@@ -21,7 +21,7 @@
 @property (nonatomic, strong) UIView *menuCard;
 @property (nonatomic, strong) UIButton *favourite;
 @property (nonatomic, strong) UIButton *history;
-@property (nonatomic, strong) UILabel *loadingLasbel;
+@property (nonatomic, strong) UILabel *loadingLabel;
 
 @property (nonatomic, strong) IQActivityIndicatorView *indicator;
 
@@ -73,14 +73,14 @@
     self.menuCard.layer.masksToBounds = YES;
     self.menuCard.layer.cornerRadius  = 12;
     
-    self.indicator = [[IQActivityIndicatorView alloc] initWithFrame: CGRectMake(0, 0, 15, 15)];
+    self.indicator = [[IQActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 15, 15)];
     [self.indicator startAnimating];
     
-    self.loadingLasbel = [[UILabel alloc] init];
-    self.loadingLasbel.text = @"loading";
-    self.loadingLasbel.textAlignment = NSTextAlignmentRight;
-    self.loadingLasbel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:10];
-    self.loadingLasbel.textColor = [UIColor grayColor];
+    self.loadingLabel = [[UILabel alloc] init];
+    self.loadingLabel.text = @"Loading";
+    self.loadingLabel.textAlignment = NSTextAlignmentRight;
+    self.loadingLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:10];
+    self.loadingLabel.textColor = [UIColor grayColor];
     
     self.favourite                 = [UIButton buttonWithType:UIButtonTypeCustom];
     self.favourite.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:14];
@@ -113,7 +113,7 @@
     [self.view addSubview:self.favourite];
     [self.view addSubview:self.history];
     [self.view addSubview:self.indicator];
-    [self.view addSubview:self.loadingLasbel];
+    [self.view addSubview:self.loadingLabel];
 }
 
 - (void)setLayouts {
@@ -152,7 +152,7 @@
         make.right.equalTo(self.menuCard.mas_right).with.offset(-20);
         make.width.height.equalTo(@15);
     }];
-    [self.loadingLasbel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.loadingLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.indicator);
         make.right.equalTo(self.indicator.mas_left).with.offset(-10);
     }];
@@ -160,15 +160,15 @@
 
 - (void)stopUpdateAnimation {
     [UIView animateWithDuration:0.5 animations:^{
-        self.loadingLasbel.alpha = 0;
-        self.indicator.alpha = 0;
+        self.loadingLabel.alpha = 0;
+        self.indicator.alpha    = 0;
     }];
 }
 
 - (void)startUpdateAnimation {
     [UIView animateWithDuration:0.5 animations:^{
-        self.loadingLasbel.alpha = 1;
-        self.indicator.alpha = 1;
+        self.loadingLabel.alpha = 1;
+        self.indicator.alpha    = 1;
     }];
 }
 

@@ -12,7 +12,7 @@
 #import "ECReturningVideo.h"
 #import "ECReturningVideoHistory.h"
 
-static NSString *const kBaseURLString    = @"https://beacon-flask.herokuapp.com";
+static NSString *const kBaseURLString    = @"http://115.159.121.50:5000";
 static const int kNetworkTimeoutInterval = 20;
 static ECAPIManager *object              = nil;
 static NSString *const kDatasKey         = @"datas";

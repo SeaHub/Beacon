@@ -10,6 +10,8 @@
 #import "QYPlayerController.h"
 #import "ECPlayerViewModel.h"
 #import "ECReturningVideo.h"
+#import "IQActivityIndicatorView.h"
+#import <Masonry.h>
 
 @interface ECFullScreenPlayerController () <QYPlayerControllerDelegate>
 
@@ -20,6 +22,7 @@
 @property (nonatomic, assign) BOOL isTimeUsed;
 @property (nonatomic, assign) NSTimeInterval currentTime;
 @property (nonatomic, assign) NSTimeInterval totalTime;
+@property (nonatomic, strong) IQActivityIndicatorView *indicator;
 
 // Following are IBOutlet properties
 @property (weak, nonatomic) IBOutlet UIView *playerView;
@@ -68,6 +71,8 @@
             [self.delegate fullScreenController:self viewWillDisappearWithModel:viewModel];
         }
     }
+    
+    [self.indicator removeFromSuperview]; // indicator should be remove because player is a singleton
 }
 
 - (void)didReceiveMemoryWarning {
@@ -84,32 +89,58 @@
     self.isTimeUsed      = NO;
 }
 
+- (void)_setupIndicatorOnView:(UIView *)view {
+    self.indicator = [[IQActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 15, 15)];
+    [self.indicator startAnimating];
+    [view addSubview:self.indicator];
+    [self.indicator mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(view.mas_centerX);
+        make.centerY.equalTo(view.mas_centerY);
+        make.width.height.equalTo(@40);
+    }];
+}
+
+- (void)_indicatorStopAnimation {
+    [UIView animateWithDuration:0.5 animations:^{
+        self.indicator.alpha = 0;
+    }];
+}
+
+- (void)_indicatorStartAnimation {
+    [UIView animateWithDuration:0.5 animations:^{
+        self.indicator.alpha = 1;
+    }];
+}
+
 - (void)_setupPlayerView {
     ECPlayerViewModel *viewModel = self.viewModel;
     
     QYPlayerController *playerController  = [QYPlayerController sharedInstance];
+    [self _setupIndicatorOnView:playerController.view];
     [_playerView addSubview:playerController.view];
-    [playerController setPlayerFrame:_playerView.frame];
+    [playerController setPlayerFrame:_playerView.bounds];
     [playerController setDelegate:self];
     [playerController openPlayerByAlbumId:viewModel.videoSource.a_id
                                      tvId:viewModel.videoSource.tv_id
                                     isVip:viewModel.videoSource.is_vip];
     
-    UITapGestureRecognizer *tapGR =  [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                             action:@selector(_videoViewDidClicked)];
+    UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                            action:@selector(_videoViewDidClicked)];
     tapGR.numberOfTapsRequired    = 1;
     [playerController.view addGestureRecognizer:tapGR];
    
     // Following code guarantee self status to be the same as Mini-Screen status
     self.timeLabel.text = [ECUtil jointPlayTimeString:viewModel.currentTime withTotalTime:viewModel.totalTime];
-    [self.videoProgressView setProgress:viewModel.currentTime / viewModel.totalTime animated:NO];
+    [self.videoProgressView setProgress:viewModel.currentTime / viewModel.totalTime];
     
     if (viewModel.isPlaying) {
         [self.playButton setImage:[UIImage imageNamed:@"toolStop"] forState:UIControlStateNormal];
         [[QYPlayerController sharedInstance] play];
+        [self _indicatorStopAnimation];
     } else {
         [self.playButton setImage:[UIImage imageNamed:@"toolPlay"] forState:UIControlStateNormal];
         [[QYPlayerController sharedInstance] pause];
+        [self _indicatorStartAnimation];
     }
     
     if (viewModel.isMute) {
@@ -163,9 +194,11 @@
     if (!self.isPlaying) {
         [self.playButton setImage:[UIImage imageNamed:@"toolStop"] forState:UIControlStateNormal];
         [[QYPlayerController sharedInstance] play];
+        [self _indicatorStopAnimation];
     } else {
         [self.playButton setImage:[UIImage imageNamed:@"toolPlay"] forState:UIControlStateNormal];
         [[QYPlayerController sharedInstance] pause];
+        [self _indicatorStartAnimation];
     }
     
     self.isPlaying = !self.isPlaying;
@@ -188,38 +221,32 @@
 
 #pragma mark - QYPlayControllerDelegate
 - (void)startLoading:(QYPlayerController *)player {
-    debugLog(@"Delegate: Start Loading...");
     [self _updateTimeStatusWithCurrentPlayer:player];
-
-//    [_cacheProgressBar setProgress:player.playableDuration / player.duration animated:YES];
 }
 
 - (void)stopLoading:(QYPlayerController *)player {
-    debugLog(@"Delegate: Stop Loading...");
-//    [_cacheProgressBar setProgress:1.0 animated:YES];
     [self _updateTimeStatusWithCurrentPlayer:player];
 }
 
 - (void)playbackTimeChanged:(QYPlayerController *)player {
     [self _updateTimeStatusWithCurrentPlayer:player];
+    [self.videoProgressView setProgress:player.currentPlaybackTime / player.duration];
 }
 
 - (void)playbackFinshed:(QYPlayerController *)player {
-    debugLog(@"Delegate: Finished watching...");
     [self _updateTimeStatusWithCurrentPlayer:player];
     [self.videoProgressView setProgress:1.0 animated:YES];
 }
 
 - (void)playerNetworkChanged:(QYPlayerController *)player {
-    debugLog(@"Delegate: Network changed...");
+    debugLog(@"Delegate: Network changed..."); // TODO
 }
 
 - (void)onPlayerError:(NSDictionary *)error_no {
-    debugLog(@"Delegate: An error occured when start playing...");
+    debugLog(@"Delegate: An error occured when start playing..."); // TODO
 }
 
 - (void)onAdStartPlay:(QYPlayerController *)player {
-    debugLog(@"Delegate: The advertisement starts playing");
     [[QYPlayerController sharedInstance] pause];
 }
 
@@ -231,9 +258,11 @@
     if (self.viewModel.isPlaying) {
         [self.playButton setImage:[UIImage imageNamed:@"toolStop"] forState:UIControlStateNormal];
         [[QYPlayerController sharedInstance] play];
+        [self _indicatorStopAnimation];
     } else {
         [self.playButton setImage:[UIImage imageNamed:@"toolPlay"] forState:UIControlStateNormal];
         [[QYPlayerController sharedInstance] pause];
+        [self _indicatorStartAnimation];
     }
 }
 
