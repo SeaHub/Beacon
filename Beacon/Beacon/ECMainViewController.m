@@ -115,6 +115,8 @@
     menuViewController.watchedVideos          = self.watchedVideos;
     menuViewController.likedVideos            = self.likedVideos;
     menuViewController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    menuViewController.rootVC                 = self;
+    
     [self presentViewController:menuViewController animated:YES completion:nil];
 }
 

@@ -12,6 +12,9 @@
 #import "ECReturningVideo.h"
 #import "IQActivityIndicatorView.h"
 #import "ECReturningWatchedVideo.h"
+#import "ECVideoTableViewController.h"
+#import "ECMainViewController.h"
+
 #import "UITableView+EmptyData.h"
 #import "Masonry.h"
 
@@ -34,42 +37,65 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self initialDatas];
     [self initialViews];
+    [self initialDatas];
     [self addViews];
     [self setLayouts];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden = YES;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [UIView animateWithDuration:0.5 animations:^{
+        self.bakView.alpha = 0.42;
+    }];
+}
+
 - (void)initialDatas {
     [[ECAPIManager sharedManager] getLikedVideoWithSuccessBlock:^(NSArray<ECReturningVideo *> * datas) {
-        self.dataSource = datas;
-        [self.tableView reloadData];
-        [self stopUpdateAnimation];
+        self.likedVideos = datas;
+        if (self.type == ECMenuFavouriteType) {
+            [self updateTableData];
+            [self stopUpdateAnimation];
+        }
     } withFailureBlock:^(NSError * error) {
+        debugLog(@"%@", error);
+    }];
+    [[ECAPIManager sharedManager] getPlayedHistroyWithSuccessBlock:^(NSArray<ECReturningWatchedVideo *> * _Nonnull watchedVideos) {
+        self.watchedVideos = watchedVideos;
+        if (self.type == ECMenuHistoryType) {
+            [self updateTableData];
+            [self stopUpdateAnimation];
+        }
+    } withFailureBlock:^(NSError * _Nonnull error) {
         debugLog(@"%@", error);
     }];
     if (self.likedVideos.count > 0) {
         self.dataSource = self.likedVideos;
-        
     } else {
         [[ECAPIManager sharedManager] getLikedVideoWithSuccessBlock:^(NSArray<ECReturningVideo *> * datas) {
             self.dataSource = datas;
             [self.tableView reloadData];
         } withFailureBlock:^(NSError * error) {
             debugLog(@"%@", error);
-        }];
+        }] ;
     }
 }
 
 - (void)initialViews {
+    self.type = ECMenuFavouriteType;
     self.bakView                 = [UIButton buttonWithType:UIButtonTypeCustom];
     self.bakView.frame           = self.view.bounds;
     self.bakView.backgroundColor = [UIColor blackColor];
-    self.bakView.alpha           = 0.42;
+    self.bakView.alpha           = 0;
     [self.bakView addTarget:self action:@selector(exitMenu) forControlEvents:UIControlEventTouchUpInside];
     
     self.menuCard                     = [[UIView alloc] init];
-    self.menuCard.backgroundColor     = [UIColor whiteColor];
+    self.menuCard.backgroundColor     = [UIColor colorWithRed:234 / 255.0 green:234 / 255.0 blue:234 / 255.0 alpha:1];
     self.menuCard.layer.masksToBounds = YES;
     self.menuCard.layer.cornerRadius  = 12;
     
@@ -172,10 +198,26 @@
     }];
 }
 
+- (void)updateTableData {
+    switch (self.type) {
+        case ECMenuFavouriteType:
+            self.dataSource = self.likedVideos;
+            [self.tableView reloadData];
+            break;
+        case ECMenuHistoryType:
+            self.dataSource = self.watchedVideos;
+            [self.tableView reloadData];
+            break;
+    }
+}
 # pragma mark: Exit Action
 - (void)exitMenu {
-    [self dismissViewControllerAnimated:YES completion:^{
-        debugLog(@"Exit menu view controller. ");
+    [UIView animateWithDuration:0.3 animations:^{
+        self.bakView.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self dismissViewControllerAnimated:YES completion:^{
+            debugLog(@"Exit menu view controller. ");
+        }];
     }];
 }
 
@@ -183,12 +225,20 @@
 - (void)filterType: (id)sender {
     UIButton *filterBtn = (UIButton *)sender;
     if (filterBtn == self.favourite) {
-        [self.favourite setTitleColor:[UIColor colorWithRed:2 / 255.0 green:173 / 255.0 blue:88 / 255.0 alpha:1] forState:UIControlStateNormal];
-        [self.history setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        if (self.type == ECMenuHistoryType) {
+            [self.favourite setTitleColor:[UIColor colorWithRed:2 / 255.0 green:173 / 255.0 blue:88 / 255.0 alpha:1] forState:UIControlStateNormal];
+            [self.history setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            self.type = ECMenuFavouriteType;
+            [self updateTableData];
+        }
     }
     if (filterBtn == self.history) {
-        [self.history setTitleColor:[UIColor colorWithRed:2 / 255.0 green:173 / 255.0 blue:88 / 255.0 alpha:1] forState:UIControlStateNormal];
-        [self.favourite setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        if (self.type == ECMenuFavouriteType) {
+            [self.history setTitleColor:[UIColor colorWithRed:2 / 255.0 green:173 / 255.0 blue:88 / 255.0 alpha:1] forState:UIControlStateNormal];
+            [self.favourite setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            self.type = ECMenuHistoryType;
+            [self updateTableData];
+        }
     }
 }
 
@@ -221,6 +271,7 @@
         return cell;
     } else {
         UITableViewCell *cell = [UITableViewCell new];
+        cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
@@ -228,6 +279,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self.rootVC performSegueWithIdentifier:kSegueOfECVideoController sender:self.dataSource[indexPath.row]];
+    }];
 }
 
 @end

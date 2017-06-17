@@ -26,6 +26,7 @@
 }
 
 - (void)initStyle {
+    self.backgroundColor = [UIColor clearColor];
     self.ablumImageView.layer.masksToBounds = YES;
     self.ablumImageView.layer.cornerRadius = 4;
 }
