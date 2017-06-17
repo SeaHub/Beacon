@@ -78,6 +78,7 @@
 		D5139B5D1EDBBE0900B6FB2C /* CCDraggableCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5139B591EDBBE0900B6FB2C /* CCDraggableCardView.m */; };
 		D5139B5E1EDBBE0900B6FB2C /* CCDraggableContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = D5139B5C1EDBBE0900B6FB2C /* CCDraggableContainer.m */; };
 		D5139B641EDBC43700B6FB2C /* ECCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5139B631EDBC43700B6FB2C /* ECCardView.m */; };
+		D54DF6AB1EF4C4B600B84A4F /* UITableView+EmptyData.m in Sources */ = {isa = PBXBuildFile; fileRef = D54DF6AA1EF4C4B600B84A4F /* UITableView+EmptyData.m */; };
 		D55AAA581EEDFFEC0095D5CE /* IQActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = D55AAA571EEDFFEC0095D5CE /* IQActivityIndicatorView.m */; };
 		D5A8F8371EE8DABE00B73670 /* ECMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5A8F8361EE8DABE00B73670 /* ECMenuViewController.m */; };
 		D5A8F83B1EE9020900B73670 /* UIView+LSCore.m in Sources */ = {isa = PBXBuildFile; fileRef = D5A8F83A1EE9020900B73670 /* UIView+LSCore.m */; };
@@ -219,6 +220,8 @@
 		D5139B5C1EDBBE0900B6FB2C /* CCDraggableContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCDraggableContainer.m; sourceTree = "<group>"; };
 		D5139B621EDBC43700B6FB2C /* ECCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECCardView.h; sourceTree = "<group>"; };
 		D5139B631EDBC43700B6FB2C /* ECCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECCardView.m; sourceTree = "<group>"; };
+		D54DF6A91EF4C4B600B84A4F /* UITableView+EmptyData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+EmptyData.h"; sourceTree = "<group>"; };
+		D54DF6AA1EF4C4B600B84A4F /* UITableView+EmptyData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+EmptyData.m"; sourceTree = "<group>"; };
 		D55AAA561EEDFFEC0095D5CE /* IQActivityIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQActivityIndicatorView.h; sourceTree = "<group>"; };
 		D55AAA571EEDFFEC0095D5CE /* IQActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQActivityIndicatorView.m; sourceTree = "<group>"; };
 		D5A8F8351EE8DABE00B73670 /* ECMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECMenuViewController.h; sourceTree = "<group>"; };
@@ -805,6 +808,8 @@
 			children = (
 				D5A8F8391EE9020900B73670 /* UIView+LSCore.h */,
 				D5A8F83A1EE9020900B73670 /* UIView+LSCore.m */,
+				D54DF6A91EF4C4B600B84A4F /* UITableView+EmptyData.h */,
+				D54DF6AA1EF4C4B600B84A4F /* UITableView+EmptyData.m */,
 			);
 			name = Category;
 			sourceTree = "<group>";
@@ -1039,6 +1044,7 @@
 				D5A8F8411EE96BC200B73670 /* ECMenuItemTableViewCell.m in Sources */,
 				520964471EDBBB5A001F2A05 /* ECReturningVideoType.m in Sources */,
 				523EA4981EDD6EE900E02A95 /* ECCacheAPIHelper.m in Sources */,
+				D54DF6AB1EF4C4B600B84A4F /* UITableView+EmptyData.m in Sources */,
 				D5A8F83B1EE9020900B73670 /* UIView+LSCore.m in Sources */,
 				529332DB1EF3F5DF00AB2EB4 /* ECNavigationViewController.m in Sources */,
 				5214C08A1EDBC55F00D09A06 /* ECVideo.m in Sources */,

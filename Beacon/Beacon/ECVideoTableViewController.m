@@ -103,6 +103,11 @@ static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoT
             ECVideoPlayerTableViewCell *playerCell = [tableView dequeueReusableCellWithIdentifier:kECVideoTablePlayerReuseIdentifier forIndexPath:indexPath];
             playerCell.delegate                    = self;
             [playerCell configureCellWithVideo:self.videoOfUserChosen];
+            
+            if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
+                NSLog(@"3d touch");
+                
+            }
             return playerCell;
             
         } else if (indexPath.row == 1) {

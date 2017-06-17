@@ -10,7 +10,9 @@
 #import "ECMenuItemTableViewCell.h"
 #import "ECAPIManager.h"
 #import "ECReturningVideo.h"
+#import "IQActivityIndicatorView.h"
 
+#import "UITableView+EmptyData.h"
 #import "Masonry.h"
 
 @interface ECMenuViewController ()<UITableViewDelegate, UITableViewDataSource>
@@ -19,6 +21,9 @@
 @property (nonatomic, strong) UIView *menuCard;
 @property (nonatomic, strong) UIButton *favourite;
 @property (nonatomic, strong) UIButton *history;
+@property (nonatomic, strong) UILabel *loadingLasbel;
+
+@property (nonatomic, strong) IQActivityIndicatorView *indicator;
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, copy) NSArray<ECReturningVideo *> *dataSource;
@@ -39,6 +44,7 @@
     [[ECAPIManager sharedManager] getLikedVideoWithSuccessBlock:^(NSArray<ECReturningVideo *> * datas) {
         self.dataSource = datas;
         [self.tableView reloadData];
+        [self stopUpdateAnimation];
     } withFailureBlock:^(NSError * error) {
         debugLog(@"%@", error);
     }];
@@ -55,6 +61,15 @@
     self.menuCard.backgroundColor = [UIColor whiteColor];
     self.menuCard.layer.masksToBounds = YES;
     self.menuCard.layer.cornerRadius = 12;
+    
+    self.indicator = [[IQActivityIndicatorView alloc] initWithFrame: CGRectMake(0, 0, 15, 15)];
+    [self.indicator startAnimating];
+    
+    self.loadingLasbel = [[UILabel alloc] init];
+    self.loadingLasbel.text = @"loading";
+    self.loadingLasbel.textAlignment = NSTextAlignmentRight;
+    self.loadingLasbel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:10];
+    self.loadingLasbel.textColor = [UIColor grayColor];
     
     self.favourite = [UIButton buttonWithType:UIButtonTypeCustom];
     self.favourite.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:14];
@@ -84,6 +99,8 @@
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.favourite];
     [self.view addSubview:self.history];
+    [self.view addSubview:self.indicator];
+    [self.view addSubview:self.loadingLasbel];
 }
 
 - (void)setLayouts {
@@ -115,6 +132,30 @@
     [self.history mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.menuCard.mas_centerX).with.offset(10);
         make.top.equalTo(self.menuCard.mas_top).with.offset(12);
+    }];
+    
+    [self.indicator mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.menuCard.mas_top).with.offset(20);
+        make.right.equalTo(self.menuCard.mas_right).with.offset(-20);
+        make.width.height.equalTo(@15);
+    }];
+    [self.loadingLasbel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.indicator);
+        make.right.equalTo(self.indicator.mas_left).with.offset(-10);
+    }];
+}
+
+- (void)stopUpdateAnimation {
+    [UIView animateWithDuration:0.5 animations:^{
+        self.loadingLasbel.alpha = 0;
+        self.indicator.alpha = 0;
+    }];
+}
+
+- (void)startUpdateAnimation {
+    [UIView animateWithDuration:0.5 animations:^{
+        self.loadingLasbel.alpha = 1;
+        self.indicator.alpha = 1;
     }];
 }
 
@@ -148,6 +189,10 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    [tableView tableViewDisplayWitMsg:@"No Videos. 🎬" ifNecessaryForRowCount:self.dataSource.count];
+    if (self.dataSource.count == 0) {
+        return 0;
+    }
     return self.dataSource.count + 1;
 }
 
