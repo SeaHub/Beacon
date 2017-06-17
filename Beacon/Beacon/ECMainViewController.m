@@ -21,9 +21,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *downButton;
 @property (weak, nonatomic) IBOutlet UIButton *upButton;
 @property (weak, nonatomic) IBOutlet UIButton *moreButton;
-
 @property (weak, nonatomic) IBOutlet CCDraggableContainer *container;
-@property (nonatomic, copy, nonnull) NSArray<ECReturningVideo *> *dataSources;
+@property (nonatomic, copy) NSArray<ECReturningVideo *> *dataSources;
+@property (nonatomic, copy) NSMutableArray<ECReturningVideo *> *likedVideos;
+@property (nonatomic, copy) NSArray<ECReturningVideoHistory *> *histories;
 
 @end
 
@@ -35,70 +36,95 @@
     [self _setupShadow:_downButton];
     [self _setupShadow:_upButton];
     [self _setupShadow:_moreButton];
-    
-    // Draggable Container
-    [self loadDatas];
-    
-    self.container.delegate = self;
-    self.container.dataSource = self;
+    [self loadDataSourceInBackground];
+    [self loadHistoriesInBackground];
+    [self loadLikedVideosInBackground];
+    self.container.delegate        = self;
+    self.container.dataSource      = self;
     self.container.backgroundColor = [UIColor clearColor];
     
     self.container.removeFromLeftCallback = ^(NSInteger index, UIView *card) {
-        ECCardView *cardView = (ECCardView *)card;
-        self.dataSources[index].isLove = NO;
-        [cardView setCancelLove];
+        ECCardView *cardView              = (ECCardView *)card;
+        ECReturningVideo *delLikedVideo   = self.dataSources[index];
+        delLikedVideo.isLiked             = NO;
+        [cardView delLiked];
+        [[ECAPIManager sharedManager] delLikedVideoWithVideoID:delLikedVideo.a_id
+                                              withSuccessBlock:nil
+                                              withFailureBlock:nil];
+        
+        if ([self.likedVideos containsObject:delLikedVideo]) { // Update the datas fetched from network
+            [self.likedVideos removeObject:delLikedVideo];
+        }
     };
     
     self.container.removeFromRightCallback = ^(NSInteger index, UIView *card) {
-        ECCardView *cardView = (ECCardView *)card;
-        self.dataSources[index].isLove = YES;
-        [cardView setIsLove];
-        NSString *videoId = self.dataSources[index].a_id;
-        [[ECAPIManager sharedManager] addLikedVideoWithVideoID:videoId withSuccessBlock:^(BOOL success) {
-            
-        } withFailureBlock:^(NSError * _Nonnull error) {
-            
-        }];
+        ECCardView *cardView               = (ECCardView *)card;
+        ECReturningVideo *likedVideo       = self.dataSources[index];
+        likedVideo.isLiked                 = YES;
+        [cardView addLiked];
+        [[ECAPIManager sharedManager] addLikedVideoWithVideoID:likedVideo.a_id
+                                              withSuccessBlock:nil
+                                              withFailureBlock:nil];
+        
+        if (![self.likedVideos containsObject:likedVideo]) { // Update the datas fetched from network
+            [self.likedVideos addObject:likedVideo];
+        }
     };
-    [self.container reloadData];
 }
 
-- (void)loadDatas {
+- (void)loadHistoriesInBackground {
+    [[ECAPIManager sharedManager] getPlayedHistroyWithSuccessBlock:^(NSArray<ECReturningVideoHistory *> * _Nonnull histories) {
+        self.histories = histories;
+    } withFailureBlock:^(NSError * _Nonnull error) {
+        debugLog(@"ErrorOnLoadingHistories: %@", [error description]);
+    }];
+}
+
+- (void)loadLikedVideosInBackground {
+    self.likedVideos = [@[] mutableCopy];
+    [[ECAPIManager sharedManager] getLikedVideoWithSuccessBlock:^(NSArray<ECReturningVideo *> * _Nonnull videos) {
+        for (ECReturningVideo *video in videos) {
+            [self.likedVideos addObject:video];
+        }
+        
+    } withFailureBlock:^(NSError * _Nonnull error) {
+        debugLog(@"ErrorOnLoadingLikedVideos: %@", [error description]);
+    }];
+}
+
+- (void)loadDataSourceInBackground {
     self.dataSources = @[];
     [ECCacheAPIHelper getTop5VideosFromCache:YES withFinishedBlock:^(BOOL isCacheHitting, NSArray<ECReturningVideo *> * _Nullable cachedVideos) {
-        debugLog(@"%hhd %@", isCacheHitting, cachedVideos);
+        debugLog(@"isCacheHitting: %hhd \n, cachedVideos: %@", isCacheHitting, cachedVideos);
         self.dataSources = cachedVideos;
         [self.container reloadData];
     }];
-    
 }
 
 #pragma mark - IBAction
 - (IBAction)downButtonClicked:(id)sender {
-    debugLog(@"Down");
     [self.container removeForDirection:CCDraggableDirectionLeft];
 }
 
 - (IBAction)upButtonClicked:(id)sender {
-    debugLog(@"todo");
     [self.container removeForDirection:CCDraggableDirectionRight];
 }
 
 - (IBAction)moreButtonClicked:(id)sender {
-    debugLog(@"Menu controller");
-    ECMenuViewController *menuVC = [ECMenuViewController new];
-//    menuVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    menuVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    [self presentViewController:menuVC animated:YES completion:nil];
+    ECMenuViewController *menuViewController  = [[ECMenuViewController alloc] init];
+    menuViewController.histories              = self.histories;
+    menuViewController.likedVideos            = self.likedVideos;
+    menuViewController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    [self presentViewController:menuViewController animated:YES completion:nil];
 }
 
 #pragma mark - Private Methods
 - (void)_setupShadow:(UIButton *)button {
-    button.layer.shadowOffset = CGSizeMake(0, 2);
-    button.layer.shadowColor  = [UIColor colorWithRed:206 green:206 blue:210 alpha:1].CGColor;
-    UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    button.layer.shadowOffset      = CGSizeMake(0, 2);
+    button.layer.shadowColor       = [UIColor colorWithRed:206 green:206 blue:210 alpha:1].CGColor;
+    UIBlurEffect *blur             = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
     UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithEffect:blur];
-    effectView.frame   = button.frame;
+    effectView.frame               = button.frame;
     [button addSubview:effectView];
 }
 
@@ -110,9 +136,7 @@
 }
 
 #pragma mark - CCDraggableContainer DataSource
-
 - (CCDraggableCardView *)draggableContainer:(CCDraggableContainer *)draggableContainer viewForIndex:(NSInteger)index {
-    
     ECCardView *cardView = [[ECCardView alloc] initWithFrame:draggableContainer.bounds];
     [cardView initialData: self.dataSources[index]];
     return cardView;
@@ -135,8 +159,6 @@
 }
 
 - (void)draggableContainer:(CCDraggableContainer *)draggableContainer cardView:(CCDraggableCardView *)cardView didSelectIndex:(NSInteger)didSelectIndex {
-    
-    NSLog(@"点击了Tag为%ld的Card", (long)didSelectIndex);
     [self performSegueWithIdentifier:kSegueOfECVideoController sender:self.dataSources[didSelectIndex]];
 }
 

@@ -104,8 +104,8 @@ typedef void(^FailureBlock)(NSError * error);
  @param failureBlock 失败回调函数
  */
 - (void)delLikedVideoWithVideoID:(NSString *)videoID
-                withSuccessBlock:(DelLikedVideoSuccessBlock)successBlock
-                withFailureBlock:(FailureBlock)failureBlock;
+                withSuccessBlock:(DelLikedVideoSuccessBlock __nullable)successBlock
+                withFailureBlock:(FailureBlock __nullable)failureBlock;
 
 /**
  查看收藏视频

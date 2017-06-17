@@ -21,7 +21,7 @@
 @property (nonatomic, strong) UIButton *history;
 
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, copy) NSArray<ECReturningVideo *> *dataSource;
+@property (nonatomic, copy)   NSArray<ECReturningVideo *> *dataSource;
 
 @end
 
@@ -36,46 +36,53 @@
 }
 
 - (void)initialDatas {
-    [[ECAPIManager sharedManager] getLikedVideoWithSuccessBlock:^(NSArray<ECReturningVideo *> * datas) {
-        self.dataSource = datas;
-        [self.tableView reloadData];
-    } withFailureBlock:^(NSError * error) {
-        debugLog(@"%@", error);
-    }];
+    if (self.likedVideos.count > 0) {
+        self.dataSource = self.likedVideos;
+        
+    } else {
+        [[ECAPIManager sharedManager] getLikedVideoWithSuccessBlock:^(NSArray<ECReturningVideo *> * datas) {
+            self.dataSource = datas;
+            [self.tableView reloadData];
+        } withFailureBlock:^(NSError * error) {
+            debugLog(@"%@", error);
+        }];
+    }
 }
 
 - (void)initialViews {
-    self.bakView = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.bakView.frame = self.view.bounds;
+    self.bakView                 = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.bakView.frame           = self.view.bounds;
     self.bakView.backgroundColor = [UIColor blackColor];
-    self.bakView.alpha = 0.42;
+    self.bakView.alpha           = 0.42;
     [self.bakView addTarget:self action:@selector(exitMenu) forControlEvents:UIControlEventTouchUpInside];
     
     self.menuCard = [[UIView alloc] init];
-    self.menuCard.backgroundColor = [UIColor whiteColor];
+    self.menuCard.backgroundColor     = [UIColor whiteColor];
     self.menuCard.layer.masksToBounds = YES;
-    self.menuCard.layer.cornerRadius = 12;
+    self.menuCard.layer.cornerRadius  = 12;
     
-    self.favourite = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.favourite                 = [UIButton buttonWithType:UIButtonTypeCustom];
     self.favourite.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:14];
     [self.favourite setTitle:@"Favourite" forState:UIControlStateNormal];
-    [self.favourite setTitleColor:[UIColor colorWithRed:2 / 255.0 green:173 / 255.0 blue:88 / 255.0 alpha:1] forState:UIControlStateNormal];
+    [self.favourite setTitleColor:[UIColor colorWithRed:2 / 255.0 green:173 / 255.0 blue:88 / 255.0 alpha:1]
+                         forState:UIControlStateNormal];
     [self.favourite addTarget:self action:@selector(filterType:) forControlEvents:UIControlEventTouchUpInside];
     
-    self.history = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.history                 = [UIButton buttonWithType:UIButtonTypeCustom];
     self.history.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:14];
     [self.history setTitle:@"History" forState:UIControlStateNormal];
     [self.history setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.history addTarget:self action:@selector(filterType:) forControlEvents:UIControlEventTouchUpInside];
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
-    self.tableView.backgroundColor = [UIColor clearColor];
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
+    self.tableView                    = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    self.tableView.backgroundColor    = [UIColor clearColor];
+    self.tableView.dataSource         = self;
+    self.tableView.delegate           = self;
     self.tableView.estimatedRowHeight = 40.f;
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.tableView registerNib:[UINib nibWithNibName:@"ECMenuItemTableViewCell" bundle:nil] forCellReuseIdentifier:@"ECMenuItemTableViewCell"];
+    self.tableView.rowHeight          = UITableViewAutomaticDimension;
+    self.tableView.separatorStyle     = UITableViewCellSeparatorStyleNone;
+    [self.tableView registerNib:[UINib nibWithNibName:@"ECMenuItemTableViewCell" bundle:nil]
+         forCellReuseIdentifier:@"ECMenuItemTableViewCell"];
 }
 
 - (void)addViews {

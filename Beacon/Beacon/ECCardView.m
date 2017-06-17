@@ -127,24 +127,24 @@
         [self.imageView sd_setImageWithURL:[NSURL URLWithString:image]];
     }
     
-    if (video.isLove) {
-        [self setIsLove];
+    if (video.isLiked) {
+        [self addLiked];
     } else {
-        [self setCancelLove];
+        [self delLiked];
     }
     
     self.title.text = video.title;
     self.duration.text = video.play_count_text;
 }
 
-- (void)setIsLove {
+- (void)addLiked {
     if (self.isStar == NO && self.star.alpha == 0) {
         self.isStar = YES;
         self.star.alpha = 1;
     }
 }
 
-- (void)setCancelLove {
+- (void)delLiked {
     if (self.isStar == YES && self.star.alpha == 1) {
         self.isStar = NO;
         self.star.alpha = 0;
