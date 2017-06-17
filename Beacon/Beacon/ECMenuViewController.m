@@ -68,7 +68,7 @@
     self.bakView.alpha           = 0.42;
     [self.bakView addTarget:self action:@selector(exitMenu) forControlEvents:UIControlEventTouchUpInside];
     
-    self.menuCard = [[UIView alloc] init];
+    self.menuCard                     = [[UIView alloc] init];
     self.menuCard.backgroundColor     = [UIColor whiteColor];
     self.menuCard.layer.masksToBounds = YES;
     self.menuCard.layer.cornerRadius  = 12;

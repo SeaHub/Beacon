@@ -23,8 +23,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *moreButton;
 @property (weak, nonatomic) IBOutlet CCDraggableContainer *container;
 @property (nonatomic, copy) NSArray<ECReturningVideo *> *dataSources;
-@property (nonatomic, copy) NSMutableArray<ECReturningVideo *> *likedVideos;
 @property (nonatomic, copy) NSArray<ECReturningVideoHistory *> *histories;
+@property (nonatomic, strong) NSMutableArray<ECReturningVideo *> *likedVideos;
 
 @end
 
