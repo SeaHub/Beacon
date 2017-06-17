@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 extern NSString *const kBundleIdentifier;
 extern NSString *const kSegueOfECVideoController;
 extern NSString *const kFullScreenPlayerStoryboardIdentifier;
+extern CGFloat const kTimeIntervalOfSwipe;
 
 @interface ECConstant : NSObject
 

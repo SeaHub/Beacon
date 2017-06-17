@@ -13,6 +13,7 @@
 #import "IQActivityIndicatorView.h"
 #import "ECAPIManager.h"
 #import <Masonry.h>
+#import <MediaPlayer/MediaPlayer.h>
 
 @interface ECFullScreenPlayerController () <QYPlayerControllerDelegate>
 
@@ -24,6 +25,12 @@
 @property (nonatomic, assign) NSTimeInterval currentTime;
 @property (nonatomic, assign) NSTimeInterval totalTime;
 @property (nonatomic, strong) IQActivityIndicatorView *indicator;
+@property (nonatomic, strong) MPVolumeView *volumeView;
+@property (nonatomic, strong) UITapGestureRecognizer   *playerTapGestureRecognizer;
+@property (nonatomic, strong) UISwipeGestureRecognizer *leftSwipeGestureRecognizer;
+@property (nonatomic, strong) UISwipeGestureRecognizer *rightSwipeGestureRecognizer;
+@property (nonatomic, strong) UISwipeGestureRecognizer *upSwipeGestureRecognizer;
+@property (nonatomic, strong) UISwipeGestureRecognizer *downSwipeGestureRecognizer;
 
 // Following are IBOutlet properties
 @property (weak, nonatomic) IBOutlet UIView *playerView;
@@ -77,7 +84,14 @@
         }
     }
     
-    [self.indicator removeFromSuperview]; // indicator should be remove because player is a singleton
+    // Things added to view should be remove because player is a singleton
+    [self.indicator removeFromSuperview];
+    UIView *player = [QYPlayerController sharedInstance].view;
+    [player removeGestureRecognizer:self.playerTapGestureRecognizer];
+    [player removeGestureRecognizer:self.rightSwipeGestureRecognizer];
+    [player removeGestureRecognizer:self.leftSwipeGestureRecognizer];
+    [player removeGestureRecognizer:self.upSwipeGestureRecognizer];
+    [player removeGestureRecognizer:self.downSwipeGestureRecognizer];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -86,15 +100,18 @@
 
 #pragma mark - Setup
 - (void)_setupVariables {
-    self.isFullScreen    = NO;
-    self.isMute          = NO;
-    self.isControlHidden = NO;
-    self.currentTime     = self.viewModel.currentTime;
-    self.totalTime       = self.viewModel.totalTime;
-    self.isTimeUsed      = NO;
+    self.isFullScreen     = NO;
+    self.isMute           = NO;
+    self.isControlHidden  = NO;
+    self.currentTime      = self.viewModel.currentTime;
+    self.totalTime        = self.viewModel.totalTime;
+    self.isTimeUsed       = NO;
+    self.volumeView       = [[MPVolumeView alloc] init];
+    self.volumeView.alpha = 0;
 }
 
 - (void)_setupIndicatorOnView:(UIView *)view {
+    [self.indicator removeFromSuperview];
     self.indicator = [[IQActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 15, 15)];
     [self.indicator startAnimating];
     [view addSubview:self.indicator];
@@ -103,6 +120,7 @@
         make.centerY.equalTo(view.mas_centerY);
         make.width.height.equalTo(@40);
     }];
+    [self _indicatorStopAnimation];
 }
 
 - (void)_indicatorStopAnimation {
@@ -115,6 +133,32 @@
     [UIView animateWithDuration:0.5 animations:^{
         self.indicator.alpha = 1;
     }];
+}
+
+- (void)_setUpGestures {
+    self.playerTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                              action:@selector(_playerViewDidClicked)];
+    self.leftSwipeGestureRecognizer  = [[UISwipeGestureRecognizer alloc] initWithTarget:self
+                                                                                 action:@selector(_leftSwipeGestureAction)];
+    self.rightSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self
+                                                                                 action:@selector(_rightSwipeGestureAction)];
+    self.upSwipeGestureRecognizer    = [[UISwipeGestureRecognizer alloc] initWithTarget:self
+                                                                                 action:@selector(_upSwipeGestureAction:)];
+    self.downSwipeGestureRecognizer  = [[UISwipeGestureRecognizer alloc] initWithTarget:self
+                                                                                 action:@selector(_downSwipeGestureAction:)];
+
+    self.playerTapGestureRecognizer.numberOfTapsRequired   = 1;
+    self.leftSwipeGestureRecognizer.direction              = UISwipeGestureRecognizerDirectionLeft;
+    self.rightSwipeGestureRecognizer.direction             = UISwipeGestureRecognizerDirectionRight;
+    self.upSwipeGestureRecognizer.direction                = UISwipeGestureRecognizerDirectionUp;
+    self.downSwipeGestureRecognizer.direction              = UISwipeGestureRecognizerDirectionDown;
+    
+    UIView *playerView = [QYPlayerController sharedInstance].view;
+    [playerView addGestureRecognizer:self.playerTapGestureRecognizer];
+    [playerView addGestureRecognizer:self.leftSwipeGestureRecognizer];
+    [playerView addGestureRecognizer:self.rightSwipeGestureRecognizer];
+    [playerView addGestureRecognizer:self.upSwipeGestureRecognizer];
+    [playerView addGestureRecognizer:self.downSwipeGestureRecognizer];
 }
 
 - (void)_setupPlayerView {
@@ -130,10 +174,8 @@
                                      tvId:viewModel.videoSource.tv_id
                                     isVip:viewModel.videoSource.is_vip];
     
-    UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                            action:@selector(_videoViewDidClicked)];
-    tapGR.numberOfTapsRequired    = 1;
-    [playerController.view addGestureRecognizer:tapGR];
+    [self _setUpGestures];
+    [self _setupIndicatorOnView:playerController.view];
    
     // Following code guarantee self status to be the same as Mini-Screen status
     self.timeLabel.text = [ECUtil jointPlayTimeString:viewModel.currentTime withTotalTime:viewModel.totalTime];
@@ -156,8 +198,72 @@
     }
 }
 
+#pragma mark - Gesture Actions
+- (void)_playerViewDidClicked {
+    if (!self.isControlHidden) {
+        [self _hideControl];
+    } else {
+        [self _showControl];
+    }
+    
+    self.isControlHidden = !self.isControlHidden;
+}
+
+- (void)_leftSwipeGestureAction {
+    [[QYPlayerController sharedInstance] seekToTime:self.currentTime + kTimeIntervalOfSwipe];
+    [[QYPlayerController sharedInstance] play];
+}
+
+- (void)_rightSwipeGestureAction {
+    [[QYPlayerController sharedInstance] seekToTime:self.currentTime - kTimeIntervalOfSwipe];
+    [[QYPlayerController sharedInstance] play];
+}
+
+- (void)_upSwipeGestureAction:(UIGestureRecognizer *)gr {
+    CGPoint point       = [gr locationInView:[QYPlayerController sharedInstance].view];
+    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+    if (point.x > screenWidth / 2) { // Tapping on the right
+        [self _changeVolume:+0.1];
+    
+    } else { // Tapping on the left
+        if ([UIScreen mainScreen].brightness < 1) {
+            [UIScreen mainScreen].brightness += 0.1;
+        }
+    }
+}
+
+- (void)_downSwipeGestureAction:(UIGestureRecognizer *)gr {
+    CGPoint point = [gr locationInView:[QYPlayerController sharedInstance].view];
+    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+    if (point.x > screenWidth / 2) { // Tapping on the right
+        [self _changeVolume:-0.1];
+        
+    } else { // Tapping on the left
+        if ([UIScreen mainScreen].brightness > 0) {
+            [UIScreen mainScreen].brightness -= 0.1;
+        }
+    }
+}
+
 #pragma mark - Private Methods
-- (void)_presentViewControllerWithTitle:(NSString *)title withMsg:(NSString *)msg {
+- (void)_changeVolume:(CGFloat)changedValue {
+    UISlider *volumeViewSlider = nil;
+    for (UIView *view in [self.volumeView subviews]){
+        if ([view.class.description isEqualToString:@"MPVolumeSlider"]){
+            volumeViewSlider = (UISlider *)view;
+            break;
+        }
+    }
+    
+    if (volumeViewSlider.value + changedValue > 1.0 || volumeViewSlider.value - changedValue < 0) {
+        return;
+    }
+    
+    [volumeViewSlider setValue:volumeViewSlider.value + changedValue animated:YES];
+    [volumeViewSlider sendActionsForControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)_presentViewControllerWithTitle:(NSString *)title withMsg:(NSString *)msg { // Can't use ECUtil method here
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title
                                                                              message:msg
                                                                       preferredStyle:UIAlertControllerStyleAlert];
@@ -166,16 +272,6 @@
                                                                 handler:nil];
     [alertController addAction:okAction];
     [self presentViewController:alertController animated:YES completion:nil];
-}
-
-- (void)_videoViewDidClicked {
-    if (!self.isControlHidden) {
-        [self _hideControl];
-    } else {
-        [self _showControl];
-    }
-    
-    self.isControlHidden = !self.isControlHidden;
 }
 
 - (void)_showControl {
@@ -188,6 +284,7 @@
         self.timeLabel.alpha            = 1.0;
         self.timeLabelBgImageView.alpha = 1.0;
         self.videoProgressView.alpha    = 1.0;
+        self.toolBgImageView.alpha      = 1.0;
     }];
     
     // Auto hide control 5s after
@@ -206,6 +303,7 @@
         self.timeLabel.alpha            = 0.0;
         self.timeLabelBgImageView.alpha = 0.0;
         self.videoProgressView.alpha    = 0.0;
+        self.toolBgImageView.alpha      = 0.0;
     }];
 }
 

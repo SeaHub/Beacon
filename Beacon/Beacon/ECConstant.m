@@ -11,7 +11,7 @@
 NSString *const kSegueOfECVideoController             = @"kSegueOfECVideoController";
 NSString *const kBundleIdentifier                     = @"com.Echo.Beacon";
 NSString *const kFullScreenPlayerStoryboardIdentifier = @"kFullScreenPlayerStoryboardIdentifier";
-
+CGFloat const kTimeIntervalOfSwipe                    = 3;
 
 @implementation ECConstant
 
