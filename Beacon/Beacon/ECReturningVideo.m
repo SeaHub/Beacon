@@ -25,6 +25,7 @@ static NSString *const kTotal_numKey       = @"total_num";
 static NSString *const kTv_idKey           = @"tv_id";
 static NSString *const kTypeKey            = @"type";
 static NSString *const kUpdate_numKey      = @"update_num";
+static NSString *const kIsLikedKey         = @"isLiked";
 
 @implementation ECReturningVideo
 
@@ -47,8 +48,8 @@ static NSString *const kUpdate_numKey      = @"update_num";
         _tv_id           = json[kTv_idKey];
         _type            = json[kTv_idKey];
         _update_num      = json[kUpdate_numKey];
-        
-        _isLove = NO;
+        // Following are not JSON datas
+        _isLiked         = NO;
     }
     
     return self;
@@ -60,46 +61,46 @@ static NSString *const kUpdate_numKey      = @"update_num";
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super init]) {
-        _a_id            = [aDecoder decodeObjectForKey:kA_idKey];
-        _date_format     = [aDecoder decodeObjectForKey:kDate_formatKey];
-        _date_timestamp  = [aDecoder decodeObjectForKey:kDate_timestampKey];
-        _identifier      = [aDecoder decodeObjectForKey:_identifier];
-        _img             = [aDecoder decodeObjectForKey:kImgKey];
-        _is_vip          = [aDecoder decodeObjectForKey:kIs_vipKey];
-        _p_type          = [aDecoder decodeObjectForKey:kP_typeKey];
-        _play_count      = [aDecoder decodeObjectForKey:kPlay_countKey];
-        _play_count_text = [aDecoder decodeObjectForKey:kPlay_count_textKey];
-        _short_title     = [aDecoder decodeObjectForKey:kShort_titleKey];
-        _sns_score       = [aDecoder decodeObjectForKey:kSns_scoreKey];
-        _title           = [aDecoder decodeObjectForKey:kTitleKey];
-        _total_num       = [aDecoder decodeObjectForKey:kTotal_numKey];
-        _tv_id           = [aDecoder decodeObjectForKey:kTv_idKey];
-        _type            = [aDecoder decodeObjectForKey:_type];
-        _update_num      = [aDecoder decodeObjectForKey:kUpdate_numKey];
-        
-        _isLove = NO;
+        _a_id            = [aDecoder  decodeObjectForKey:kA_idKey];
+        _date_format     = [aDecoder  decodeObjectForKey:kDate_formatKey];
+        _date_timestamp  = [aDecoder  decodeObjectForKey:kDate_timestampKey];
+        _identifier      = [aDecoder  decodeObjectForKey:kIDKey];
+        _img             = [aDecoder  decodeObjectForKey:kImgKey];
+        _is_vip          = [aDecoder  decodeObjectForKey:kIs_vipKey];
+        _p_type          = [aDecoder  decodeObjectForKey:kP_typeKey];
+        _play_count      = [aDecoder  decodeObjectForKey:kPlay_countKey];
+        _play_count_text = [aDecoder  decodeObjectForKey:kPlay_count_textKey];
+        _short_title     = [aDecoder  decodeObjectForKey:kShort_titleKey];
+        _sns_score       = [aDecoder  decodeObjectForKey:kSns_scoreKey];
+        _title           = [aDecoder  decodeObjectForKey:kTitleKey];
+        _total_num       = [aDecoder  decodeObjectForKey:kTotal_numKey];
+        _tv_id           = [aDecoder  decodeObjectForKey:kTv_idKey];
+        _type            = [aDecoder  decodeObjectForKey:kTypeKey];
+        _update_num      = [aDecoder  decodeObjectForKey:kUpdate_numKey];
+        _isLiked         = [[aDecoder decodeObjectForKey:kIsLikedKey] boolValue];
     }
     
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    [aCoder encodeObject:_a_id            forKey:kA_idKey];
-    [aCoder encodeObject:_date_format     forKey:kDate_formatKey];
-    [aCoder encodeObject:_date_timestamp  forKey:kDate_timestampKey];
-    [aCoder encodeObject:_identifier      forKey:kIDKey];
-    [aCoder encodeObject:_img             forKey:kImgKey];
-    [aCoder encodeObject:_is_vip          forKey:kIs_vipKey];
-    [aCoder encodeObject:_p_type          forKey:kP_typeKey];
-    [aCoder encodeObject:_play_count      forKey:kPlay_countKey];
-    [aCoder encodeObject:_play_count_text forKey:kPlay_count_textKey];
-    [aCoder encodeObject:_short_title     forKey:kShort_titleKey];
-    [aCoder encodeObject:_sns_score       forKey:kSns_scoreKey];
-    [aCoder encodeObject:_title           forKey:kTitleKey];
-    [aCoder encodeObject:_total_num       forKey:kTotal_numKey];
-    [aCoder encodeObject:_tv_id           forKey:kTv_idKey];
-    [aCoder encodeObject:_type            forKey:kTypeKey];
-    [aCoder encodeObject:_update_num      forKey:kUpdate_numKey];
+    [aCoder encodeObject:_a_id                              forKey:kA_idKey];
+    [aCoder encodeObject:_date_format                       forKey:kDate_formatKey];
+    [aCoder encodeObject:_date_timestamp                    forKey:kDate_timestampKey];
+    [aCoder encodeObject:_identifier                        forKey:kIDKey];
+    [aCoder encodeObject:_img                               forKey:kImgKey];
+    [aCoder encodeObject:_is_vip                            forKey:kIs_vipKey];
+    [aCoder encodeObject:_p_type                            forKey:kP_typeKey];
+    [aCoder encodeObject:_play_count                        forKey:kPlay_countKey];
+    [aCoder encodeObject:_play_count_text                   forKey:kPlay_count_textKey];
+    [aCoder encodeObject:_short_title                       forKey:kShort_titleKey];
+    [aCoder encodeObject:_sns_score                         forKey:kSns_scoreKey];
+    [aCoder encodeObject:_title                             forKey:kTitleKey];
+    [aCoder encodeObject:_total_num                         forKey:kTotal_numKey];
+    [aCoder encodeObject:_tv_id                             forKey:kTv_idKey];
+    [aCoder encodeObject:_type                              forKey:kTypeKey];
+    [aCoder encodeObject:_update_num                        forKey:kUpdate_numKey];
+    [aCoder encodeObject:[NSNumber numberWithBool:_isLiked] forKey:kIsLikedKey];
 }
 
 - (BOOL)isEqual:(id)object {
@@ -107,6 +108,10 @@ static NSString *const kUpdate_numKey      = @"update_num";
     [_a_id isEqualToString:((ECReturningVideo *)object).a_id] &&
     [_tv_id isEqualToString:((ECReturningVideo *)object).tv_id] &&
     [_is_vip isEqualToString:((ECReturningVideo *)object).is_vip];
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"aID: %@, dateFormat: %@, identifier: %@, img: %@, isVip: %@, playCountText: %@, shortTitle: %@, tvID: %@", _a_id, _date_format, _identifier, _img, _is_vip, _play_count_text, _short_title, _tv_id];
 }
 
 @end

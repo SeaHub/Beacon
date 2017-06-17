@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithCoder:(NSCoder *)aDecoder;
 - (void)encodeWithCoder:(NSCoder *)aCoder;
 - (BOOL)isEqual:(id)object;
+- (NSString *)description;
 
 @property (nonatomic, copy, readonly) NSString *a_id;
 @property (nonatomic, copy, readonly) NSString *date_format;
@@ -35,8 +36,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly) NSString *tv_id;
 @property (nonatomic, copy, readonly) NSString *type;
 @property (nonatomic, copy, readonly) NSString *update_num;
-
-@property (assign) BOOL isLove;
+// Following are not JSON datas
+@property (nonatomic, assign) BOOL isLiked;
 
 @end
 
