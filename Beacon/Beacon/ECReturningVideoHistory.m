@@ -42,7 +42,7 @@ static NSString *const kWatchDateKey = @"watch_date";
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [aCoder encodeObject:_user_id      forKey:kUserIDKey];
     [aCoder encodeObject:_video_id     forKey:kVideoIDKey];
-    [aCoder encodeObject:kWatchDateKey forKey:kWatchDateKey];
+    [aCoder encodeObject:_watch_date forKey:kWatchDateKey];
 }
 
 @end

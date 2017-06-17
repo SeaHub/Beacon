@@ -11,7 +11,7 @@
 #import "ECAPIManager.h"
 #import "ECReturningVideo.h"
 #import "IQActivityIndicatorView.h"
-
+#import "ECReturningWatchedVideo.h"
 #import "UITableView+EmptyData.h"
 #import "Masonry.h"
 

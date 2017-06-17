@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@class ECReturningVideoHistory;
+@class ECReturningWatchedVideo;
 @class ECReturningVideo;
 @interface ECMenuViewController : UIViewController
 
-@property (nonatomic, strong) NSArray <ECReturningVideoHistory *> *histories;
+@property (nonatomic, strong) NSArray <ECReturningWatchedVideo *> *watchedVideos;
 @property (nonatomic, strong) NSArray <ECReturningVideo *> *likedVideos;
 
 @end

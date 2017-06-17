@@ -12,13 +12,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class ECReturningVideoType;
 @class ECReturningVideo;
-@class ECReturningVideoHistory;
+@class ECReturningWatchedVideo;
 
 typedef void(^VideoTypeSuccessBlock)(NSArray<ECReturningVideoType *> *videoTypes);
 typedef void(^Top5VideosSuccessBlock)(NSArray<ECReturningVideo *> *videos);
 typedef void(^AddPlayedHistorySuccessBlock)(BOOL isSuccess);
 typedef void(^DelPlayedHistorySuccessBlock)(BOOL isSuccess);
-typedef void(^VideoHistorySuccessBlock)(NSArray<ECReturningVideoHistory *> *histories);
+typedef void(^VideoHistorySuccessBlock)(NSArray<ECReturningWatchedVideo *> *watchedVideos);
 typedef void(^AddLikedVideoSuccessBlock)(BOOL isSuccess);
 typedef void(^DelLikedVideoSuccessBlock)(BOOL isSuccess);
 typedef void(^LikedVideoSuccessBlock)(NSArray<ECReturningVideo *> *videos);

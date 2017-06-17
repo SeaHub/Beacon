@@ -18,6 +18,7 @@
 		525167431ED17BC500FA943C /* ECConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = 525167421ED17BC500FA943C /* ECConstant.m */; };
 		526A56821EE7002400FCD30D /* ECVideoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 526A56811EE7002400FCD30D /* ECVideoTableViewController.m */; };
 		526F34F81EF0566C004AB51B /* ECPlayerViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 526F34F71EF0566C004AB51B /* ECPlayerViewModel.m */; };
+		5274F3C51EF57AEA00E4B06D /* ECReturningWatchedVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5274F3C41EF57AEA00E4B06D /* ECReturningWatchedVideo.m */; };
 		5281986D1EDBB1C8009D15FA /* ECAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5281986C1EDBB1C8009D15FA /* ECAPIManager.m */; };
 		5289E06D1EEBE0FF0012D05E /* ECVideoIntroductTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5289E06C1EEBE0FF0012D05E /* ECVideoIntroductTableViewCell.m */; };
 		5289E0711EEBE6B40012D05E /* ECVideoGuessingLabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5289E0701EEBE6B40012D05E /* ECVideoGuessingLabelTableViewCell.m */; };
@@ -122,6 +123,8 @@
 		526A56811EE7002400FCD30D /* ECVideoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECVideoTableViewController.m; sourceTree = "<group>"; };
 		526F34F61EF0566C004AB51B /* ECPlayerViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPlayerViewModel.h; sourceTree = "<group>"; };
 		526F34F71EF0566C004AB51B /* ECPlayerViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECPlayerViewModel.m; sourceTree = "<group>"; };
+		5274F3C31EF57AEA00E4B06D /* ECReturningWatchedVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECReturningWatchedVideo.h; sourceTree = "<group>"; };
+		5274F3C41EF57AEA00E4B06D /* ECReturningWatchedVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECReturningWatchedVideo.m; sourceTree = "<group>"; };
 		5281986B1EDBB1C8009D15FA /* ECAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECAPIManager.h; sourceTree = "<group>"; };
 		5281986C1EDBB1C8009D15FA /* ECAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECAPIManager.m; sourceTree = "<group>"; };
 		5289E06B1EEBE0FF0012D05E /* ECVideoIntroductTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECVideoIntroductTableViewCell.h; sourceTree = "<group>"; };
@@ -365,6 +368,15 @@
 			name = PlayerViewModel;
 			sourceTree = "<group>";
 		};
+		5274F3C21EF57AB000E4B06D /* ReturningWatchedVideo */ = {
+			isa = PBXGroup;
+			children = (
+				5274F3C31EF57AEA00E4B06D /* ECReturningWatchedVideo.h */,
+				5274F3C41EF57AEA00E4B06D /* ECReturningWatchedVideo.m */,
+			);
+			name = ReturningWatchedVideo;
+			sourceTree = "<group>";
+		};
 		5281986A1EDBB112009D15FA /* APIManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -480,6 +492,7 @@
 		528B21EF1EDBABA700D1CE02 /* ReturnModel */ = {
 			isa = PBXGroup;
 			children = (
+				5274F3C21EF57AB000E4B06D /* ReturningWatchedVideo */,
 				52DE8C9F1EDC19BE00072C91 /* ReturningVideoHistory */,
 				5209644C1EDBC451001F2A05 /* ReturningVideoType */,
 				520964481EDBC406001F2A05 /* ReturningVideo */,
@@ -1049,6 +1062,7 @@
 				529332DB1EF3F5DF00AB2EB4 /* ECNavigationViewController.m in Sources */,
 				5214C08A1EDBC55F00D09A06 /* ECVideo.m in Sources */,
 				5233909E1ED067B600C46419 /* ECMainViewController.m in Sources */,
+				5274F3C51EF57AEA00E4B06D /* ECReturningWatchedVideo.m in Sources */,
 				52DE8C9E1EDC12CC00072C91 /* ECUtil.m in Sources */,
 				52EEB3641ED05AFD00CBDDBB /* AppDelegate.m in Sources */,
 				5209644B1EDBC436001F2A05 /* ECReturningVideo.m in Sources */,

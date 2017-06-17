@@ -23,7 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *moreButton;
 @property (weak, nonatomic) IBOutlet CCDraggableContainer *container;
 @property (nonatomic, copy) NSArray<ECReturningVideo *> *dataSources;
-@property (nonatomic, copy) NSArray<ECReturningVideoHistory *> *histories;
+@property (nonatomic, copy) NSArray<ECReturningWatchedVideo *> *watchedVideos;
 @property (nonatomic, strong) NSMutableArray<ECReturningVideo *> *likedVideos;
 
 @end
@@ -73,8 +73,8 @@
 }
 
 - (void)loadHistoriesInBackground {
-    [[ECAPIManager sharedManager] getPlayedHistroyWithSuccessBlock:^(NSArray<ECReturningVideoHistory *> * _Nonnull histories) {
-        self.histories = histories;
+    [[ECAPIManager sharedManager] getPlayedHistroyWithSuccessBlock:^(NSArray<ECReturningWatchedVideo *> * _Nonnull watchedVideos) {
+        self.watchedVideos = watchedVideos;
     } withFailureBlock:^(NSError * _Nonnull error) {
         debugLog(@"ErrorOnLoadingHistories: %@", [error description]);
     }];
@@ -112,7 +112,7 @@
 
 - (IBAction)moreButtonClicked:(id)sender {
     ECMenuViewController *menuViewController  = [[ECMenuViewController alloc] init];
-    menuViewController.histories              = self.histories;
+    menuViewController.watchedVideos          = self.watchedVideos;
     menuViewController.likedVideos            = self.likedVideos;
     menuViewController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     [self presentViewController:menuViewController animated:YES completion:nil];

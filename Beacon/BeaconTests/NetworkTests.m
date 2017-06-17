@@ -40,6 +40,7 @@ static const double kTestCaseTimeOutInterval = 20.0;
         [exception fulfill];
     } withFailureBlock:^(NSError * _Nonnull error) {
         XCTAssert(error == nil);
+        [exception fulfill];
     }];
     
     [self waitForExpectationsWithTimeout:kTestCaseTimeOutInterval handler:nil];
@@ -57,6 +58,7 @@ static const double kTestCaseTimeOutInterval = 20.0;
         [exception fulfill];
     } withFailureBlock:^(NSError * _Nonnull error) {
         XCTAssert(error == nil);
+        [exception fulfill];
     }];
     
     [self waitForExpectationsWithTimeout:kTestCaseTimeOutInterval handler:nil];
@@ -74,6 +76,7 @@ static const double kTestCaseTimeOutInterval = 20.0;
         [exception fulfill];
     } withFailureBlock:^(NSError * _Nonnull error) {
         XCTAssert(error == nil);
+        [exception fulfill];
     }];
     
     [self waitForExpectationsWithTimeout:kTestCaseTimeOutInterval handler:nil];
@@ -146,15 +149,16 @@ static const double kTestCaseTimeOutInterval = 20.0;
 
 - (void)testGetPlayedHistory {
     XCTestExpectation *exception = [self expectationWithDescription:@"Wait callback"];
-    [[ECAPIManager sharedManager] getPlayedHistroyWithSuccessBlock:^(NSArray<ECReturningVideoHistory *> * _Nonnull models) {
-        for (ECReturningVideo *model in models) {
-            ECVideo *realModel = [model toRealObject];
-            XCTAssert(realModel != nil);
+    
+    [[ECAPIManager sharedManager] getPlayedHistroyWithSuccessBlock:^(NSArray<ECReturningWatchedVideo *> * _Nonnull watchedVideos) {
+        for (ECReturningWatchedVideo *video in watchedVideos) {
+            XCTAssert(video != nil);
         }
-        
         [exception fulfill];
+        
     } withFailureBlock:^(NSError * _Nonnull error) {
-         XCTAssert(error == nil);
+        XCTAssert(error == nil);
+        [exception fulfill];
     }];
     
     [self waitForExpectationsWithTimeout:kTestCaseTimeOutInterval * 2 handler:nil];
@@ -216,6 +220,7 @@ static const double kTestCaseTimeOutInterval = 20.0;
         [exception fulfill];
     } withFailureBlock:^(NSError * _Nonnull error) {
         XCTAssert(error == nil);
+        [exception fulfill];
     }];
 
     [self waitForExpectationsWithTimeout:kTestCaseTimeOutInterval * 2 handler:nil];

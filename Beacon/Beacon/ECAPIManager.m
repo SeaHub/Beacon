@@ -10,7 +10,7 @@
 #import <AFNetworking.h>
 #import "ECReturningVideoType.h"
 #import "ECReturningVideo.h"
-#import "ECReturningVideoHistory.h"
+#import "ECReturningWatchedVideo.h"
 
 static NSString *const kBaseURLString    = @"http://115.159.121.50:5000";
 static const int kNetworkTimeoutInterval = 20;
@@ -174,7 +174,7 @@ static NSString *const kErrorCodeMsgKey  = @"msg";
         NSMutableArray *returnModels = [@[] mutableCopy];
         
         for (NSDictionary *dataJSON in dataJSONs) {
-            ECReturningVideoHistory *model = [[ECReturningVideoHistory alloc] initWithJSON:dataJSON];
+            ECReturningWatchedVideo *model = [[ECReturningWatchedVideo alloc] initWithJSON:dataJSON];
             [returnModels addObject:model];
         }
         
