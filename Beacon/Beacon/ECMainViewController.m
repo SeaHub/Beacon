@@ -14,6 +14,9 @@
 #import "ECCardView.h"
 #import "ECVideoTableViewController.h"
 #import "ECAPIManager.h"
+#import "IQActivityIndicatorView.h"
+
+#import "Masonry.h"
 
 @interface ECMainViewController ()<CCDraggableContainerDelegate, CCDraggableContainerDataSource>
 
@@ -25,6 +28,7 @@
 @property (nonatomic, copy) NSArray<ECReturningVideo *> *dataSources;
 @property (nonatomic, copy) NSArray<ECReturningWatchedVideo *> *watchedVideos;
 @property (nonatomic, strong) NSMutableArray<ECReturningVideo *> *likedVideos;
+@property (strong, nonatomic)  IQActivityIndicatorView *indicator;
 
 @end
 
@@ -39,9 +43,14 @@
     [self loadDataSourceInBackground];
     [self loadHistoriesInBackground];
     [self loadLikedVideosInBackground];
+    self.indicator = [[IQActivityIndicatorView alloc] init];
+    self.indicator.color = [UIColor grayColor];
+    [self.indicator startAnimating];
+    [self.view addSubview:self.indicator];
     self.container.delegate        = self;
     self.container.dataSource      = self;
     self.container.backgroundColor = [UIColor clearColor];
+    self.container.alpha           = 0;
     
     self.container.removeFromLeftCallback = ^(NSInteger index, UIView *card) {
         ECCardView *cardView              = (ECCardView *)card;
@@ -70,6 +79,11 @@
             [self.likedVideos addObject:likedVideo];
         }
     };
+    
+    [self.indicator mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self.container);
+        make.height.width.equalTo(@40);
+    }];
 }
 
 - (void)loadHistoriesInBackground {
@@ -98,6 +112,10 @@
         debugLog(@"isCacheHitting: %hhd \n, cachedVideos: %@", isCacheHitting, cachedVideos);
         self.dataSources = cachedVideos;
         [self.container reloadData];
+        [UIView animateWithDuration:0.4 animations:^{
+            self.indicator.alpha = 0;
+            self.container.alpha = 1;
+        }];
     }];
 }
 
