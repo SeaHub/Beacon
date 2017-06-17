@@ -159,10 +159,13 @@ static NSString *const kECVideoPlayerCellCollectionReuseIdentifier = @"kECVideoP
 - (IBAction)likeButtonClicked:(id)sender {
     [[ECAPIManager sharedManager] addLikedVideoWithVideoID:self.video.a_id
                                           withSuccessBlock:^(BOOL status) {
-                                              if (status) {
-                                                  [ECUtil showCancelAlertWithTitle:@"提示"
-                                                                           withMsg:@"成功添加至喜爱列表"];
-                                              }
+                                              dispatch_async(dispatch_get_main_queue(), ^{
+                                                  if (status) {
+                                                      [ECUtil showCancelAlertWithTitle:@"提示"
+                                                                               withMsg:@"成功添加至喜爱列表"];
+                                                  }
+                                              });
+                                              
                                           } withFailureBlock:^(NSError * _Nonnull error) {
                                               debugLog(@"%@", [error description]);
                                           }];
@@ -171,10 +174,13 @@ static NSString *const kECVideoPlayerCellCollectionReuseIdentifier = @"kECVideoP
 - (IBAction)dislikeButtonClicked:(id)sender {
     [[ECAPIManager sharedManager] delLikedVideoWithVideoID:self.video.a_id
                                           withSuccessBlock:^(BOOL status) {
-                                              if (status) {
-                                                  [ECUtil showCancelAlertWithTitle:@"提示"
-                                                                           withMsg:@"成功添加至喜爱列表"];
-                                              }
+                                              dispatch_async(dispatch_get_main_queue(), ^{
+                                                  if (status) {
+                                                      [ECUtil showCancelAlertWithTitle:@"提示"
+                                                                               withMsg:@"成功操作"];
+                                                  }
+                                              });
+                                              
                                           } withFailureBlock:^(NSError * _Nonnull error) {
                                               debugLog(@"%@", [error description]);
                                           }];

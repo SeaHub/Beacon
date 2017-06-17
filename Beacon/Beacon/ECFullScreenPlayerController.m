@@ -11,6 +11,7 @@
 #import "ECPlayerViewModel.h"
 #import "ECReturningVideo.h"
 #import "IQActivityIndicatorView.h"
+#import "ECAPIManager.h"
 #import <Masonry.h>
 
 @interface ECFullScreenPlayerController () <QYPlayerControllerDelegate>
@@ -29,7 +30,11 @@
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
 @property (weak, nonatomic) IBOutlet UIButton *muteButton;
 @property (weak, nonatomic) IBOutlet UIButton *fullScreenButton;
+@property (weak, nonatomic) IBOutlet UIButton *dislikeButton;
+@property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *timeLabelBgImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *toolBgImageView;
 @property (weak, nonatomic) IBOutlet UIProgressView *videoProgressView;
 
 @end
@@ -114,6 +119,7 @@
 
 - (void)_setupPlayerView {
     ECPlayerViewModel *viewModel = self.viewModel;
+    [self _showControl];
     
     QYPlayerController *playerController  = [QYPlayerController sharedInstance];
     [self _setupIndicatorOnView:playerController.view];
@@ -151,6 +157,17 @@
 }
 
 #pragma mark - Private Methods
+- (void)_presentViewControllerWithTitle:(NSString *)title withMsg:(NSString *)msg {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title
+                                                                             message:msg
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction            = [UIAlertAction actionWithTitle:@"确定"
+                                                                  style:UIAlertActionStyleCancel
+                                                                handler:nil];
+    [alertController addAction:okAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
 - (void)_videoViewDidClicked {
     if (!self.isControlHidden) {
         [self _hideControl];
@@ -163,21 +180,32 @@
 
 - (void)_showControl {
     [UIView animateWithDuration:0.5 animations:^{
-        self.timeLabel.alpha         = 1.0;
-        self.muteButton.alpha        = 1.0;
-        self.playButton.alpha        = 1.0;
-        self.fullScreenButton.alpha  = 1.0;
-        self.videoProgressView.alpha = 1.0;
+        self.playButton.alpha           = 1.0;
+        self.muteButton.alpha           = 1.0;
+        self.fullScreenButton.alpha     = 1.0;
+        self.dislikeButton.alpha        = 1.0;
+        self.likeButton.alpha           = 1.0;
+        self.timeLabel.alpha            = 1.0;
+        self.timeLabelBgImageView.alpha = 1.0;
+        self.videoProgressView.alpha    = 1.0;
     }];
+    
+    // Auto hide control 5s after
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self _hideControl];
+    });
 }
 
 - (void)_hideControl {
     [UIView animateWithDuration:0.5 animations:^{
-        self.timeLabel.alpha         = 0.0;
-        self.muteButton.alpha        = 0.0;
-        self.playButton.alpha        = 0.0;
-        self.fullScreenButton.alpha  = 0.0;
-        self.videoProgressView.alpha = 0.0;
+        self.playButton.alpha           = 0.0;
+        self.muteButton.alpha           = 0.0;
+        self.fullScreenButton.alpha     = 0.0;
+        self.dislikeButton.alpha        = 0.0;
+        self.likeButton.alpha           = 0.0;
+        self.timeLabel.alpha            = 0.0;
+        self.timeLabelBgImageView.alpha = 0.0;
+        self.videoProgressView.alpha    = 0.0;
     }];
 }
 
@@ -217,6 +245,36 @@
     
     self.isMute = !self.isMute;
     [[QYPlayerController sharedInstance] setMute:self.isMute];
+}
+
+- (IBAction)likeButtoClicked:(id)sender {
+    [[ECAPIManager sharedManager] addLikedVideoWithVideoID:self.viewModel.videoSource.a_id
+                                          withSuccessBlock:^(BOOL status) {
+                                              dispatch_async(dispatch_get_main_queue(), ^{
+                                                  if (status) {
+                                                      [self _presentViewControllerWithTitle:@"提示"
+                                                                                    withMsg:@"成功添加至喜爱列表"];
+                                                  }
+                                              });
+                                              
+                                          } withFailureBlock:^(NSError * _Nonnull error) {
+                                              debugLog(@"%@", [error description]);
+                                          }];
+}
+
+- (IBAction)dislikeButtonClicked:(id)sender {
+    [[ECAPIManager sharedManager] delLikedVideoWithVideoID:self.viewModel.videoSource.a_id
+                                          withSuccessBlock:^(BOOL status) {
+                                              dispatch_async(dispatch_get_main_queue(), ^{
+                                                  if (status) {
+                                                      [self _presentViewControllerWithTitle:@"提示"
+                                                                                    withMsg:@"成功操作"];
+                                                  }
+                                              });
+                                              
+                                          } withFailureBlock:^(NSError * _Nonnull error) {
+                                              debugLog(@"%@", [error description]);
+                                          }];
 }
 
 #pragma mark - QYPlayControllerDelegate
