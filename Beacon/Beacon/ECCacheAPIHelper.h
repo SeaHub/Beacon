@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void(^GetTop5VideosFromCacheBlock)(BOOL isCacheHitting, NSArray<ECReturningVideo *> * _Nullable cachedVideos);
 typedef void(^GetVideoTypesFromCacheBlock)(BOOL isCacheHitting, NSArray<ECReturningVideoType *> * _Nullable cachedTypes);
 
+extern NSTimeInterval kCacheExpiredTimeInterval;
+
 @interface ECCacheAPIHelper : NSObject
 
 /**

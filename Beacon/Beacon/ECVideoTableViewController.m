@@ -292,37 +292,4 @@ static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoT
     [self _closeLight];
 }
 
-#pragma mark - Special For 3D Touch
-- (ECReturningVideo *)_getRandomVideoFromStaticAppVideos {
-#warning TODO - should provide some static JSON datas in main bundle
-    NSInteger const kNumberOfStaticJSON = 0; // should be modify to number of static data
-    NSMutableArray <NSDictionary *> *staticJSONDatas = [@[] mutableCopy];
-    
-    for (NSInteger i = 0; i < kNumberOfStaticJSON; ++i) {
-        NSBundle *bundle   = [NSBundle mainBundle];
-        NSString *filename = [NSString stringWithFormat:@"StaticJSON%d", i];
-        NSString *path     = [bundle pathForResource:filename ofType:nil];
-        NSDictionary *JSON = [NSDictionary dictionaryWithContentsOfFile:path];
-        
-        [staticJSONDatas addObject:JSON];
-    }
-    
-    NSInteger randomNumber = arc4random() % staticJSONDatas.count; // create randomNumber in [0, staticDatas.count)
-    return [[ECReturningVideo alloc] initWithJSON:staticJSONDatas[randomNumber]];
-}
-
-- (void)enterFullScreenFromAppStart {
-    ECReturningVideo  *video     = [self _getRandomVideoFromStaticAppVideos];
-    ECPlayerViewModel *viewModel = [[ECPlayerViewModel alloc] initWithReturningVideo:video
-                                                                     withCurrentTime:0
-                                                                       withTotalTime:0
-                                                                       withMuteStaus:NO
-                                                                   withPlayingStatus:YES];
-    UIStoryboard *storyBoard                       = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    ECFullScreenPlayerController *playerController = [storyBoard instantiateViewControllerWithIdentifier:kFullScreenPlayerStoryboardIdentifier];
-    playerController.viewModel                     = viewModel;
-    playerController.delegate                      = self;
-    [self presentViewController:playerController animated:YES completion:nil];
-}
-
 @end

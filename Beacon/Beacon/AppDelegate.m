@@ -7,12 +7,20 @@
 //
 
 #import "AppDelegate.h"
+#import "ECNotificationHelper.h"
+#import <UserNotifications/UserNotifications.h>
+
+@interface AppDelegate ()
+
+@property (nonatomic, strong) ECNotificationHelper *notificationHelper;
+
+@end
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Save UUID
-    [ECUtil saveUUIDToKeyChain];
+    [self _registerNotification];
+    [ECUtil saveUUIDToKeyChain]; // Save UUID
     debugLog(@"UUID: %@", [ECUtil readUUIDFromKeyChain]);
     return YES;
 }
@@ -21,6 +29,44 @@
     if ([shortcutItem.type isEqualToString:@"play"]) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"play_random_video" object:nil];
     }
+}
+
+- (void)_registerNotification {
+    [self _registerNotificationCategory];
+    self.notificationHelper                                       = [[ECNotificationHelper alloc] init];
+    [UNUserNotificationCenter currentNotificationCenter].delegate = self.notificationHelper;
+    static NSString *const kIsNotificationAlertShown = @"isNotificationAlertShown";
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:kIsNotificationAlertShown] == nil
+        || [[[NSUserDefaults standardUserDefaults] objectForKey:kIsNotificationAlertShown] boolValue] == NO) {
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [ECUtil showCancelAlertWithTitle:@"提示"
+                                     withMsg:@"Beacon 接下来将请求您的授权，以通知您获取最新的资讯"
+                              withCompletion:^{
+                                  
+                                  
+                                  [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES]
+                                                                            forKey:kIsNotificationAlertShown];
+                                  
+                                  [[UNUserNotificationCenter currentNotificationCenter] requestAuthorizationWithOptions:UNAuthorizationOptionAlert | UNNotificationPresentationOptionSound | UNAuthorizationOptionBadge  completionHandler:^(BOOL granted, NSError * _Nullable error) {
+                                      
+                                      
+                                      if (!granted || error) {
+                                          debugLog(@"用户不同意授权");
+                                      }
+                                  }];
+                              }];
+        });
+    }
+}
+    
+
+- (void)_registerNotificationCategory {
+    
+    UNNotificationAction *openAppAction = [UNNotificationAction actionWithIdentifier:kECNotificationOpenAppActionIdentifier title:@"打开应用" options:UNNotificationActionOptionForeground];
+    UNNotificationAction *cancelAction  = [UNNotificationAction actionWithIdentifier:kECNotificationCancelActionIdentifier title:@"取消" options:UNNotificationActionOptionDestructive];
+    UNNotificationCategory *category    = [UNNotificationCategory categoryWithIdentifier:kECNotificationCategoryIdentifier actions:@[openAppAction, cancelAction] intentIdentifiers:@[] options:UNNotificationCategoryOptionCustomDismissAction];
+    [[UNUserNotificationCenter currentNotificationCenter] setNotificationCategories:[NSSet setWithObjects:category, nil]];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

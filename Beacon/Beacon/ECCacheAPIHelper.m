@@ -14,7 +14,7 @@ static NSString *const kTop5VideosCacheIdentifier         = @"kTop5VideosCacheId
 static NSString *const kTop5VideosTimestampIdentifier     = @"kTop5VideosTimestampIdentifier";
 static NSString *const kVideoTypesCacheIdentifier         = @"kVideoTypesCacheIdentifier";
 static NSString *const kVideoTypesTimestampIdentifier     = @"kVideoTypesTimestampIdentifier";
-static NSTimeInterval  kCacheExpiredTimeInterval          = 60 * 60 * 24; // 缓存有效期
+NSTimeInterval  kCacheExpiredTimeInterval                 = 60 * 60 * 24; // 缓存有效期
 
 typedef void(^GetTimestampOfExistedCacheBlock)(NSTimeInterval timestamp);
 typedef void(^SetTimestampOfExistedCacheBlock)(BOOL isSuccess);

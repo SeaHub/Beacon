@@ -16,6 +16,7 @@
 #import "ECAPIManager.h"
 #import "IQActivityIndicatorView.h"
 #import "Masonry.h"
+#import "ECNotificationHelper.h"
 
 @interface ECMainViewController ()<CCDraggableContainerDelegate, CCDraggableContainerDataSource>
 
@@ -94,6 +95,8 @@
         [self loadHistoriesInBackground];
         [self loadLikedVideosInBackground];
     }];
+    
+    [self _setupLocalNotification];
 }
 
 - (void)loadHistoriesInBackground {
@@ -163,6 +166,28 @@
     [UIView animateWithDuration:0.4 animations:^{
         self.reloadButton.alpha = 1;
     }];
+}
+
+- (void)_setupLocalNotification {
+    NSString *const kTodayNotificationTimeStampIdentifier = @"kTodayNotificationTimeStampIdentifier";
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:kTodayNotificationTimeStampIdentifier] == nil) {
+        NSTimeInterval lastPostTimeStamp = [[[NSUserDefaults standardUserDefaults] objectForKey:kTodayNotificationTimeStampIdentifier] doubleValue];
+        NSTimeInterval currentTImeStamp  = [[NSDate date] timeIntervalSince1970];
+        
+        if (currentTImeStamp - lastPostTimeStamp > kCacheExpiredTimeInterval) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [ECNotificationHelper sendLocationNotification:@"Beacon"
+                                                     wiithBody:@"资源更新了！"
+                                                      withType:kECNotificationNormalTypeIdentifier
+                                              withTimeInterval:kCacheExpiredTimeInterval
+                                                    isRepeated:NO
+                                                  withImageURL:nil];
+                [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithDouble:
+                                                                  [[NSDate date] timeIntervalSince1970]]
+                                                          forKey:kTodayNotificationTimeStampIdentifier];
+            });
+        }
+    }
 }
 
 - (void)_reloadPage {
