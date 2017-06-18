@@ -449,7 +449,6 @@
 			isa = PBXGroup;
 			children = (
 				528B21EA1EDBAB3600D1CE02 /* NetworkManager */,
-				528B21E91EDBAB2D00D1CE02 /* NetworkModel */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -507,6 +506,7 @@
 		528B21F01EDBABBD00D1CE02 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				528B21E91EDBAB2D00D1CE02 /* NetworkModel */,
 				526F34F51EF0563B004AB51B /* PlayerViewModel */,
 				5214C0871EDBC54F00D09A06 /* Video */,
 				5214C0861EDBC54700D09A06 /* VideoType */,
@@ -524,13 +524,13 @@
 			name = Navigation;
 			sourceTree = "<group>";
 		};
-		52B5EEB81EF672D900AF85DC /* Notification */ = {
+		52B5EEB81EF672D900AF85DC /* UNNotification */ = {
 			isa = PBXGroup;
 			children = (
 				52B5EEB91EF672FB00AF85DC /* ECNotificationHelper.h */,
 				52B5EEBA1EF672FB00AF85DC /* ECNotificationHelper.m */,
 			);
-			name = Notification;
+			name = UNNotification;
 			sourceTree = "<group>";
 		};
 		52B9E0321EE8537B003E5CFF /* VideoTableViewCell */ = {
@@ -557,7 +557,7 @@
 		52DE8C961EDC109D00072C91 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
-				52B5EEB81EF672D900AF85DC /* Notification */,
+				52B5EEB81EF672D900AF85DC /* UNNotification */,
 				52E227EE1EDCF8520019E958 /* Cache */,
 				52DE8C9B1EDC12B500072C91 /* Util */,
 				52DE8C9A1EDC10AD00072C91 /* Keychain */,
