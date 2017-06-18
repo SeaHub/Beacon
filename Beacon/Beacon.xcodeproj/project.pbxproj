@@ -13,6 +13,7 @@
 		5209644B1EDBC436001F2A05 /* ECReturningVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5209644A1EDBC436001F2A05 /* ECReturningVideo.m */; };
 		520A4E381EDDA53400FFA5CA /* CacheAPITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 520A4E371EDDA53400FFA5CA /* CacheAPITests.m */; };
 		5214C08A1EDBC55F00D09A06 /* ECVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5214C0891EDBC55F00D09A06 /* ECVideo.m */; };
+		5224AE821EF68A7600D5C0DD /* SFDisplayHeavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5224AE811EF68A7600D5C0DD /* SFDisplayHeavy.ttf */; };
 		5233909E1ED067B600C46419 /* ECMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5233909D1ED067B600C46419 /* ECMainViewController.m */; };
 		523EA4981EDD6EE900E02A95 /* ECCacheAPIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 523EA4971EDD6EE900E02A95 /* ECCacheAPIHelper.m */; };
 		525167431ED17BC500FA943C /* ECConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = 525167421ED17BC500FA943C /* ECConstant.m */; };
@@ -114,6 +115,7 @@
 		520A4E371EDDA53400FFA5CA /* CacheAPITests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CacheAPITests.m; sourceTree = "<group>"; };
 		5214C0881EDBC55F00D09A06 /* ECVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECVideo.h; sourceTree = "<group>"; };
 		5214C0891EDBC55F00D09A06 /* ECVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECVideo.m; sourceTree = "<group>"; };
+		5224AE811EF68A7600D5C0DD /* SFDisplayHeavy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = SFDisplayHeavy.ttf; path = IOSPlayerLib/SFDisplayHeavy.ttf; sourceTree = "<group>"; };
 		5233909C1ED067B600C46419 /* ECMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECMainViewController.h; sourceTree = "<group>"; };
 		5233909D1ED067B600C46419 /* ECMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECMainViewController.m; sourceTree = "<group>"; };
 		523EA4961EDD6EE900E02A95 /* ECCacheAPIHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECCacheAPIHelper.h; sourceTree = "<group>"; };
@@ -657,6 +659,7 @@
 			children = (
 				52EEB3841ED05B9B00CBDDBB /* IOSPlayerLib */,
 				52EEB3601ED05AFD00CBDDBB /* main.m */,
+				5224AE811EF68A7600D5C0DD /* SFDisplayHeavy.ttf */,
 				52EEB3701ED05AFD00CBDDBB /* Info.plist */,
 				52E0C88D1ED065C0007D08D9 /* ECBeacon-Prefix.pch */,
 			);
@@ -951,6 +954,7 @@
 			files = (
 				52EEB36F1ED05AFD00CBDDBB /* LaunchScreen.storyboard in Resources */,
 				52EEB36C1ED05AFD00CBDDBB /* Assets.xcassets in Resources */,
+				5224AE821EF68A7600D5C0DD /* SFDisplayHeavy.ttf in Resources */,
 				52EEB36A1ED05AFD00CBDDBB /* Main.storyboard in Resources */,
 				D5A8F8421EE96BC200B73670 /* ECMenuItemTableViewCell.xib in Resources */,
 			);
