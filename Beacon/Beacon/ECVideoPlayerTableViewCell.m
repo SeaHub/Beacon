@@ -336,6 +336,11 @@ static NSString *const kECVideoPlayerCellCollectionReuseIdentifier = @"kECVideoP
     [volumeViewSlider sendActionsForControlEvents:UIControlEventTouchUpInside];
 }
 
+- (void)transformPlayerIntoFullScreen {
+    [self _indicatorStopAnimation];
+    [self _setFullScreen];
+}
+
 #pragma mark - QYPlayControllerDelegate
 - (void)startLoading:(QYPlayerController *)player {
     [self _updateTimeStatusWithCurrentPlayer:player];

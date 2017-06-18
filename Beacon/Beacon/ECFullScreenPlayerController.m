@@ -60,6 +60,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self _setupShaking];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -109,6 +110,11 @@
     self.isTimeUsed       = NO;
     self.volumeView       = [[MPVolumeView alloc] init];
     self.volumeView.alpha = 0;
+}
+
+- (void)_setupShaking {
+    [self becomeFirstResponder];
+    [UIApplication sharedApplication].applicationSupportsShakeToEdit = YES;
 }
 
 - (void)_setupIndicator {
@@ -430,6 +436,11 @@
         [[QYPlayerController sharedInstance] pause];
         [self _indicatorStartAnimation];
     }
+}
+
+#pragma mark - Shaking devices
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

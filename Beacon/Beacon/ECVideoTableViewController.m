@@ -43,6 +43,7 @@ static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoT
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self _setupShaking];
+    [self _setupDoubleTapGesture];
     [self _checkNetworkStatus];
     [self _initialGuessingDatas];
 }
@@ -70,6 +71,13 @@ static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoT
 - (void)_setupShaking {
     [self becomeFirstResponder];
     [UIApplication sharedApplication].applicationSupportsShakeToEdit = YES;
+}
+
+- (void)_setupDoubleTapGesture {
+    UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                            action:@selector(_viewDidDoubleClicked)];
+    tapGR.numberOfTapsRequired    = 2;
+    [self.tableView addGestureRecognizer:tapGR];
 }
 
 - (void)_checkNetworkStatus {
@@ -248,9 +256,10 @@ static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoT
 
 #pragma mark - Shaking devices
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
-    [self _closeLight];
+    [self.playerCell transformPlayerIntoFullScreen];
 }
 
+#pragma mark - Light Closing
 - (void)_closeLight {
     // Calculate which cell should be reload, don't reload player cell or it will miss all status of player cell
     NSMutableArray<NSIndexPath *> *indexPaths = [@[] mutableCopy];
@@ -284,6 +293,10 @@ static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoT
             self.tableView.backgroundColor = [UIColor whiteColor];
         }];
     }
+}
+
+- (void)_viewDidDoubleClicked {
+    [self _closeLight];
 }
 
 #pragma mark - Special For 3D Touch
