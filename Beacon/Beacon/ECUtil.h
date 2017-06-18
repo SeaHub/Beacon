@@ -89,10 +89,12 @@ typedef void(^ECAlertActionBlock)(void);
 
 /**
  检查网络状态（若在非 WiFi 状态下会出现弹窗警告）
-
+ 
  @param errorBlock 网络不可用回调函数
+ @param successBlock WiFi / 蜂窝数据下的回调函数
  */
-+ (void)checkNetworkStatusWithErrorBlock:(nullable ECNetworkMonitoringBlock)errorBlock;
++ (void)checkNetworkStatusWithErrorBlock:(nullable ECNetworkMonitoringBlock)errorBlock
+                        withSuccessBlock:(nullable ECNetworkMonitoringBlock)successBlock;
 
 @end
 

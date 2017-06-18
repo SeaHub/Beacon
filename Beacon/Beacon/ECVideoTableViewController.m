@@ -19,6 +19,7 @@
 #import "QYPlayerController.h"
 #import "ECFullScreenPlayerController.h"
 #import "ECPlayerViewModel.h"
+#import <DKNightVersion/DKNightVersion.h>
 
 static const NSUInteger kNumberOfNoneGuessingContentCell           = 3;
 static NSString *const kECVideoTablePlayerReuseIdentifier          = @"kECVideoTablePlayerReuseIdentifier";
@@ -43,9 +44,10 @@ static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoT
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self _setupShaking];
+    [self _setupSingleTapGesture];
     [self _setupDoubleTapGesture];
     [self _initialGuessingDatas];
-    [ECUtil checkNetworkStatusWithErrorBlock:nil];
+    [ECUtil checkNetworkStatusWithErrorBlock:nil withSuccessBlock:nil];
 }
 
 - (void)_initialPropertyStatus {
@@ -71,6 +73,13 @@ static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoT
 - (void)_setupShaking {
     [self becomeFirstResponder];
     [UIApplication sharedApplication].applicationSupportsShakeToEdit = YES;
+}
+
+- (void)_setupSingleTapGesture {
+    UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                            action:@selector(_viewDidSingleClicked)];
+    tapGR.numberOfTapsRequired    = 1;
+    [self.tableView addGestureRecognizer:tapGR];
 }
 
 - (void)_setupDoubleTapGesture {
@@ -280,6 +289,11 @@ static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoT
             self.tableView.backgroundColor = [UIColor whiteColor];
         }];
     }
+}
+
+- (void)_viewDidSingleClicked {
+    self.view.dk_backgroundColorPicker = DKColorPickerWithKey(BG);
+    [[DKNightVersionManager sharedManager] nightFalling];
 }
 
 - (void)_viewDidDoubleClicked {

@@ -37,16 +37,6 @@
 #pragma mark - Life Cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self _setupShadow:_downButton];
-    [self _setupShadow:_upButton];
-    [self _setupShadow:_moreButton];
-    [ECUtil checkNetworkStatusWithErrorBlock:^{
-        [self _setupReloadButton];
-    }];
-    
-    [self loadDataSourceInBackground];
-    [self loadHistoriesInBackground];
-    [self loadLikedVideosInBackground];
 
     self.indicator       = [[IQActivityIndicatorView alloc] init];
     self.indicator.color = [UIColor grayColor];
@@ -91,6 +81,18 @@
     [self.indicator mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self.container);
         make.height.width.equalTo(@40);
+    }];
+    
+    [self _setupShadow:_downButton];
+    [self _setupShadow:_upButton];
+    [self _setupShadow:_moreButton];
+    [ECUtil checkNetworkStatusWithErrorBlock:^{
+        [self _setupReloadButton];
+        [self.indicator stopAnimating];
+    } withSuccessBlock:^{
+        [self loadDataSourceInBackground];
+        [self loadHistoriesInBackground];
+        [self loadLikedVideosInBackground];
     }];
 }
 
@@ -164,11 +166,12 @@
     [self.reloadButton removeFromSuperview];
     [ECUtil checkNetworkStatusWithErrorBlock:^{
         [self _setupReloadButton];
+    } withSuccessBlock:^{
+        [self.indicator startAnimating];
+        [self loadDataSourceInBackground];
+        [self loadHistoriesInBackground];
+        [self loadLikedVideosInBackground];
     }];
-    [self.indicator startAnimating];
-    [self loadDataSourceInBackground];
-    [self loadHistoriesInBackground];
-    [self loadLikedVideosInBackground];
 }
 
 - (void)_setupShadow:(UIButton *)button {

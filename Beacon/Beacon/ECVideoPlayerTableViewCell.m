@@ -363,7 +363,7 @@ static NSString *const kECVideoPlayerCellCollectionReuseIdentifier = @"kECVideoP
 }
 
 - (void)playerNetworkChanged:(QYPlayerController *)player {
-    [ECUtil checkNetworkStatusWithErrorBlock:nil];
+    [ECUtil checkNetworkStatusWithErrorBlock:nil withSuccessBlock:nil];
 }
 
 - (void)onPlayerError:(NSDictionary *)error_no {

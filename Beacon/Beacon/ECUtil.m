@@ -146,7 +146,8 @@
     return [NSString stringWithFormat:@"%@ / %@", currentPlayTimeString, totalPlayTimeString];
 }
 
-+ (void)checkNetworkStatusWithErrorBlock:(ECNetworkMonitoringBlock)errorBlock {
++ (void)checkNetworkStatusWithErrorBlock:(ECNetworkMonitoringBlock)errorBlock
+                        withSuccessBlock:(ECNetworkMonitoringBlock)successBlock {
     [ECUtil monitoringNetworkWithErrorBlock:^{
         [ECUtil showCancelAlertWithTitle:@"提示" withMsg:@"网络连接错误，请检查您的网络设置" withCompletion:^{
             if (errorBlock) {
@@ -156,8 +157,16 @@
     } withWWANBlock:^{
         [ECUtil showCancelAlertWithTitle:@"提示"
                                  withMsg:@"观看视频可能会消耗大量流量，建议您在 WiFi 状态下观看"
-                          withCompletion:nil];
-    } withWiFiBlock:nil];
+                          withCompletion:^{
+                              if (successBlock) {
+                                  successBlock();
+                              }
+                          }];
+    } withWiFiBlock:^{
+        if (successBlock) {
+            successBlock();
+        }
+    }];
 }
 
 @end
