@@ -86,17 +86,14 @@
     [self _setupShadow:_downButton];
     [self _setupShadow:_upButton];
     [self _setupShadow:_moreButton];
-//    [ECUtil checkNetworkStatusWithErrorBlock:^{
-//        [self _setupReloadButton];
-//        [self.indicator stopAnimating];
-//    } withSuccessBlock:^{
-//        [self loadDataSourceInBackground];
-//        [self loadHistoriesInBackground];
-//        [self loadLikedVideosInBackground];
-//    }];
-    [self loadDataSourceInBackground];
-    [self loadHistoriesInBackground];
-    [self loadLikedVideosInBackground];
+    [ECUtil checkNetworkStatusWithErrorBlock:^{
+        [self _setupReloadButton];
+        [self.indicator stopAnimating];
+    } withSuccessBlock:^{
+        [self loadDataSourceInBackground];
+        [self loadHistoriesInBackground];
+        [self loadLikedVideosInBackground];
+    }];
 }
 
 - (void)loadHistoriesInBackground {
