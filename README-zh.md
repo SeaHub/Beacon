@@ -51,7 +51,7 @@
   * 通用常量请在 ECConstant 内编写
 * 涉及缓存、网络请求的方法，请于 CacheTests、CacheAPITests、NetworkTests 三个类中编写合理的单元测试方法，并保证通过
 
-###开发前的准备
+### 开发前的准备
 
 1. 获取由爱奇艺官方提供的 IOSPlayerLib 播放器库，并放置 ~/Beacon/Beacon 目录下，如下图示
 
