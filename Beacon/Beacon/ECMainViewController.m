@@ -150,15 +150,18 @@
 
 #pragma mark - Private Methods
 - (void)_setupReloadButton {
-    self.reloadButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    [self.reloadButton setTitle:@"点击重试" forState:UIControlStateNormal];
+    self.reloadButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.reloadButton.alpha = 0;
+    [self.reloadButton setImage:[UIImage imageNamed:@"reload"] forState:UIControlStateNormal];
     [self.reloadButton addTarget:self action:@selector(_reloadPage) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.reloadButton];
     [self.reloadButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view.mas_centerX);
-        make.centerY.equalTo(self.view.mas_centerY);
-        make.width.mas_equalTo(100);
-        make.height.mas_equalTo(50);
+        make.center.equalTo(self.container);
+        make.width.mas_equalTo(80);
+        make.height.mas_equalTo(80);
+    }];
+    [UIView animateWithDuration:0.4 animations:^{
+        self.reloadButton.alpha = 1;
     }];
 }
 
