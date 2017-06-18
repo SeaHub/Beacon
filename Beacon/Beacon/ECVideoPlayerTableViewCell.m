@@ -30,6 +30,7 @@ static NSString *const kECVideoPlayerCellCollectionReuseIdentifier = @"kECVideoP
 @property (nonatomic, assign) NSTimeInterval totalTime;
 @property (nonatomic, strong) IQActivityIndicatorView *indicator;
 @property (nonatomic, strong) MPVolumeView *volumeView;
+@property (nonatomic, strong) UITapGestureRecognizer   *indicatorTapGestureRecognizer;
 @property (nonatomic, strong) UISwipeGestureRecognizer *leftSwipeGestureRecognizer;
 @property (nonatomic, strong) UISwipeGestureRecognizer *rightSwipeGestureRecognizer;
 @property (nonatomic, strong) UISwipeGestureRecognizer *upSwipeGestureRecognizer;
@@ -153,6 +154,9 @@ static NSString *const kECVideoPlayerCellCollectionReuseIdentifier = @"kECVideoP
     }
     
     self.isPlaying = !self.isPlaying;
+    [[ECAPIManager sharedManager] addPlayedHistoryWithVideoID:self.video.a_id
+                                             withSuccessBlock:nil
+                                             withFailureBlock:nil];
 }
 
 - (IBAction)muteButtonClicked:(id)sender {
@@ -223,6 +227,7 @@ static NSString *const kECVideoPlayerCellCollectionReuseIdentifier = @"kECVideoP
 }
 
 - (void)_setupIndicator {
+    [self.indicator removeGestureRecognizer:self.indicatorTapGestureRecognizer];
     [self.indicator removeFromSuperview];
     UIView *player = [QYPlayerController sharedInstance].view;
     self.indicator = [[IQActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 15, 15)];
@@ -233,6 +238,11 @@ static NSString *const kECVideoPlayerCellCollectionReuseIdentifier = @"kECVideoP
         make.centerY.equalTo(player.mas_centerY);
         make.width.height.equalTo(@40);
     }];
+    
+    self.indicatorTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                 action:@selector(playButtonClicked:)];
+    self.indicatorTapGestureRecognizer.numberOfTapsRequired = 1;
+    [self.indicator addGestureRecognizer:self.indicatorTapGestureRecognizer];
 }
 
 - (void)_indicatorStopAnimation {
@@ -402,11 +412,13 @@ static NSString *const kECVideoPlayerCellCollectionReuseIdentifier = @"kECVideoP
 - (void)_leftSwipeGestureAction {
     [[QYPlayerController sharedInstance] seekToTime:self.currentTime + kTimeIntervalOfSwipe];
     [[QYPlayerController sharedInstance] play];
+    [self _indicatorStopAnimation];
 }
 
 - (void)_rightSwipeGestureAction {
     [[QYPlayerController sharedInstance] seekToTime:self.currentTime - kTimeIntervalOfSwipe];
     [[QYPlayerController sharedInstance] play];
+    [self _indicatorStopAnimation];
 }
 
 - (void)_upSwipeGestureAction:(UIGestureRecognizer *)gr {

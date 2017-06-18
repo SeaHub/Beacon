@@ -27,6 +27,7 @@
 @property (nonatomic, strong) IQActivityIndicatorView *indicator;
 @property (nonatomic, strong) MPVolumeView *volumeView;
 @property (nonatomic, strong) UITapGestureRecognizer   *playerTapGestureRecognizer;
+@property (nonatomic, strong) UITapGestureRecognizer   *indicatorTapGestureRecognizer;
 @property (nonatomic, strong) UISwipeGestureRecognizer *leftSwipeGestureRecognizer;
 @property (nonatomic, strong) UISwipeGestureRecognizer *rightSwipeGestureRecognizer;
 @property (nonatomic, strong) UISwipeGestureRecognizer *upSwipeGestureRecognizer;
@@ -110,17 +111,25 @@
     self.volumeView.alpha = 0;
 }
 
-- (void)_setupIndicatorOnView:(UIView *)view {
+- (void)_setupIndicator {
+    [self.indicator removeGestureRecognizer:self.indicatorTapGestureRecognizer];
     [self.indicator removeFromSuperview];
+    
+    UIView *player = [QYPlayerController sharedInstance].view;
     self.indicator = [[IQActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 15, 15)];
     [self.indicator startAnimating];
-    [view addSubview:self.indicator];
+    [player addSubview:self.indicator];
     [self.indicator mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(view.mas_centerX);
-        make.centerY.equalTo(view.mas_centerY);
+        make.centerX.equalTo(player.mas_centerX);
+        make.centerY.equalTo(player.mas_centerY);
         make.width.height.equalTo(@40);
     }];
     [self _indicatorStopAnimation];
+    
+    self.indicatorTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                 action:@selector(playButtonClicked:)];
+    self.indicatorTapGestureRecognizer.numberOfTapsRequired = 1;
+    [self.indicator addGestureRecognizer:self.indicatorTapGestureRecognizer];
 }
 
 - (void)_indicatorStopAnimation {
@@ -166,7 +175,6 @@
     [self _showControl];
     
     QYPlayerController *playerController  = [QYPlayerController sharedInstance];
-    [self _setupIndicatorOnView:playerController.view];
     [_playerView addSubview:playerController.view];
     [playerController setPlayerFrame:_playerView.bounds];
     [playerController setDelegate:self];
@@ -175,7 +183,7 @@
                                     isVip:viewModel.videoSource.is_vip];
     
     [self _setUpGestures];
-    [self _setupIndicatorOnView:playerController.view];
+    [self _setupIndicator];
    
     // Following code guarantee self status to be the same as Mini-Screen status
     self.timeLabel.text = [ECUtil jointPlayTimeString:viewModel.currentTime withTotalTime:viewModel.totalTime];
@@ -212,11 +220,13 @@
 - (void)_leftSwipeGestureAction {
     [[QYPlayerController sharedInstance] seekToTime:self.currentTime + kTimeIntervalOfSwipe];
     [[QYPlayerController sharedInstance] play];
+    [self _indicatorStopAnimation];
 }
 
 - (void)_rightSwipeGestureAction {
     [[QYPlayerController sharedInstance] seekToTime:self.currentTime - kTimeIntervalOfSwipe];
     [[QYPlayerController sharedInstance] play];
+    [self _indicatorStopAnimation];
 }
 
 - (void)_upSwipeGestureAction:(UIGestureRecognizer *)gr {
