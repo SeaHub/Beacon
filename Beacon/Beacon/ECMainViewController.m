@@ -80,6 +80,9 @@
         }
     };
     
+    // 3d touch notification
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toPlayRandomVideo) name:@"play_random_video" object:nil];
+    
     [self.indicator mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self.container);
         make.height.width.equalTo(@40);
@@ -184,6 +187,18 @@
 
 - (void)draggableContainer:(CCDraggableContainer *)draggableContainer finishedDraggableLastCard:(BOOL)finishedDraggableLastCard {
     [draggableContainer reloadData];
+}
+
+#pragma mark - 3D Touch Entrance
+- (void)toPlayRandomVideo {
+    [ECCacheAPIHelper getTop5VideosFromCache:YES withFinishedBlock:^(BOOL isCacheHitting, NSArray<ECReturningVideo *> * _Nullable cachedVideos) {
+        debugLog(@"isCacheHitting: %hhd \n, cachedVideos: %@", isCacheHitting, cachedVideos);
+        NSInteger index = arc4random() % 5;
+        if (cachedVideos.count > 0) {
+            ECReturningVideo *selOne = cachedVideos[index];
+            [self performSegueWithIdentifier:kSegueOfECVideoController sender:selOne];
+        }
+    }];
 }
 
 @end

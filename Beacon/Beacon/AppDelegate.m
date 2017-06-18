@@ -11,9 +11,17 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    // Save UUID
     [ECUtil saveUUIDToKeyChain];
     debugLog(@"UUID: %@", [ECUtil readUUIDFromKeyChain]);
+    
     return YES;
+}
+
+- (void)application:(UIApplication *)application performActionForShortcutItem:(nonnull UIApplicationShortcutItem *)shortcutItem completionHandler:(nonnull void (^)(BOOL))completionHandler {
+    if ([shortcutItem.type isEqualToString:@"play"]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"play_random_video" object:nil];
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
