@@ -6,6 +6,7 @@ target 'Beacon' do
   pod 'Masonry'
   pod 'AFNetworking', '~> 3.0'
   pod 'YYCache'
+  pod "DKNightVersion"
 
   target 'BeaconTests' do
   end
