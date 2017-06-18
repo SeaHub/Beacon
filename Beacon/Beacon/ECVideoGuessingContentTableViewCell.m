@@ -89,8 +89,4 @@ static NSString *const kECVideoGuessingCellCollectionReuseIdentifier = @"Guessin
     return self.resourceTypes.count;
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    debugLog(@"section: %ld, row: %ld selected", (long)indexPath.section, (long)indexPath.row);
-}
-
 @end

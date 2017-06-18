@@ -181,7 +181,8 @@ static NSString *const kECVideoPlayerCellCollectionReuseIdentifier = @"kECVideoP
                                               dispatch_async(dispatch_get_main_queue(), ^{
                                                   if (status) {
                                                       [ECUtil showCancelAlertWithTitle:@"提示"
-                                                                               withMsg:@"成功添加至喜爱列表"];
+                                                                               withMsg:@"成功添加至喜爱列表"
+                                                                        withCompletion:nil];
                                                   }
                                               });
                                               
@@ -196,7 +197,8 @@ static NSString *const kECVideoPlayerCellCollectionReuseIdentifier = @"kECVideoP
                                               dispatch_async(dispatch_get_main_queue(), ^{
                                                   if (status) {
                                                       [ECUtil showCancelAlertWithTitle:@"提示"
-                                                                               withMsg:@"成功操作"];
+                                                                               withMsg:@"成功操作"
+                                                                        withCompletion:nil];
                                                   }
                                               });
                                               
@@ -361,20 +363,20 @@ static NSString *const kECVideoPlayerCellCollectionReuseIdentifier = @"kECVideoP
 }
 
 - (void)playerNetworkChanged:(QYPlayerController *)player {
-    debugLog(@"Delegate: Network changed...");
+    [ECUtil checkNetworkStatusWithErrorBlock:nil];
 }
 
 - (void)onPlayerError:(NSDictionary *)error_no {
     debugLog(@"Delegate: An error %@ occured when start playing...", error_no);
+    [ECUtil showCancelAlertWithTitle:@"提示" withMsg:@"发生未知错误, 请稍后重试" withCompletion:nil];
 }
 
 - (void)onAdStartPlay:(QYPlayerController *)player {
-    debugLog(@"Delegate: The advertisement starts playing");
+
     [[QYPlayerController sharedInstance] pause];
 }
 
 - (void)onContentStartPlay:(QYPlayerController *)player {
-    debugLog(@"Delegate: The content starts playing");
     if (!self.isTimeUsed) {
         [[QYPlayerController sharedInstance] seekToTime:self.currentTime];
     }
@@ -407,10 +409,6 @@ static NSString *const kECVideoPlayerCellCollectionReuseIdentifier = @"kECVideoP
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.resourceTypes.count;
-}
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    debugLog(@"section: %ld, row: %ld selected", (long)indexPath.section, (long)indexPath.row);
 }
 
 #pragma mark - Gesture Actions

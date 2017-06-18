@@ -15,7 +15,6 @@
 #import "ECVideoTableViewController.h"
 #import "ECAPIManager.h"
 #import "IQActivityIndicatorView.h"
-
 #import "Masonry.h"
 
 @interface ECMainViewController ()<CCDraggableContainerDelegate, CCDraggableContainerDataSource>
@@ -28,7 +27,8 @@
 @property (nonatomic, copy) NSArray<ECReturningVideo *> *dataSources;
 @property (nonatomic, copy) NSArray<ECReturningWatchedVideo *> *watchedVideos;
 @property (nonatomic, strong) NSMutableArray<ECReturningVideo *> *likedVideos;
-@property (strong, nonatomic)  IQActivityIndicatorView *indicator;
+@property (nonatomic, strong) IQActivityIndicatorView *indicator;
+@property (nonatomic, strong) UIButton *reloadButton;
 
 @end
 
@@ -40,10 +40,15 @@
     [self _setupShadow:_downButton];
     [self _setupShadow:_upButton];
     [self _setupShadow:_moreButton];
+    [ECUtil checkNetworkStatusWithErrorBlock:^{
+        [self _setupReloadButton];
+    }];
+    
     [self loadDataSourceInBackground];
     [self loadHistoriesInBackground];
     [self loadLikedVideosInBackground];
-    self.indicator = [[IQActivityIndicatorView alloc] init];
+
+    self.indicator       = [[IQActivityIndicatorView alloc] init];
     self.indicator.color = [UIColor grayColor];
     [self.indicator startAnimating];
     [self.view addSubview:self.indicator];
@@ -142,6 +147,30 @@
 }
 
 #pragma mark - Private Methods
+- (void)_setupReloadButton {
+    self.reloadButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [self.reloadButton setTitle:@"点击重试" forState:UIControlStateNormal];
+    [self.reloadButton addTarget:self action:@selector(_reloadPage) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.reloadButton];
+    [self.reloadButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.view.mas_centerX);
+        make.centerY.equalTo(self.view.mas_centerY);
+        make.width.mas_equalTo(100);
+        make.height.mas_equalTo(50);
+    }];
+}
+
+- (void)_reloadPage {
+    [self.reloadButton removeFromSuperview];
+    [ECUtil checkNetworkStatusWithErrorBlock:^{
+        [self _setupReloadButton];
+    }];
+    [self.indicator startAnimating];
+    [self loadDataSourceInBackground];
+    [self loadHistoriesInBackground];
+    [self loadLikedVideosInBackground];
+}
+
 - (void)_setupShadow:(UIButton *)button {
     button.layer.shadowOffset      = CGSizeMake(0, 2);
     button.layer.shadowColor       = [UIColor colorWithRed:206 green:206 blue:210 alpha:1].CGColor;

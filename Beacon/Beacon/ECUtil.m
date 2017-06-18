@@ -68,14 +68,19 @@
 }
 
 + (void)showCancelAlertWithTitle:(NSString *)title
-                         withMsg:(NSString *)msg {
+                         withMsg:(NSString *)msg
+                  withCompletion:(ECAlertActionBlock)actionBlock {
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title
                                                                              message:msg
                                                                       preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction            = [UIAlertAction actionWithTitle:@"确定"
                                                                   style:UIAlertActionStyleCancel
-                                                                handler:nil];
+                                                                handler:^(UIAlertAction * _Nonnull action) {
+                                                                    if (actionBlock) {
+                                                                        actionBlock();
+                                                                    }
+                                                                }];
     [alertController addAction:okAction];
     UIWindow *keyWindow                  = [UIApplication sharedApplication].keyWindow;
     UIViewController *rootViewController = keyWindow.rootViewController;
@@ -139,6 +144,20 @@
     NSString *currentPlayTimeString = [ECUtil convertTimeIntervalToDateString:currentPlayTime];
     NSString *totalPlayTimeString   = [ECUtil convertTimeIntervalToDateString:totalTime];
     return [NSString stringWithFormat:@"%@ / %@", currentPlayTimeString, totalPlayTimeString];
+}
+
++ (void)checkNetworkStatusWithErrorBlock:(ECNetworkMonitoringBlock)errorBlock {
+    [ECUtil monitoringNetworkWithErrorBlock:^{
+        [ECUtil showCancelAlertWithTitle:@"提示" withMsg:@"网络连接错误，请检查您的网络设置" withCompletion:^{
+            if (errorBlock) {
+                errorBlock();
+            }
+        }];
+    } withWWANBlock:^{
+        [ECUtil showCancelAlertWithTitle:@"提示"
+                                 withMsg:@"观看视频可能会消耗大量流量，建议您在 WiFi 状态下观看"
+                          withCompletion:nil];
+    } withWiFiBlock:nil];
 }
 
 @end

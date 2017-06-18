@@ -44,8 +44,8 @@ static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoT
     [super viewDidLoad];
     [self _setupShaking];
     [self _setupDoubleTapGesture];
-    [self _checkNetworkStatus];
     [self _initialGuessingDatas];
+    [ECUtil checkNetworkStatusWithErrorBlock:nil];
 }
 
 - (void)_initialPropertyStatus {
@@ -78,19 +78,6 @@ static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoT
                                                                             action:@selector(_viewDidDoubleClicked)];
     tapGR.numberOfTapsRequired    = 2;
     [self.tableView addGestureRecognizer:tapGR];
-}
-
-- (void)_checkNetworkStatus {
-    [ECUtil monitoringNetworkWithErrorBlock:^{
-        [ECUtil showCancelAlertWithTitle:@"提示" withMsg:@"网络不可用，请连接 WiFi"];
-        self.networkStatus = AFNetworkReachabilityStatusUnknown;
-    } withWWANBlock:^{
-        [ECUtil showCancelAlertWithTitle:@"提示" withMsg:@"目前使用蜂窝数据，建议使用 WiFi 观看视频"];
-        self.networkStatus = AFNetworkReachabilityStatusReachableViaWWAN;
-    } withWiFiBlock:^{
-        self.networkStatus = AFNetworkReachabilityStatusReachableViaWiFi;
-        debugLog(@"Current network status is WiFi");
-    }];
 }
 
 - (void)didReceiveMemoryWarning {

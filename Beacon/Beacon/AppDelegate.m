@@ -14,7 +14,6 @@
     // Save UUID
     [ECUtil saveUUIDToKeyChain];
     debugLog(@"UUID: %@", [ECUtil readUUIDFromKeyChain]);
-    
     return YES;
 }
 

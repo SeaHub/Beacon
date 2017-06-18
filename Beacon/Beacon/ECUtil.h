@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef void(^ECNetworkMonitoringBlock)(void);
+typedef void(^ECAlertActionBlock)(void);
 
 @interface ECUtil : NSObject
 
@@ -49,12 +50,14 @@ typedef void(^ECNetworkMonitoringBlock)(void);
 
 /**
  在最顶层 Controller 弹出确认提示框
-
+ 
  @param title 提示框标题
  @param msg 提示框内容
+ @param actionBlock 结束点击动作回调函数
  */
 + (void)showCancelAlertWithTitle:(NSString *)title
-                         withMsg:(NSString *)msg;
+                         withMsg:(NSString *)msg
+                  withCompletion:(nullable ECAlertActionBlock)actionBlock;
 
 /**
  监控网络状态
@@ -83,6 +86,13 @@ typedef void(^ECNetworkMonitoringBlock)(void);
  @return '播放器时间戳格式'字符串
  */
 + (NSString *)jointPlayTimeString:(NSTimeInterval)currentPlayTime withTotalTime:(NSTimeInterval)totalTime;
+
+/**
+ 检查网络状态（若在非 WiFi 状态下会出现弹窗警告）
+
+ @param errorBlock 网络不可用回调函数
+ */
++ (void)checkNetworkStatusWithErrorBlock:(nullable ECNetworkMonitoringBlock)errorBlock;
 
 @end
 

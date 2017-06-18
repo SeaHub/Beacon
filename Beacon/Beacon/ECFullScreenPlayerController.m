@@ -411,11 +411,16 @@
 }
 
 - (void)playerNetworkChanged:(QYPlayerController *)player {
-    debugLog(@"Delegate: Network changed..."); // TODO
+    // Can't use ECUtil checkNetworkStatusWithErrorBlock: function here
+    [ECUtil monitoringNetworkWithErrorBlock:^{
+        [self _presentViewControllerWithTitle:@"提示" withMsg:@"网络连接错误，请检查您的网络设置"];
+    } withWWANBlock:^{
+        [self _presentViewControllerWithTitle:@"提示" withMsg:@"观看视频可能会消耗大量流量，建议您在 WiFi 状态下观看"];
+    } withWiFiBlock:nil];
 }
 
 - (void)onPlayerError:(NSDictionary *)error_no {
-    debugLog(@"Delegate: An error occured when start playing..."); // TODO
+    [self _presentViewControllerWithTitle:@"提示" withMsg:@"发生未知错误, 请稍后重试"];
 }
 
 - (void)onAdStartPlay:(QYPlayerController *)player {
@@ -423,7 +428,6 @@
 }
 
 - (void)onContentStartPlay:(QYPlayerController *)player {
-    debugLog(@"Delegate: The content starts playing");
     self.isTimeUsed = YES;
     [[QYPlayerController sharedInstance] seekToTime:self.viewModel.currentTime];
     
