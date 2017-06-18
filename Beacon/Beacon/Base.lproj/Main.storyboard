@@ -135,16 +135,17 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="120"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hvs-kf-CB8" id="9I6-tR-8P2">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="119"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
                                 </tableViewCellContentView>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="kECVideoTablePlayerReuseIdentifier" rowHeight="390" id="brf-9Z-l1h" customClass="ECVideoPlayerTableViewCell">
                                 <rect key="frame" x="0.0" y="148" width="375" height="390"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="brf-9Z-l1h" id="d19-qw-iuS">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="390"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="389"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZXV-eD-0BO">
@@ -377,6 +378,7 @@
                                         <constraint firstItem="yod-Xw-sDo" firstAttribute="centerX" secondItem="To6-MU-QqW" secondAttribute="centerX" id="zca-nS-jeF"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
                                     <outlet property="dislikeButton" destination="yod-Xw-sDo" id="Uek-Hw-g3k"/>
                                     <outlet property="loveButton" destination="JMB-Uh-Dd0" id="TZX-PF-edj"/>
@@ -396,7 +398,7 @@
                                 <rect key="frame" x="0.0" y="538" width="375" height="150"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lgz-vP-5gO" id="BnT-k3-Csh">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="149"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Introduction" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="deK-IJ-hrw">
@@ -410,7 +412,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WB0-n6-csF">
-                                            <rect key="frame" x="15" y="37" width="345" height="84.5"/>
+                                            <rect key="frame" x="15" y="37" width="345" height="85"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <string key="text">In the near future, Major is the first of her kind : A human saved from a terrible crash, who  is cyber enhanced to be a perfect soldier devoted to stop-ping the world's most dangerous criminals.</string>
                                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -426,6 +428,7 @@
                                         <constraint firstItem="WB0-n6-csF" firstAttribute="leading" secondItem="BnT-k3-Csh" secondAttribute="leading" constant="15" id="ag4-lu-60e"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
                                     <outlet property="contentTextView" destination="WB0-n6-csF" id="n98-pH-uMd"/>
                                     <outlet property="titleLabel" destination="deK-IJ-hrw" id="r7z-oP-oMZ"/>
@@ -463,7 +466,7 @@
                                 <rect key="frame" x="0.0" y="720" width="375" height="120"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ROO-Uu-i0d" id="yhl-op-zbI">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="119"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="guessFilm" translatesAutoresizingMaskIntoConstraints="NO" id="TtP-lp-tTs">
@@ -551,6 +554,7 @@
                                         <constraint firstItem="0dy-Df-I7U" firstAttribute="leading" secondItem="TtP-lp-tTs" secondAttribute="trailing" constant="15" id="znR-ME-1oC"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
                                     <outlet property="resourceImageView" destination="TtP-lp-tTs" id="ivV-O1-7KN"/>
                                     <outlet property="resourceTypeCollectionView" destination="bwn-2E-79Z" id="R6Q-sH-ITL"/>
@@ -610,7 +614,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eZi-fR-etP">
-                                <rect key="frame" x="623" y="291.5" width="22" height="22"/>
+                                <rect key="frame" x="623" y="292" width="22" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="22" id="VgK-4q-mBR"/>
                                     <constraint firstAttribute="height" constant="22" id="jlo-FM-SNl"/>
@@ -621,7 +625,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q76-dp-Pm4">
-                                <rect key="frame" x="579" y="291.5" width="22" height="22"/>
+                                <rect key="frame" x="579" y="292" width="22" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="22" id="3pd-1V-clD"/>
                                     <constraint firstAttribute="height" constant="22" id="RLJ-6D-KEt"/>
@@ -632,7 +636,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bD3-Ef-17h">
-                                <rect key="frame" x="535" y="291.5" width="22" height="22"/>
+                                <rect key="frame" x="535" y="292" width="22" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="22" id="Esg-NW-ERY"/>
                                     <constraint firstAttribute="height" constant="22" id="yk2-Wh-gbU"/>
@@ -643,7 +647,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Phc-aL-eqw">
-                                <rect key="frame" x="491" y="291.5" width="22" height="22"/>
+                                <rect key="frame" x="491" y="292" width="22" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="HrY-f8-Qiu"/>
                                     <constraint firstAttribute="width" constant="22" id="tNI-5b-cSM"/>

@@ -343,6 +343,28 @@ static NSString *const kECVideoPlayerCellCollectionReuseIdentifier = @"kECVideoP
     [self _setFullScreen];
 }
 
+- (void)transformBackgroundColor:(BOOL)isLightClosed {
+    if (isLightClosed) {
+        [UIView animateWithDuration:0.5 animations:^{
+            self.resourceTitleLabel.textColor               = [UIColor whiteColor];
+            self.resourceWatchTimeLabel.textColor           = [UIColor whiteColor];
+            self.resourceTypeCollectionView.backgroundColor = [UIColor blackColor];
+            self.contentView.backgroundColor                = [UIColor blackColor];
+        }];
+        
+    } else {
+        [UIView animateWithDuration:0.5 animations:^{
+            self.resourceTitleLabel.textColor               = [UIColor blackColor];
+            self.resourceWatchTimeLabel.textColor           = [UIColor colorWithRed:127 / 255.0
+                                                                              green:127 / 255.0
+                                                                               blue:127 / 255.0
+                                                                              alpha:1.0];
+            self.resourceTypeCollectionView.backgroundColor = [UIColor whiteColor];
+            self.contentView.backgroundColor                = [UIColor whiteColor];
+        }];
+    }
+}
+
 #pragma mark - QYPlayControllerDelegate
 - (void)startLoading:(QYPlayerController *)player {
     [self _updateTimeStatusWithCurrentPlayer:player];

@@ -19,7 +19,6 @@
 #import "QYPlayerController.h"
 #import "ECFullScreenPlayerController.h"
 #import "ECPlayerViewModel.h"
-#import <DKNightVersion/DKNightVersion.h>
 
 static const NSUInteger kNumberOfNoneGuessingContentCell           = 3;
 static NSString *const kECVideoTablePlayerReuseIdentifier          = @"kECVideoTablePlayerReuseIdentifier";
@@ -32,6 +31,7 @@ static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoT
 
 @property (nonatomic, assign) BOOL isLightClosed;
 @property (nonatomic, assign) BOOL isVideoSwapped;
+@property (nonatomic, strong) UIColor *originSeparatorColor;
 @property (nonatomic, assign) NSInteger numberOfRowsInSectionZero;
 @property (nonatomic, assign) AFNetworkReachabilityStatus networkStatus;
 @property (nonatomic, strong) NSMutableArray<ECReturningVideo *> *guessingDatas;
@@ -44,7 +44,6 @@ static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoT
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self _setupShaking];
-    [self _setupSingleTapGesture];
     [self _setupDoubleTapGesture];
     [self _initialGuessingDatas];
     [ECUtil checkNetworkStatusWithErrorBlock:nil withSuccessBlock:nil];
@@ -54,6 +53,7 @@ static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoT
     self.numberOfRowsInSectionZero = kNumberOfNoneGuessingContentCell;
     self.isLightClosed             = NO;
     self.isVideoSwapped            = NO;
+    self.originSeparatorColor      = self.tableView.separatorColor;
 }
 
 - (void)_initialGuessingDatas {
@@ -73,13 +73,6 @@ static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoT
 - (void)_setupShaking {
     [self becomeFirstResponder];
     [UIApplication sharedApplication].applicationSupportsShakeToEdit = YES;
-}
-
-- (void)_setupSingleTapGesture {
-    UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                            action:@selector(_viewDidSingleClicked)];
-    tapGR.numberOfTapsRequired    = 1;
-    [self.tableView addGestureRecognizer:tapGR];
 }
 
 - (void)_setupDoubleTapGesture {
@@ -277,6 +270,7 @@ static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoT
         [self.tableView endUpdates];
         [UIView animateWithDuration:0.5 animations:^{
             self.tableView.backgroundColor = [UIColor blackColor];
+            self.tableView.separatorColor  = [UIColor blackColor];
         }];
         
     } else {
@@ -287,13 +281,11 @@ static NSString *const kECVideoTableGuessingContentReuseIdentifier = @"kECVideoT
         [self.tableView endUpdates];
         [UIView animateWithDuration:0.5 animations:^{
             self.tableView.backgroundColor = [UIColor whiteColor];
+            self.tableView.separatorColor  = self.originSeparatorColor;
         }];
     }
-}
-
-- (void)_viewDidSingleClicked {
-    self.view.dk_backgroundColorPicker = DKColorPickerWithKey(BG);
-    [[DKNightVersionManager sharedManager] nightFalling];
+    
+    [self.playerCell transformBackgroundColor:!oldStatus];
 }
 
 - (void)_viewDidDoubleClicked {

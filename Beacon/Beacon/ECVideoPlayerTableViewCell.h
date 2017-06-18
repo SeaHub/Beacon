@@ -27,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)configureCellWithVideo:(ECReturningVideo *)video;
 - (void)transformPlayerIntoFullScreen;
 - (void)updateCurrentPlayingStatusWithViewModel:(ECPlayerViewModel *)viewModel;
+- (void)transformBackgroundColor:(BOOL)isLightClosed;
 
 @end
 
