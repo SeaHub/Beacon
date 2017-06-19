@@ -52,7 +52,7 @@ Beacon - The production of Echo team in the Best Developer Competition of iQiYi.
 
 ## Preparation for development
 
-1. Get the IOSPlayerLib provided by iQiYi, and place it in ~/Beacon/Beacon folder, as the photo shows below
+1. Get the  [IOSPlayerLib](https://pan.baidu.com/s/1gfxfyc7) provided by iQiYi, and place it in ~/Beacon/Beacon folder, as the photo shows below
 
    ![SettingA](http://on9ydhp18.bkt.clouddn.com/pics/20170618204439_BndnaO_Project-Setting-A.jpeg)
 

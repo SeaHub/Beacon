@@ -53,7 +53,7 @@
 
 ### 开发前的准备
 
-1. 获取由爱奇艺官方提供的 IOSPlayerLib 播放器库，并放置 ~/Beacon/Beacon 目录下，如下图示
+1. 获取由爱奇艺官方提供的 [IOSPlayerLib](https://pan.baidu.com/s/1gfxfyc7) 播放器库，并放置 ~/Beacon/Beacon 目录下，如下图示
 
    ![SettingA](http://on9ydhp18.bkt.clouddn.com/pics/20170618204439_BndnaO_Project-Setting-A.jpeg)
 
