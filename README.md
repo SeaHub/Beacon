@@ -1,11 +1,15 @@
 # Beacon
 ![Supporter](http://on9ydhp18.bkt.clouddn.com/pics/20170618205508_dQZ1ek_Supporter.jpeg) ![Architecture](http://on9ydhp18.bkt.clouddn.com/pics/20170618205432_W94axV_Architecture.jpeg) ![Backend](http://on9ydhp18.bkt.clouddn.com/pics/20170618205432_TGf2e2_Backend.jpeg) ![Dependency](http://on9ydhp18.bkt.clouddn.com/pics/20170618205432_xF0g8n_Dependency.jpeg) ![License](http://on9ydhp18.bkt.clouddn.com/pics/20170618205432_zFUvyr_License.jpeg) ![Platform](http://on9ydhp18.bkt.clouddn.com/pics/20170618205432_TCtNzu_Platform.jpeg) ![IDE](http://on9ydhp18.bkt.clouddn.com/pics/20170618205432_VQWET8_IDE.jpeg) ![Language](http://on9ydhp18.bkt.clouddn.com/pics/20170618205432_UXtbau_Language.jpeg) ![Device](http://on9ydhp18.bkt.clouddn.com/pics/20170618205432_OFpf5X_Device.jpeg)
 
+## Introduction
+
 Beacon - The production of Echo team in the Best Developer Competition of iQiYi.
 
 [中文文档](https://github.com/SeaHub/Beacon/blob/master/README-zh.md)
 
 [Backend Document（后端文档）Here](https://github.com/Desgard/Beacon-Flask)
+
+![Beacon](http://on9ydhp18.bkt.clouddn.com/pics/20170627211853_AJCvNS_Show.gif)
 
 ![App-1](http://on9ydhp18.bkt.clouddn.com/pics/20170618194831_9KMtre_App-1.jpeg)
 

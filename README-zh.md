@@ -9,6 +9,8 @@
 
 [后端文档（Backend Document）Here](https://github.com/Desgard/Beacon-Flask)
 
+![Beacon](http://on9ydhp18.bkt.clouddn.com/pics/20170627211853_AJCvNS_Show.gif)
+
 ![App-1](http://on9ydhp18.bkt.clouddn.com/pics/20170618194831_9KMtre_App-1.jpeg)
 
 ![App-2](http://on9ydhp18.bkt.clouddn.com/pics/20170618194831_B39Rn6_App-2.jpeg)
